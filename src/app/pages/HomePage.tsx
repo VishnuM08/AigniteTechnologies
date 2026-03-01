@@ -10,6 +10,7 @@ import {
   Globe,
   Code,
   Layers,
+  Linkedin,
 } from "lucide-react";
 import { Navigation } from "../components/Navigation";
 import { CustomCursor } from "../components/CustomCursor";
@@ -745,6 +746,19 @@ export default function HomePage() {
                 applications, his approach combines technical excellence with a
                 deep understanding of human needs.
               </motion.p>
+
+              <motion.a
+                href="https://www.linkedin.com/in/vishnum08/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 text-[#86868b] hover:text-[#0A66C2] transition-colors"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                title="Connect with Vishnu on LinkedIn"
+              >
+                <Linkedin size={24} />
+              </motion.a>
             </div>
 
             {/* Lavanya's Profile */}
@@ -830,6 +844,19 @@ export default function HomePage() {
                 remain deeply committed to building human-centered, impactful
                 digital products without compromise.
               </motion.p>
+
+              <motion.a
+                href="https://www.linkedin.com/in/lavanya2002/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 text-[#86868b] hover:text-[#0A66C2] transition-colors"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                title="Connect with Lavanya on LinkedIn"
+              >
+                <Linkedin size={24} />
+              </motion.a>
             </div>
           </div>
         </div>

@@ -14,7 +14,18 @@ export function CustomCursor() {
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
   useEffect(() => {
+    // A more reliable way to detect true mobile/touch-only devices
+    // instead of laptops with touchscreens.
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent,
+      ) || window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+    setIsTouchDevice(isMobile);
+
     const updateMousePosition = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
@@ -52,7 +63,7 @@ export function CustomCursor() {
     };
   }, [cursorX, cursorY]);
 
-  if (!isVisible) return null;
+  if (isTouchDevice || !isVisible) return null;
 
   const isPointer = cursorVariant === "pointer";
 
