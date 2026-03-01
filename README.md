@@ -59,11 +59,13 @@ Every product is designed with real users in mind, prioritizing trust, performan
 
 ---
 
-## 👤 Founder
+## 👥 Leadership
 
 **Vishnu Magesh**  
-Founder & Full Stack Engineer  
-Aignite Technologies
+Founder & CEO | Full Stack Engineer
+
+**Lavanya L.**  
+Co-founder & Strategic Advisor
 
 ---
 
@@ -78,4 +80,5 @@ For business, support, or collaboration inquiries:
 ## 📄 License
 
 © Aignite Technologies. All rights reserved.
+
 # AigniteTechnologies
