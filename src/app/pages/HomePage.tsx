@@ -222,15 +222,19 @@ export default function HomePage() {
               },
               {
                 value: "Soon",
-                label: "Launching",
-                icon: <Sparkles size={24} />,
+                label: "Peerova Launching",
+                icon: <Users size={24} />,
               },
               {
                 value: "Beta",
-                label: "Current Stage",
-                icon: <Code size={24} />,
+                label: "Kakeibo Stage",
+                icon: <Zap size={24} />,
               },
-              { value: "India", label: "Based in", icon: <Globe size={24} /> },
+              {
+                value: "Global",
+                label: "User Reach",
+                icon: <Globe size={24} />,
+              },
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -472,6 +476,52 @@ export default function HomePage() {
           </div>
         </div>
       </motion.section>
+
+      {/* Tech Stack Marquee */}
+      <section className="py-20 md:py-28 overflow-hidden bg-white dark:bg-[#1a1a1a] border-t border-[#d2d2d7]/30 dark:border-[#2a2a2a]">
+        <div className="max-w-6xl mx-auto px-6 mb-12 text-center">
+          <h2 className="text-[#86868b] uppercase tracking-widest text-sm font-semibold">
+            Powered by industry-leading technology
+          </h2>
+        </div>
+        <div className="relative flex overflow-x-hidden group">
+          <div className="animate-marquee whitespace-nowrap flex items-center gap-16 md:gap-24 px-8 md:px-12">
+            {[...Array(2)].map((_, i) => (
+              <React.Fragment key={i}>
+                <span className="text-2xl md:text-3xl font-bold text-[#1a1a1a]/40 dark:text-white/40 hover:text-[#0071e3] transition-colors cursor-default">
+                  React
+                </span>
+                <span className="text-2xl md:text-3xl font-bold text-[#1a1a1a]/40 dark:text-white/40 hover:text-[#0071e3] transition-colors cursor-default">
+                  TypeScript
+                </span>
+                <span className="text-2xl md:text-3xl font-bold text-[#1a1a1a]/40 dark:text-white/40 hover:text-[#0071e3] transition-colors cursor-default">
+                  Tailwind CSS
+                </span>
+                <span className="text-2xl md:text-3xl font-bold text-[#1a1a1a]/40 dark:text-white/40 hover:text-[#0071e3] transition-colors cursor-default">
+                  Node.js
+                </span>
+                <span className="text-2xl md:text-3xl font-bold text-[#1a1a1a]/40 dark:text-white/40 hover:text-[#0071e3] transition-colors cursor-default">
+                  Spring Boot
+                </span>
+                <span className="text-2xl md:text-3xl font-bold text-[#1a1a1a]/40 dark:text-white/40 hover:text-[#0071e3] transition-colors cursor-default">
+                  PostgreSQL
+                </span>
+                <span className="text-2xl md:text-3xl font-bold text-[#1a1a1a]/40 dark:text-white/40 hover:text-[#0071e3] transition-colors cursor-default">
+                  Capacitor
+                </span>
+                <span className="text-2xl md:text-3xl font-bold text-[#1a1a1a]/40 dark:text-white/40 hover:text-[#0071e3] transition-colors cursor-default">
+                  Framer Motion
+                </span>
+                <span className="text-2xl md:text-3xl font-bold text-[#1a1a1a]/40 dark:text-white/40 hover:text-[#0071e3] transition-colors cursor-default">
+                  Figma
+                </span>
+              </React.Fragment>
+            ))}
+          </div>
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white dark:from-[#1a1a1a] to-transparent pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white dark:from-[#1a1a1a] to-transparent pointer-events-none"></div>
+        </div>
+      </section>
 
       {/* How We Build Section */}
       <motion.section
@@ -751,13 +801,20 @@ export default function HomePage() {
                 href="https://www.linkedin.com/in/vishnum08/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 text-[#86868b] hover:text-[#0A66C2] transition-colors"
+                className="mt-8 flex items-center justify-center gap-2 w-full max-w-[200px] mx-auto py-2.5 px-4 rounded-full border border-[#d2d2d7] dark:border-[#2a2a2a] bg-[#fbfbfd] dark:bg-[#0a0a0a] text-[#1a1a1a] dark:text-white hover:bg-white dark:hover:bg-[#1f1f1f] hover:border-[#0A66C2] dark:hover:border-[#0A66C2] transition-all group"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={{ delay: 0.45 }}
                 title="Connect with Vishnu on LinkedIn"
               >
-                <Linkedin size={24} />
+                <Linkedin
+                  size={18}
+                  className="text-[#86868b] group-hover:text-[#0A66C2] transition-colors"
+                />
+                <span style={{ fontSize: "0.875rem", fontWeight: 500 }}>
+                  LinkedIn
+                </span>
               </motion.a>
             </div>
 
@@ -849,13 +906,20 @@ export default function HomePage() {
                 href="https://www.linkedin.com/in/lavanya2002/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 text-[#86868b] hover:text-[#0A66C2] transition-colors"
+                className="mt-8 flex items-center justify-center gap-2 w-full max-w-[200px] mx-auto py-2.5 px-4 rounded-full border border-[#d2d2d7] dark:border-[#2a2a2a] bg-[#fbfbfd] dark:bg-[#0a0a0a] text-[#1a1a1a] dark:text-white hover:bg-white dark:hover:bg-[#1f1f1f] hover:border-[#0A66C2] dark:hover:border-[#0A66C2] transition-all group"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={{ delay: 0.55 }}
                 title="Connect with Lavanya on LinkedIn"
               >
-                <Linkedin size={24} />
+                <Linkedin
+                  size={18}
+                  className="text-[#86868b] group-hover:text-[#0A66C2] transition-colors"
+                />
+                <span style={{ fontSize: "0.875rem", fontWeight: 500 }}>
+                  LinkedIn
+                </span>
               </motion.a>
             </div>
           </div>
@@ -927,50 +991,204 @@ export default function HomePage() {
           </motion.p>
         </div>
       </motion.section>
+      {/* Join Us Section */}
+      <motion.section
+        className="px-6 py-20 md:py-28 bg-[#0071e3] text-white text-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInUp}
+      >
+        <div className="max-w-4xl mx-auto">
+          <h2
+            className="mb-6"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 3rem)",
+              fontWeight: 600,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.2,
+            }}
+          >
+            Build the future with us
+          </h2>
+          <p
+            className="mb-10 text-white/80 max-w-2xl mx-auto"
+            style={{ fontSize: "1.125rem", lineHeight: 1.6 }}
+          >
+            We're always looking for passionate engineers and designers who care
+            deeply about craft and clarity. If that sounds like you, let's talk.
+          </p>
+          <a
+            href="mailto:careers@theaignite.app"
+            className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#0071e3] rounded-full transition-all hover:scale-105 active:scale-[0.98] font-medium"
+            style={{ fontSize: "1.125rem" }}
+          >
+            View open roles
+          </a>
+        </div>
+      </motion.section>
 
-      {/* Footer */}
-      <footer className="px-6 py-12 border-t border-[#d2d2d7]/50 dark:border-[#2a2a2a]">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
-            <div className="text-center md:text-left">
-              <p
-                className="text-[#1a1a1a] dark:text-white mb-2"
-                style={{ fontSize: "1.125rem", fontWeight: 600 }}
+      {/* Polished Footer */}
+      <footer className="px-6 py-16 md:py-24 bg-[#fbfbfd] dark:bg-[#111111] border-t border-[#d2d2d7]/50 dark:border-[#2a2a2a]">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
+          <div className="lg:col-span-2">
+            <h3
+              className="text-[#1a1a1a] dark:text-white mb-4"
+              style={{ fontSize: "1.25rem", fontWeight: 600 }}
+            >
+              Aignite Technologies
+            </h3>
+            <p
+              className="text-[#86868b] max-w-sm mb-8"
+              style={{ fontSize: "0.9375rem", lineHeight: 1.6 }}
+            >
+              Building thoughtful web, mobile, and AI products designed with
+              clarity and built for people.
+            </p>
+            <form
+              className="relative max-w-sm"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <input
+                type="email"
+                placeholder="Join our newsletter"
+                className="w-full bg-white dark:bg-[#0a0a0a] border border-[#d2d2d7] dark:border-[#2a2a2a] rounded-full px-5 py-3 text-sm focus:outline-none focus:border-[#0071e3] dark:focus:border-[#0071e3] transition-colors text-[#1a1a1a] dark:text-white"
+                required
+              />
+              <button
+                type="submit"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-[#0071e3] text-white rounded-full hover:bg-[#0077ed] transition-colors"
+                aria-label="Subscribe to newsletter"
               >
-                Aignite Technologies
-              </p>
-              <p className="text-[#86868b]" style={{ fontSize: "0.875rem" }}>
-                Building thoughtful technology
-              </p>
-            </div>
-
-            <nav className="flex flex-wrap justify-center gap-8">
-              {[
-                { name: "Products", href: "#products" },
-                { name: "Insights", href: "/insights" },
-                { name: "About", href: "#who-we-are" },
-                { name: "Contact", href: "#contact" },
-              ].map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-[#86868b] hover:text-[#1a1a1a] dark:hover:text-white transition-colors"
-                  style={{ fontSize: "0.875rem", fontWeight: 500 }}
-                >
-                  {link.name}
-                </a>
-              ))}
-            </nav>
+                <ArrowRight size={16} />
+              </button>
+            </form>
           </div>
 
-          <div className="pt-8 border-t border-[#d2d2d7]/30 dark:border-[#2a2a2a] text-center space-y-3">
-            <p className="text-[#86868b]" style={{ fontSize: "0.8125rem" }}>
-              © 2026 Aignite Technologies. All rights reserved.
+          <div>
+            <h4 className="text-[#1a1a1a] dark:text-white mb-6 font-semibold">
+              Products
+            </h4>
+            <ul className="space-y-4">
+              <li>
+                <Link
+                  to="/products/peerova"
+                  className="text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-colors text-sm"
+                >
+                  Peerova
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/products/kakeibo"
+                  className="text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-colors text-sm"
+                >
+                  Kakeibo
+                </Link>
+              </li>
+              <li>
+                <span className="text-[#86868b]/50 text-sm cursor-not-allowed">
+                  Upcoming Releases
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-[#1a1a1a] dark:text-white mb-6 font-semibold">
+              Company
+            </h4>
+            <ul className="space-y-4">
+              <li>
+                <a
+                  href="#who-we-are"
+                  className="text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-colors text-sm"
+                >
+                  About Us
+                </a>
+              </li>
+              <li>
+                <Link
+                  to="/insights"
+                  className="text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-colors text-sm"
+                >
+                  Insights
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="mailto:admin@theaignite.app"
+                  className="text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-colors text-sm"
+                >
+                  Contact
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#careers"
+                  className="text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-colors text-sm"
+                >
+                  Careers
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-[#1a1a1a] dark:text-white mb-6 font-semibold">
+              Legal
+            </h4>
+            <ul className="space-y-4">
+              <li>
+                <a
+                  href="#"
+                  className="text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-colors text-sm"
+                >
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-colors text-sm"
+                >
+                  Terms of Service
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="max-w-6xl mx-auto pt-8 border-t border-[#d2d2d7]/50 dark:border-[#2a2a2a] flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-center md:text-left">
+            <p className="text-[#86868b] text-sm mb-1">
+              © {new Date().getFullYear()} Aignite Technologies. All rights
+              reserved.
             </p>
             <p className="text-[#86868b]" style={{ fontSize: "0.75rem" }}>
               Engineered and designed by{" "}
               <span className="text-[#0071e3] font-medium">LAVISH</span>
             </p>
+          </div>
+          <div className="flex gap-4">
+            <a
+              href="https://www.linkedin.com/in/vishnum08/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#86868b] hover:text-[#0A66C2] transition-colors"
+              title="Vishnu's LinkedIn"
+            >
+              <Linkedin size={20} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/lavanya2002/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#86868b] hover:text-[#0A66C2] transition-colors"
+              title="Lavanya's LinkedIn"
+            >
+              <Linkedin size={20} />
+            </a>
           </div>
         </div>
       </footer>
