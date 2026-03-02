@@ -10,10 +10,7 @@ import {
   Calendar,
 } from "lucide-react";
 import { Link } from "react-router";
-import { Navigation } from "../components/Navigation";
-import { CustomCursor } from "../components/CustomCursor";
-import { ScrollProgress } from "../components/ScrollProgress";
-import { BackToTop } from "../components/BackToTop";
+
 import { SEO } from "../components/SEO";
 
 import { Variants } from "motion/react";
@@ -72,10 +69,6 @@ export default function PeerovaPage() {
         description="A collaborative study platform with rooms, video calls, and chat. Learn together with Peerova."
         keywords="Peerova, collaborative learning, study platform, video calls, study groups"
       />
-      <CustomCursor />
-      <ScrollProgress />
-      <Navigation />
-      <BackToTop />
 
       {/* Hero Section */}
       <section className="px-6 pt-32 pb-20 md:pt-40 md:pb-28">

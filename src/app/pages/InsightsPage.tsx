@@ -1,10 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Calendar, ArrowRight } from "lucide-react";
-import { Navigation } from "../components/Navigation";
-import { CustomCursor } from "../components/CustomCursor";
-import { ScrollProgress } from "../components/ScrollProgress";
-import { BackToTop } from "../components/BackToTop";
+
 import { SEO } from "../components/SEO";
 import { Link } from "react-router";
 
@@ -88,10 +85,6 @@ export default function InsightsPage() {
         description="Thoughts on building thoughtful products, design philosophy, and technology that serves people."
         keywords="technology insights, product design, software development, thoughtful technology"
       />
-      <CustomCursor />
-      <ScrollProgress />
-      <Navigation />
-      <BackToTop />
 
       {/* Hero Section */}
       <section className="px-6 pt-32 pb-20 md:pt-40 md:pb-28">

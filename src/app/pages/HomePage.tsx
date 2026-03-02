@@ -12,13 +12,7 @@ import {
   Layers,
   Linkedin,
 } from "lucide-react";
-import { Navigation } from "../components/Navigation";
-import { CustomCursor } from "../components/CustomCursor";
-import { ScrollProgress } from "../components/ScrollProgress";
-import { BackToTop } from "../components/BackToTop";
-import { ThemeToggle } from "../components/ThemeToggle";
 import { SEO } from "../components/SEO";
-import { LoadingScreen } from "../components/LoadingScreen";
 import { Link } from "react-router";
 
 import { Variants } from "motion/react";
@@ -84,13 +78,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#1a1a1a] transition-colors duration-300">
-      <LoadingScreen />
       <SEO />
-      <CustomCursor />
-      <ScrollProgress />
-      <Navigation />
-      <BackToTop />
-      <ThemeToggle />
 
       {/* Hero Section with Parallax */}
       <section
@@ -123,20 +111,55 @@ export default function HomePage() {
             </span>
           </motion.div>
 
-          <motion.h1
-            className="mb-6 text-[#1a1a1a] dark:text-white"
-            style={{
-              fontSize: "clamp(2.5rem, 8vw, 5rem)",
-              fontWeight: 600,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-            }}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.6, 0.05, 0.01, 0.9] }}
-          >
-            Aignite Technologies
-          </motion.h1>
+          <div className="overflow-hidden mb-6">
+            <motion.h1
+              className="text-[#1a1a1a] dark:text-white"
+              style={{
+                fontSize: "clamp(2.5rem, 8vw, 5rem)",
+                fontWeight: 600,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.1,
+              }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+                },
+              }}
+              initial="hidden"
+              animate="visible"
+            >
+              {`Aignite Technologies`.split(" ").map((word, i) => (
+                <span
+                  key={i}
+                  className="inline-block mr-[2vw] lg:mr-4 last:mr-0"
+                >
+                  {word.split("").map((char, j) => (
+                    <motion.span
+                      key={j}
+                      className="inline-block"
+                      variants={{
+                        hidden: { opacity: 0, y: "100%", rotateX: -90 },
+                        visible: {
+                          opacity: 1,
+                          y: "0%",
+                          rotateX: 0,
+                          transition: {
+                            type: "spring",
+                            damping: 20,
+                            stiffness: 100,
+                          },
+                        },
+                      }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </span>
+              ))}
+            </motion.h1>
+          </div>
           <motion.p
             className="mb-4 text-[#1a1a1a] dark:text-white"
             style={{
@@ -182,14 +205,25 @@ export default function HomePage() {
               ease: [0.6, 0.05, 0.01, 0.9],
             }}
           >
-            <a
+            <motion.a
               href="#products"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] hover:shadow-lg active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] hover:shadow-lg hover:shadow-[#0071e3]/20 hover:scale-[1.02] active:scale-[0.98]"
               style={{ fontSize: "1.0625rem", fontWeight: 500 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 0 }}
             >
               Explore products
-              <ArrowRight size={18} />
-            </a>
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <ArrowRight size={18} />
+              </motion.div>
+            </motion.a>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent text-[#0071e3] border border-[#0071e3] rounded-full transition-all hover:bg-[#0071e3]/5 active:scale-[0.98]"
@@ -296,10 +330,16 @@ export default function HomePage() {
           <div className="space-y-16">
             {/* Product 1: Kakeibo */}
             <motion.div
-              className="group bg-white dark:bg-[#1a1a1a] rounded-3xl overflow-hidden shadow-sm border border-[#d2d2d7]/30 dark:border-[#2a2a2a] hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+              className="group bg-white dark:bg-[#1a1a1a] rounded-3xl overflow-hidden shadow-sm border border-[#d2d2d7]/30 dark:border-[#2a2a2a] hover:shadow-2xl transition-all duration-500 will-change-transform"
               variants={scaleIn}
+              whileHover={{ scale: 1.01, y: -8 }}
+              style={{ perspective: 1000 }}
             >
-              <div className="grid md:grid-cols-2 gap-8">
+              <motion.div
+                className="grid md:grid-cols-2 gap-8 h-full"
+                whileHover={{ rotateX: 1, rotateY: -1 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              >
                 <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-full bg-[#fef3c7] dark:bg-[#854d0e] w-fit">
                     <div className="w-2 h-2 rounded-full bg-[#f59e0b] animate-pulse" />
@@ -385,15 +425,21 @@ export default function HomePage() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
 
             {/* Product 2: Peerova */}
             <motion.div
-              className="group bg-white dark:bg-[#1a1a1a] rounded-3xl overflow-hidden shadow-sm border border-[#d2d2d7]/30 dark:border-[#2a2a2a] hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+              className="group bg-white dark:bg-[#1a1a1a] rounded-3xl overflow-hidden shadow-sm border border-[#d2d2d7]/30 dark:border-[#2a2a2a] hover:shadow-2xl transition-all duration-500 will-change-transform"
               variants={scaleIn}
+              whileHover={{ scale: 1.01, y: -8 }}
+              style={{ perspective: 1000 }}
             >
-              <div className="grid md:grid-cols-2 gap-8">
+              <motion.div
+                className="grid md:grid-cols-2 gap-8 h-full"
+                whileHover={{ rotateX: 1, rotateY: 1 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              >
                 <div className="relative h-64 md:h-auto bg-gradient-to-br from-[#0071e3]/10 to-[#0071e3]/5 dark:from-[#0071e3]/20 dark:to-[#0071e3]/10 flex items-center justify-center order-2 md:order-1">
                   {/* Placeholder for product image/screenshot */}
                   <div className="text-center p-8">
@@ -471,7 +517,7 @@ export default function HomePage() {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -848,7 +894,7 @@ export default function HomePage() {
                       lineHeight: 1.4,
                     }}
                   >
-                    CO-FOUNDER & STRATEGIC ADVISOR
+                    CO-FOUNDER, ADVISOR & QA LEAD
                   </span>
                 </motion.div>
               </div>
@@ -882,8 +928,8 @@ export default function HomePage() {
                 transition={{ delay: 0.45 }}
               >
                 Instrumental to the founding vision of Aignite Technologies,
-                Lavanya provides ongoing strategic guidance that shapes our
-                long-term direction and core philosophy.
+                Lavanya handles the main testing operations and provides
+                strategic guidance that shapes our long-term direction.
               </motion.p>
 
               <motion.p

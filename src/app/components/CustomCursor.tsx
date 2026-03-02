@@ -1,35 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { motion, useSpring, useMotionValue, useTransform } from "motion/react";
+import React, { useEffect, useRef, useState } from "react";
 
 export function CustomCursor() {
-  const [cursorVariant, setCursorVariant] = useState("default");
-  const [isVisible, setIsVisible] = useState(true);
-
-  // Motion values for raw mouse coordinates
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-
-  // Fast spring for the inner dot
-  const dotSpringConfig = { damping: 30, stiffness: 600, mass: 0.1 };
-  const dotXSpring = useSpring(cursorX, dotSpringConfig);
-  const dotYSpring = useSpring(cursorY, dotSpringConfig);
-
-  // Slightly slower, highly fluid spring for the outer geometric shape
-  const ringSpringConfig = { damping: 20, stiffness: 150, mass: 0.3 };
-  const ringXSpring = useSpring(cursorX, ringSpringConfig);
-  const ringYSpring = useSpring(cursorY, ringSpringConfig);
-
-  // Calculate rotation based on velocity/movement to make it feel alive
-  const rotation = useTransform(
-    [ringXSpring, ringYSpring],
-    ([x, y]: number[]) => {
-      // Create a subtle continuous rotation based on position
-      // The shape will slowly rotate as it moves across the screen
-      return (x + y) * 0.15;
-    },
-  );
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
 
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const isMobile =
@@ -38,105 +14,131 @@ export function CustomCursor() {
       ) || window.matchMedia("(hover: none) and (pointer: coarse)").matches;
 
     setIsTouchDevice(isMobile);
+    if (isMobile) return;
 
-    let animationFrameId: number;
+    let mouseX = -100;
+    let mouseY = -100;
+    // Smoothed trailing coordinates for the ring
+    let ringX = -100;
+    let ringY = -100;
 
-    const updateMousePosition = (e: MouseEvent) => {
-      cancelAnimationFrame(animationFrameId);
-      animationFrameId = requestAnimationFrame(() => {
-        cursorX.set(e.clientX);
-        cursorY.set(e.clientY);
-      });
+    let isRunning = true;
+    let isHovering = false;
+
+    // Direct DOM manipulation completely bypasses React state for maximum performance
+    const animate = () => {
+      if (!isRunning) return;
+
+      // Inner dot instantly follows mouse
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      }
+
+      // Outer ring trails fluidly
+      ringX += (mouseX - ringX) * 0.15; // The lower the multiplier, the softer/slower the trail
+      ringY += (mouseY - ringY) * 0.15;
+
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+      }
+
+      requestAnimationFrame(animate);
+    };
+
+    const updateMousePos = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     };
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
 
-      const isInteractive =
-        target.tagName === "A" ||
-        target.tagName === "BUTTON" ||
+      const interactiveEl =
         target.closest("a") ||
         target.closest("button") ||
         target.closest("[role='button']") ||
         target.classList.contains("cursor-pointer");
 
-      setCursorVariant(isInteractive ? "pointer" : "default");
+      if (interactiveEl && !isHovering) {
+        isHovering = true;
+        hoverStateOn();
+      } else if (!interactiveEl && isHovering) {
+        isHovering = false;
+        hoverStateOff();
+      }
+    };
+
+    const hoverStateOn = () => {
+      if (ringRef.current) {
+        ringRef.current.style.width = "48px";
+        ringRef.current.style.height = "48px";
+        ringRef.current.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
+        ringRef.current.style.borderColor = "rgba(255, 255, 255, 0.6)";
+      }
+      if (dotRef.current) {
+        dotRef.current.style.opacity = "0";
+      }
+    };
+
+    const hoverStateOff = () => {
+      if (ringRef.current) {
+        ringRef.current.style.width = "36px";
+        ringRef.current.style.height = "36px";
+        ringRef.current.style.backgroundColor = "transparent";
+        ringRef.current.style.borderColor = "rgba(255, 255, 255, 0.4)";
+      }
+      if (dotRef.current) {
+        dotRef.current.style.opacity = "1";
+      }
     };
 
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener("mousemove", updateMousePosition, {
+    window.addEventListener("mousemove", updateMousePos, { passive: true });
+    window.addEventListener("mouseover", handleMouseOver, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave, {
       passive: true,
     });
-    window.addEventListener("mouseover", handleMouseOver, { passive: true });
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mouseenter", handleMouseEnter, {
+      passive: true,
+    });
+
+    // Start ultra-fast 60fps/120fps hardware loop
+    requestAnimationFrame(animate);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("mousemove", updateMousePosition);
+      isRunning = false;
+      window.removeEventListener("mousemove", updateMousePos);
       window.removeEventListener("mouseover", handleMouseOver);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [cursorX, cursorY]);
+  }, []);
 
   if (isTouchDevice || !isVisible) return null;
 
-  const isPointer = cursorVariant === "pointer";
-
   return (
     <>
-      {/* Outer Sleek Ring */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9998] flex items-center justify-center will-change-transform"
+      {/* Outer Fast Ring */}
+      <div
+        ref={ringRef}
+        className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border border-solid transition-all duration-300 ease-out will-change-transform mix-blend-difference"
         style={{
-          x: ringXSpring,
-          y: ringYSpring,
-          translateX: "-50%",
-          translateY: "-50%",
+          width: "36px",
+          height: "36px",
+          borderColor: "rgba(255, 255, 255, 0.4)",
         }}
-      >
-        <motion.div
-          className={`rounded-full border transition-colors duration-300 ${
-            isPointer
-              ? "dark:border-black border-white dark:bg-white bg-black"
-              : "dark:border-white border-black"
-          }`}
-          animate={{
-            width: isPointer ? 50 : 36,
-            height: isPointer ? 50 : 36,
-            opacity: isPointer ? 0.15 : 0.2,
-            borderWidth: isPointer ? "1px" : "1.5px",
-            scale: isPointer ? 1.2 : 1,
-          }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        />
-      </motion.div>
+      />
 
-      {/* Inner Precision Dot */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] flex items-center justify-center will-change-transform"
-        style={{
-          x: dotXSpring,
-          y: dotYSpring,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
+      {/* Inner Fast Dot */}
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 pointer-events-none z-[9999] will-change-transform transition-opacity duration-200 flex items-center justify-center mix-blend-difference"
+        style={{ width: "6px", height: "6px" }}
       >
-        <motion.div
-          className={`rounded-full transition-colors duration-300 drop-shadow-sm ${
-            isPointer ? "dark:bg-black bg-white" : "dark:bg-white bg-black"
-          }`}
-          animate={{
-            width: isPointer ? 6 : 8,
-            height: isPointer ? 6 : 8,
-            opacity: isPointer ? 1 : 0.8,
-          }}
-          transition={{ type: "spring", stiffness: 600, damping: 30 }}
-        />
-      </motion.div>
+        <div className="w-full h-full rounded-full bg-white" />
+      </div>
     </>
   );
 }
