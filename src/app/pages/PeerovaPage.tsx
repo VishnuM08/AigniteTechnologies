@@ -149,6 +149,23 @@ export default function PeerovaPage() {
             </motion.div>
           </motion.div>
         </div>
+
+        {/* Concrete Hero Asset */}
+        <motion.div
+          className="max-w-6xl mx-auto mt-20 px-6"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#d2d2d7]/30 dark:border-[#2a2a2a] bg-[#f5f5f7] dark:bg-[#0a0a0a] aspect-[16/9] md:aspect-[21/9]">
+            <img
+              src="/assets/peerova.png"
+              alt="Peerova Collaborative Learning Interface mockup"
+              className="absolute inset-0 w-full h-full object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+          </div>
+        </motion.div>
       </section>
 
       {/* Features Section */}

@@ -391,7 +391,7 @@ export default function HomePage() {
                   >
                     Currently in beta testing. Full launch coming soon.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col sm:flex-row gap-4 mt-8">
                     <a
                       href="#"
                       className="inline-flex items-center gap-2 px-6 py-3 bg-[#f59e0b] dark:bg-[#f59e0b] text-white rounded-full transition-all hover:bg-[#d97706] dark:hover:bg-[#d97706] hover:shadow-lg active:scale-[0.98]"
@@ -410,20 +410,13 @@ export default function HomePage() {
                     </Link>
                   </div>
                 </div>
-                <div className="relative h-64 md:h-auto bg-gradient-to-br from-[#34c759]/10 to-[#34c759]/5 dark:from-[#34c759]/20 dark:to-[#34c759]/10 flex items-center justify-center">
-                  {/* Placeholder for product image/screenshot */}
-                  <div className="text-center p-8">
-                    <Code
-                      size={80}
-                      className="mx-auto mb-4 text-[#34c759] opacity-40"
-                    />
-                    <p
-                      className="text-[#86868b]"
-                      style={{ fontSize: "0.875rem" }}
-                    >
-                      Product Screenshot
-                    </p>
-                  </div>
+                <div className="relative h-64 md:h-auto overflow-hidden bg-[#f5f5f7] dark:bg-[#0a0a0a]">
+                  <img
+                    src="/assets/kakeibo.png"
+                    alt="Kakeibo Expense Dashboard Mockup"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                 </div>
               </motion.div>
             </motion.div>
@@ -440,22 +433,15 @@ export default function HomePage() {
                 whileHover={{ rotateX: 1, rotateY: 1 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
-                <div className="relative h-64 md:h-auto bg-gradient-to-br from-[#0071e3]/10 to-[#0071e3]/5 dark:from-[#0071e3]/20 dark:to-[#0071e3]/10 flex items-center justify-center order-2 md:order-1">
-                  {/* Placeholder for product image/screenshot */}
-                  <div className="text-center p-8">
-                    <Users
-                      size={80}
-                      className="mx-auto mb-4 text-[#0071e3] opacity-40"
-                    />
-                    <p
-                      className="text-[#86868b]"
-                      style={{ fontSize: "0.875rem" }}
-                    >
-                      Product Screenshot
-                    </p>
-                  </div>
+                <div className="relative h-64 md:h-auto overflow-hidden bg-[#f5f5f7] dark:bg-[#0a0a0a] order-2 md:order-1">
+                  <img
+                    src="/assets/peerova.png"
+                    alt="Peerova Collaboration Interface Mockup"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                 </div>
-                <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center order-1 md:order-2">
+                <div className="p-10 md:p-16 flex flex-col justify-center order-1 md:order-2">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-full bg-[#e0f2fe] dark:bg-[#0c4a6e] w-fit">
                     <div className="w-2 h-2 rounded-full bg-[#0284c7] animate-pulse" />
                     <span
