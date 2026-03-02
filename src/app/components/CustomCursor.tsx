@@ -34,9 +34,9 @@ export function CustomCursor() {
         dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
       }
 
-      // Outer ring trails fluidly
-      ringX += (mouseX - ringX) * 0.15; // The lower the multiplier, the softer/slower the trail
-      ringY += (mouseY - ringY) * 0.15;
+      // Outer ring trails fluidly but faster
+      ringX += (mouseX - ringX) * 0.35; // Increased from 0.15 to make the trail snappier and faster
+      ringY += (mouseY - ringY) * 0.35;
 
       if (ringRef.current) {
         ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
