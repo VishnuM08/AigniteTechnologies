@@ -761,7 +761,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               >
-                Vishnu Magesh
+                Vishnu M
               </motion.h3>
 
               <motion.p
@@ -866,7 +866,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
               >
-                Lavanya L.
+                Lavanya L
               </motion.h3>
 
               <motion.p

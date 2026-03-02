@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, useSpring, useMotionValue } from "motion/react";
+import { motion, useSpring, useMotionValue, useTransform } from "motion/react";
 
 export function CustomCursor() {
   const [cursorVariant, setCursorVariant] = useState("default");
@@ -9,20 +9,29 @@ export function CustomCursor() {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  // Fast spring for the inner dot (feels responsive and exactly on target)
-  const dotSpringConfig = { damping: 35, stiffness: 700, mass: 0.1 };
+  // Fast spring for the inner dot
+  const dotSpringConfig = { damping: 30, stiffness: 600, mass: 0.1 };
   const dotXSpring = useSpring(cursorX, dotSpringConfig);
   const dotYSpring = useSpring(cursorY, dotSpringConfig);
 
-  // Smooth, fluid spring for the outer trailing ring (feels premium and weighty)
-  const ringSpringConfig = { damping: 25, stiffness: 200, mass: 0.4 };
+  // Slightly slower, highly fluid spring for the outer geometric shape
+  const ringSpringConfig = { damping: 20, stiffness: 150, mass: 0.3 };
   const ringXSpring = useSpring(cursorX, ringSpringConfig);
   const ringYSpring = useSpring(cursorY, ringSpringConfig);
+
+  // Calculate rotation based on velocity/movement to make it feel alive
+  const rotation = useTransform(
+    [ringXSpring, ringYSpring],
+    ([x, y]: number[]) => {
+      // Create a subtle continuous rotation based on position
+      // The shape will slowly rotate as it moves across the screen
+      return (x + y) * 0.15;
+    },
+  );
 
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
-    // Detect touch-only devices to disable custom cursor on mobile
     const isMobile =
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent,
@@ -33,7 +42,6 @@ export function CustomCursor() {
     let animationFrameId: number;
 
     const updateMousePosition = (e: MouseEvent) => {
-      // Hardware-accelerated throttling to maintain 60fps even on constrained CPUs (Zscaler)
       cancelAnimationFrame(animationFrameId);
       animationFrameId = requestAnimationFrame(() => {
         cursorX.set(e.clientX);
@@ -80,7 +88,7 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Outer Premium Glassmorphism Ring */}
+      {/* Outer Sleek Ring */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9998] flex items-center justify-center will-change-transform"
         style={{
@@ -91,15 +99,17 @@ export function CustomCursor() {
         }}
       >
         <motion.div
-          className="rounded-full border border-white/40 shadow-[0_0_15px_rgba(255,255,255,0.1)] backdrop-blur-[2px]"
+          className={`rounded-full border transition-colors duration-300 ${
+            isPointer
+              ? "dark:border-black border-white dark:bg-white bg-black"
+              : "dark:border-white border-black"
+          }`}
           animate={{
-            width: isPointer ? 64 : 40,
-            height: isPointer ? 64 : 40,
-            opacity: isPointer ? 0.9 : 0.6,
+            width: isPointer ? 50 : 36,
+            height: isPointer ? 50 : 36,
+            opacity: isPointer ? 0.15 : 0.2,
             borderWidth: isPointer ? "1px" : "1.5px",
-            backgroundColor: isPointer
-              ? "rgba(255, 255, 255, 0.05)"
-              : "transparent",
+            scale: isPointer ? 1.2 : 1,
           }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
         />
@@ -116,13 +126,15 @@ export function CustomCursor() {
         }}
       >
         <motion.div
-          className="bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+          className={`rounded-full transition-colors duration-300 drop-shadow-sm ${
+            isPointer ? "dark:bg-black bg-white" : "dark:bg-white bg-black"
+          }`}
           animate={{
-            width: isPointer ? 4 : 8,
-            height: isPointer ? 4 : 8,
-            opacity: isPointer ? 1 : 1,
+            width: isPointer ? 6 : 8,
+            height: isPointer ? 6 : 8,
+            opacity: isPointer ? 1 : 0.8,
           }}
-          transition={{ type: "spring", stiffness: 500, damping: 28 }}
+          transition={{ type: "spring", stiffness: 600, damping: 30 }}
         />
       </motion.div>
     </>
