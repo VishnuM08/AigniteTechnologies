@@ -8,6 +8,7 @@ import {
   PieChart,
   Target,
   Shield,
+  Code,
 } from "lucide-react";
 import { Link } from "react-router";
 import { SEO } from "../components/SEO";
@@ -148,20 +149,39 @@ export default function KakeiboPage() {
           </motion.div>
         </div>
 
-        {/* Concrete Hero Asset */}
+        {/* Concrete Hero Asset / Playstore Announcement */}
         <motion.div
           className="max-w-6xl mx-auto mt-20 px-6"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#d2d2d7]/30 dark:border-[#2a2a2a] bg-[#f5f5f7] dark:bg-[#0a0a0a] aspect-[16/9] md:aspect-[21/9]">
-            <img
-              src="/assets/kakeibo.png"
-              alt="Kakeibo Mindful Expense Dashboard interface mockup"
-              className="absolute inset-0 w-full h-full object-cover object-top"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#d2d2d7]/30 dark:border-[#2a2a2a] bg-gradient-to-br from-[#34c759]/10 to-[#34c759]/5 dark:from-[#34c759]/20 dark:to-[#34c759]/10 aspect-[16/9] md:aspect-[21/9] flex flex-col items-center justify-center group">
+            {/* Image Placeholder (User can drop <img src="..." /> here later) */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-30">
+              <div className="text-center">
+                <Code size={64} className="mx-auto mb-3 text-[#34c759]" />
+                <span className="text-lg font-medium text-[#34c759]">
+                  Hero Image Slot
+                </span>
+              </div>
+            </div>
+
+            {/* Floating Glassmorphic Playstore Badge */}
+            <motion.div
+              className="absolute top-6 right-6 md:top-10 md:right-10 z-10 flex items-center gap-3 px-5 py-3 bg-white/70 dark:bg-black/70 backdrop-blur-md rounded-full border border-white/20 dark:border-white/10 shadow-lg cursor-default"
+              initial={{ y: 0 }}
+              whileHover={{ y: -2, scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            >
+              <Download size={20} className="text-[#34c759]" />
+              <span
+                className="text-[#1a1a1a] dark:text-white"
+                style={{ fontSize: "1rem", fontWeight: 600 }}
+              >
+                Coming to Playstore
+              </span>
+            </motion.div>
           </div>
         </motion.div>
       </section>

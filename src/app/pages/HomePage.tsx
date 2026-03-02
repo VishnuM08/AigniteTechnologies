@@ -88,9 +88,9 @@ export default function HomePage() {
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#f5f5f7]/20 to-transparent dark:via-[#0a0a0a]/20 pointer-events-none" />
 
-        {/* Floating orbs for depth */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#0071e3]/5 dark:bg-[#0071e3]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-[#34c759]/5 dark:bg-[#34c759]/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Floating orbs for depth - optimized without heavy CSS blurs */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-radial from-[#0071e3]/10 to-transparent rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-radial from-[#34c759]/10 to-transparent rounded-full pointer-events-none" />
 
         <motion.div
           className="max-w-5xl mx-auto text-center relative"
@@ -392,14 +392,14 @@ export default function HomePage() {
                     Currently in beta testing. Full launch coming soon.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                    <a
-                      href="#"
+                    <Link
+                      to="/products/kakeibo"
                       className="inline-flex items-center gap-2 px-6 py-3 bg-[#f59e0b] dark:bg-[#f59e0b] text-white rounded-full transition-all hover:bg-[#d97706] dark:hover:bg-[#d97706] hover:shadow-lg active:scale-[0.98]"
                       style={{ fontSize: "1rem", fontWeight: 500 }}
                     >
                       <Download size={16} />
                       Try Beta
-                    </a>
+                    </Link>
                     <Link
                       to="/products/kakeibo"
                       className="inline-flex items-center gap-2 px-6 py-3 bg-[#1a1a1a] dark:bg-white text-white dark:text-[#1a1a1a] rounded-full transition-all hover:bg-[#2a2a2a] dark:hover:bg-[#f5f5f7] hover:shadow-lg active:scale-[0.98]"
@@ -410,13 +410,32 @@ export default function HomePage() {
                     </Link>
                   </div>
                 </div>
-                <div className="relative h-64 md:h-auto overflow-hidden bg-[#f5f5f7] dark:bg-[#0a0a0a]">
-                  <img
-                    src="/assets/kakeibo.png"
-                    alt="Kakeibo Expense Dashboard Mockup"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+                <div className="relative h-64 md:h-auto overflow-hidden bg-gradient-to-br from-[#34c759]/10 to-[#34c759]/5 dark:from-[#34c759]/20 dark:to-[#34c759]/10 flex flex-col items-center justify-center group">
+                  {/* Image Placeholder (User can drop <img src="..." /> here later) */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                    <div className="text-center">
+                      <Code size={48} className="mx-auto mb-2 text-[#34c759]" />
+                      <span className="text-sm font-medium text-[#34c759]">
+                        Image Slot
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Floating Glassmorphic Playstore Badge */}
+                  <motion.div
+                    className="absolute top-6 right-6 md:top-8 md:right-8 z-10 flex items-center gap-3 px-4 py-2 bg-white/70 dark:bg-black/70 backdrop-blur-md rounded-full border border-white/20 dark:border-white/10 shadow-lg cursor-default"
+                    initial={{ y: 0 }}
+                    whileHover={{ y: -2, scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  >
+                    <Download size={18} className="text-[#34c759]" />
+                    <span
+                      className="text-[#1a1a1a] dark:text-white"
+                      style={{ fontSize: "0.875rem", fontWeight: 600 }}
+                    >
+                      Coming to Playstore
+                    </span>
+                  </motion.div>
                 </div>
               </motion.div>
             </motion.div>
@@ -433,13 +452,35 @@ export default function HomePage() {
                 whileHover={{ rotateX: 1, rotateY: 1 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
-                <div className="relative h-64 md:h-auto overflow-hidden bg-[#f5f5f7] dark:bg-[#0a0a0a] order-2 md:order-1">
-                  <img
-                    src="/assets/peerova.png"
-                    alt="Peerova Collaboration Interface Mockup"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+                <div className="relative h-64 md:h-auto overflow-hidden bg-gradient-to-br from-[#0071e3]/10 to-[#0071e3]/5 dark:from-[#0071e3]/20 dark:to-[#0071e3]/10 flex flex-col items-center justify-center group order-2 md:order-1">
+                  {/* Image Placeholder (User can drop <img src="..." /> here later) */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                    <div className="text-center">
+                      <Users
+                        size={48}
+                        className="mx-auto mb-2 text-[#0071e3]"
+                      />
+                      <span className="text-sm font-medium text-[#0071e3]">
+                        Image Slot
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Floating Glassmorphic Playstore Badge */}
+                  <motion.div
+                    className="absolute top-6 left-6 md:top-8 md:left-8 z-10 flex items-center gap-3 px-4 py-2 bg-white/70 dark:bg-black/70 backdrop-blur-md rounded-full border border-white/20 dark:border-white/10 shadow-lg cursor-default"
+                    initial={{ y: 0 }}
+                    whileHover={{ y: -2, scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  >
+                    <Download size={18} className="text-[#0071e3]" />
+                    <span
+                      className="text-[#1a1a1a] dark:text-white"
+                      style={{ fontSize: "0.875rem", fontWeight: 600 }}
+                    >
+                      Coming to Playstore
+                    </span>
+                  </motion.div>
                 </div>
                 <div className="p-10 md:p-16 flex flex-col justify-center order-1 md:order-2">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-full bg-[#e0f2fe] dark:bg-[#0c4a6e] w-fit">
