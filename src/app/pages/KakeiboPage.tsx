@@ -63,16 +63,38 @@ export default function KakeiboPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#1a1a1a]">
+    <div className="min-h-screen bg-white dark:bg-[#1a1a1a] transition-colors duration-300">
       <SEO
         title="Kakeibo - Mindful Expense Tracker | Aignite Technologies"
         description="A mindful expense tracker inspired by the Japanese Kakeibo method. Understand your money with clarity."
         keywords="Kakeibo, expense tracker, budgeting, mindful money, Japanese budgeting method"
       />
 
-      {/* Hero Section */}
-      <section className="px-6 pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="max-w-5xl mx-auto">
+      {/* Hero Section with Light Mode Premium Mesh Gradient */}
+      <section className="relative px-6 pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-to-br from-green-50/40 via-teal-50/40 to-emerald-50/40 dark:from-transparent dark:via-transparent dark:to-transparent transition-colors duration-700">
+        {/* Soft Animated Mesh Background (Light Mode Only) */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-100 dark:opacity-0 transition-opacity duration-700">
+          <motion.div
+            animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-gradient-to-r from-green-300/20 to-emerald-300/20 blur-3xl mix-blend-multiply"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], rotate: [0, -5, 5, 0] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[30%] -right-[10%] w-[40%] h-[40%] rounded-full bg-gradient-to-l from-teal-300/20 to-cyan-300/20 blur-3xl mix-blend-multiply"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.15, 1], x: [0, 50, 0] }}
+            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+            className="absolute -bottom-[20%] left-[20%] w-[60%] h-[40%] rounded-full bg-gradient-to-t from-emerald-300/10 to-green-300/10 blur-3xl mix-blend-multiply"
+          />
+        </div>
+
+        {/* Mask gradient to fade to white at the bottom */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white dark:via-[#1a1a1a]/80 dark:to-[#1a1a1a] pointer-events-none" />
+
+        <div className="max-w-5xl mx-auto relative z-10">
           <Link
             to="/"
             className="inline-flex items-center gap-2 mb-8 text-[#86868b] hover:text-[#1a1a1a] dark:hover:text-white transition-colors"

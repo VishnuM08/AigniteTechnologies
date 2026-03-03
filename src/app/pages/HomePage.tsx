@@ -80,17 +80,41 @@ export default function HomePage() {
     <div className="min-h-screen bg-white dark:bg-[#1a1a1a] transition-colors duration-300">
       <SEO />
 
-      {/* Hero Section with Parallax */}
+      {/* Hero Section with Parallax and Premium Light Mode Gradients */}
       <section
         ref={heroRef}
-        className="relative px-6 pt-32 pb-24 md:pt-40 md:pb-32 lg:pt-48 lg:pb-48 overflow-hidden"
+        className="relative px-6 pt-32 pb-24 md:pt-40 md:pb-32 lg:pt-48 lg:pb-48 overflow-hidden bg-gradient-to-br from-indigo-50/40 via-purple-50/40 to-blue-50/40 dark:from-transparent dark:via-transparent dark:to-transparent transition-colors duration-700"
       >
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#f5f5f7]/20 to-transparent dark:via-[#0a0a0a]/20 pointer-events-none" />
+        {/* Soft Animated Mesh Background (Light Mode Only) */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-100 dark:opacity-0 transition-opacity duration-700">
+          <motion.div
+            animate={{
+              scale: [1, 1.1, 1],
+              rotate: [0, 5, -5, 0],
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-gradient-to-r from-blue-300/30 to-purple-300/30 blur-3xl mix-blend-multiply"
+          />
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, -5, 5, 0],
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[30%] -right-[10%] w-[40%] h-[40%] rounded-full bg-gradient-to-l from-indigo-300/30 to-cyan-300/30 blur-3xl mix-blend-multiply"
+          />
+          <motion.div
+            animate={{
+              scale: [1, 1.15, 1],
+              x: [0, 50, 0],
+            }}
+            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+            className="absolute -bottom-[20%] left-[20%] w-[60%] h-[40%] rounded-full bg-gradient-to-t from-pink-300/20 to-purple-300/20 blur-3xl mix-blend-multiply"
+          />
+        </div>
 
-        {/* Floating orbs for depth - optimized without heavy CSS blurs */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-radial from-[#0071e3]/10 to-transparent rounded-full pointer-events-none" />
-        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-radial from-[#34c759]/10 to-transparent rounded-full pointer-events-none" />
+        {/* Background gradient mask to fade it out neatly at the bottom */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white dark:via-[#1a1a1a]/80 dark:to-[#1a1a1a] pointer-events-none" />
 
         <motion.div
           className="max-w-5xl mx-auto text-center relative"
@@ -330,7 +354,7 @@ export default function HomePage() {
           <div className="space-y-16">
             {/* Product 1: Kakeibo */}
             <motion.div
-              className="group bg-white dark:bg-[#1a1a1a] rounded-3xl overflow-hidden shadow-sm border border-[#d2d2d7]/30 dark:border-[#2a2a2a] hover:shadow-2xl transition-all duration-500 will-change-transform"
+              className="group bg-white dark:bg-[#1a1a1a] rounded-3xl overflow-hidden shadow-sm border border-[#d2d2d7]/30 dark:border-[#2a2a2a] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-2xl transition-all duration-500 will-change-transform"
               variants={scaleIn}
               whileHover={{ scale: 1.01, y: -8 }}
               style={{ perspective: 1000 }}
@@ -442,7 +466,7 @@ export default function HomePage() {
 
             {/* Product 2: Peerova */}
             <motion.div
-              className="group bg-white dark:bg-[#1a1a1a] rounded-3xl overflow-hidden shadow-sm border border-[#d2d2d7]/30 dark:border-[#2a2a2a] hover:shadow-2xl transition-all duration-500 will-change-transform"
+              className="group bg-white dark:bg-[#1a1a1a] rounded-3xl overflow-hidden shadow-sm border border-[#d2d2d7]/30 dark:border-[#2a2a2a] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-2xl transition-all duration-500 will-change-transform"
               variants={scaleIn}
               whileHover={{ scale: 1.01, y: -8 }}
               style={{ perspective: 1000 }}

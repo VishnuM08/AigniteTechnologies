@@ -1,11 +1,36 @@
 import React, { useEffect, useRef, useState } from "react";
 
+/**
+ * Detects whether the user is behind a VPN / corporate proxy (e.g. ZScaler)
+ * by measuring round-trip time of a tiny same-origin fetch.
+ * ZScaler and similar TLS-intercepting proxies add noticeable overhead (typically >100ms).
+ */
+async function detectVpnOrProxy(): Promise<boolean> {
+  try {
+    const start = performance.now();
+    // Fetch the favicon (tiny, always cached) purely to measure proxy overhead
+    await fetch("/favicon.ico", {
+      method: "HEAD",
+      cache: "no-store",
+      signal: AbortSignal.timeout(2000),
+    });
+    const elapsed = performance.now() - start;
+    // If the same-origin round-trip exceeds 150ms it very likely went through
+    // a TLS-inspecting proxy (ZScaler, Netskope, etc.)
+    return elapsed > 150;
+  } catch {
+    // Timeout or blocked — treat as proxy-like environment
+    return true;
+  }
+}
+
 export function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
 
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isProxyEnv, setIsProxyEnv] = useState(false);
 
   useEffect(() => {
     const isMobile =
@@ -16,6 +41,33 @@ export function CustomCursor() {
     setIsTouchDevice(isMobile);
     if (isMobile) return;
 
+    // --- VPN / ZScaler detection ---
+    // Run a quick latency probe. If it's slow, a TLS-inspecting proxy
+    // (ZScaler, Netskope, Cisco Umbrella…) is almost certainly involved.
+    // In that environment the rAF loop competes with proxy overhead, so
+    // we fall back to the native OS cursor for a smooth experience.
+    let cleanupCalled = false;
+    detectVpnOrProxy().then((isProxy) => {
+      if (cleanupCalled) return;
+      if (isProxy) {
+        setIsProxyEnv(true);
+        // Restore the native cursor on the whole page
+        document.body.style.cursor = "auto";
+        return;
+      }
+      // Not a proxy — hide the default cursor and run custom one
+      document.body.style.cursor = "none";
+      startCustomCursor();
+    });
+
+    return () => {
+      cleanupCalled = true;
+      document.body.style.cursor = "auto";
+    };
+  }, []);
+
+  // Extracted so it can be called only after proxy check resolves
+  function startCustomCursor() {
     let mouseX = -100;
     let mouseY = -100;
     // Smoothed trailing coordinates for the ring
@@ -107,6 +159,7 @@ export function CustomCursor() {
     // Start ultra-fast 60fps/120fps hardware loop
     requestAnimationFrame(animate);
 
+    // Return inner cleanup (called when component unmounts)
     return () => {
       isRunning = false;
       window.removeEventListener("mousemove", updateMousePos);
@@ -114,9 +167,10 @@ export function CustomCursor() {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, []);
+  }
 
-  if (isTouchDevice || !isVisible) return null;
+  // If on a touch device, proxy/VPN, or cursor left window → use native cursor
+  if (isTouchDevice || isProxyEnv || !isVisible) return null;
 
   return (
     <>
