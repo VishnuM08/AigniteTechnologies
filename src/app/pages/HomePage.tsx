@@ -1237,20 +1237,20 @@ export default function HomePage() {
             </h4>
             <ul className="space-y-4">
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/privacy"
                   className="text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-colors text-sm"
                 >
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  to="/terms"
                   className="text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-colors text-sm"
                 >
                   Terms of Service
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

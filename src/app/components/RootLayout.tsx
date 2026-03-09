@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router";
+import { Outlet, ScrollRestoration } from "react-router";
 import { Navigation } from "./Navigation";
 import { CustomCursor } from "./CustomCursor";
 import { ScrollProgress } from "./ScrollProgress";
@@ -10,6 +10,7 @@ import { LoadingScreen } from "./LoadingScreen";
 export function RootLayout() {
   return (
     <>
+      <ScrollRestoration />
       <LoadingScreen />
       <CustomCursor />
       <ScrollProgress />

@@ -373,13 +373,20 @@ export default function PeerovaPage() {
 
       {/* Footer */}
       <footer className="px-6 py-12 border-t border-[#d2d2d7]/50 dark:border-[#2a2a2a]">
-        <div className="max-w-6xl mx-auto text-center">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
           <Link
             to="/"
             className="text-[#86868b] hover:text-[#1a1a1a] dark:hover:text-white transition-colors"
             style={{ fontSize: "0.875rem" }}
           >
             © 2026 Aignite Technologies
+          </Link>
+          <Link
+            to="/privacy/kakeibo"
+            className="text-[#86868b] hover:text-[#0071e3] transition-colors"
+            style={{ fontSize: "0.875rem" }}
+          >
+            Privacy Policy
           </Link>
         </div>
       </footer>

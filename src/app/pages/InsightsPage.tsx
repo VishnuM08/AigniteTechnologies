@@ -250,6 +250,7 @@ export default function InsightsPage() {
                 { name: "Products", href: "/#products" },
                 { name: "About", href: "/#who-we-are" },
                 { name: "Contact", href: "/#contact" },
+                { name: "Privacy", href: "/privacy/kakeibo" },
               ].map((link) => (
                 <a
                   key={link.name}
