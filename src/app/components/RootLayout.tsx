@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, ScrollRestoration } from "react-router";
 import { Navigation } from "./Navigation";
-import { CustomCursor } from "./CustomCursor";
+
 import { ScrollProgress } from "./ScrollProgress";
 import { BackToTop } from "./BackToTop";
 import { ThemeToggle } from "./ThemeToggle";
@@ -12,7 +12,7 @@ export function RootLayout() {
     <>
       <ScrollRestoration />
       <LoadingScreen />
-      <CustomCursor />
+
       <ScrollProgress />
       <Navigation />
       <BackToTop />

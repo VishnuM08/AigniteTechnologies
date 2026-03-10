@@ -152,7 +152,9 @@ export default function KakeiboPage() {
               variants={fadeInUp}
             >
               <a
-                href="#"
+                href="https://kakeibo.theaignite.app"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] active:scale-[0.98]"
                 style={{ fontSize: "1.0625rem", fontWeight: 500 }}
               >
@@ -423,7 +425,9 @@ export default function KakeiboPage() {
 
           <motion.div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="#"
+              href="https://kakeibo.theaignite.app"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] active:scale-[0.98]"
               style={{ fontSize: "1.0625rem", fontWeight: 500 }}
             >
