@@ -7,6 +7,7 @@ import InsightsPage from "./pages/InsightsPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import AignitePrivacyPolicyPage from "./pages/AignitePrivacyPolicyPage";
 import TermsOfServicePage from "./pages/TermsOfServicePage";
+import DeleteAccountPage from "./pages/DeleteAccountPage";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "/terms",
         element: <TermsOfServicePage />,
+      },
+      {
+        path: "/delete-account",
+        element: <DeleteAccountPage />,
       },
     ],
   },
