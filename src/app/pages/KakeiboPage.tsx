@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import {
   ArrowLeft,
   ExternalLink,
@@ -49,28 +49,6 @@ const staggerContainer: Variants = {
 };
 
 export default function KakeiboPage() {
-  const [demoStep, setDemoStep] = React.useState<"idle" | "receiving" | "approving" | "success">("idle");
-  const [demoTransactions, setDemoTransactions] = React.useState<any[]>([]);
-
-  const startDemo = () => {
-    setDemoStep("receiving");
-    setTimeout(() => {
-      // Auto-trigger approved after simulation
-    }, 3000);
-  };
-
-  const approveTransaction = () => {
-    setDemoStep("approving");
-    setTimeout(() => {
-      setDemoTransactions([
-        { id: Date.now(), title: "Starbucks Coffee", amount: "₹350", category: "Optional", time: "Just now" },
-        ...demoTransactions
-      ]);
-      setDemoStep("success");
-      setTimeout(() => setDemoStep("idle"), 3000);
-    }, 800);
-  };
-
   const mainPillars = [
     {
       icon: <Zap size={32} />,
@@ -244,202 +222,6 @@ export default function KakeiboPage() {
         </div>
       </section>
 
-      {/* Interactive Experience - Suggestion 1 */}
-      <section className="px-6 py-24 bg-[#fbfbfd] dark:bg-[#0d0d0d] overflow-hidden relative border-y border-[#d2d2d7]/30 dark:border-white/5">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-[#1a1a1a] dark:text-white mb-6 tracking-tight">Experience the Magic.</h2>
-            <p className="text-[#86868b] text-lg md:text-xl max-w-2xl mx-auto font-medium">
-              See how Kakeibo transforms your banking SMS into clear, mindful entries instantly.
-            </p>
-          </div>
-
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-            {/* Control Panel */}
-            <div className="w-full lg:w-1/3 space-y-8">
-              <div className="p-8 rounded-3xl bg-white dark:bg-white/5 border border-[#d2d2d7]/50 dark:border-white/10 shadow-sm relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <h3 className="text-xl font-bold text-[#1a1a1a] dark:text-white mb-4 relative z-10">Try it yourself</h3>
-                <p className="text-[#86868b] mb-8 font-medium relative z-10 leading-relaxed">Receive a simulated bank SMS and see the automation in action.</p>
-                <button
-                  onClick={startDemo}
-                  disabled={demoStep !== 'idle'}
-                  className="w-full py-5 bg-[#0071e3] text-white rounded-2xl font-bold text-lg transition-all hover:bg-[#0077ed] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/20 active:scale-[0.98] relative z-10"
-                >
-                  {demoStep === 'idle' ? 'Simulate Transaction SMS' : 'Demo in Progress...'}
-                </button>
-              </div>
-              
-              <div className="flex items-start gap-4 p-6 rounded-2xl bg-blue-50 dark:bg-blue-500/10 border border-blue-100 dark:border-blue-500/20">
-                <div className="p-2 rounded-lg bg-blue-500 text-white">
-                  <Shield size={20} />
-                </div>
-                <div>
-                  <p className="text-blue-900 dark:text-blue-300 text-sm font-bold mb-1">Bank-Grade Privacy</p>
-                  <p className="text-blue-700 dark:text-blue-400 text-xs font-bold leading-snug">Parsing happens 100% locally on your device. Your data never leaves your app.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Phone Mockup */}
-            <div className="w-full lg:w-2/3 relative flex justify-center">
-              <div className="w-[300px] h-[600px] md:w-[340px] md:h-[680px] bg-[#0a0a0a] rounded-[3.5rem] border-[10px] border-[#1a1a1a] relative overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] ring-1 ring-white/10">
-                {/* iPhone Notch Style Status Bar */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-[#1a1a1a] rounded-b-2xl z-40" />
-                <div className="absolute top-0 w-full h-8 px-8 flex justify-between items-center z-30 text-white text-[10px] font-bold pt-2">
-                  <span>9:41</span>
-                  <div className="flex gap-1.5 items-center">
-                    <Smartphone size={10} />
-                    <div className="w-4 h-2 rounded-sm border border-white/30 relative">
-                       <div className="absolute left-[1px] top-[1px] bottom-[1px] w-2 bg-emerald-500 rounded-[1px]" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* App Content */}
-                <div className="absolute inset-0 bg-white dark:bg-[#0a0a0a] pt-12 overflow-y-auto no-scrollbar">
-                  <div className="p-6">
-                    <div className="flex justify-between items-center mb-6">
-                      <h4 className="text-xl font-bold dark:text-white">Live Insights</h4>
-                      <BarChart3 size={20} className="text-[#0071e3]" />
-                    </div>
-                    
-                    <div className="space-y-4">
-                      {demoTransactions.length === 0 && (
-                        <div className="py-20 text-center opacity-30">
-                          <PieChart size={64} className="mx-auto mb-4 text-[#86868b]" />
-                          <p className="text-sm font-bold uppercase tracking-widest text-[#86868b]">Feed is Empty</p>
-                        </div>
-                      )}
-                      
-                      <AnimatePresence mode="popLayout">
-                        {demoTransactions.map(tx => (
-                          <motion.div
-                            key={tx.id}
-                            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            className="flex items-center justify-between p-4 rounded-2xl bg-[#fbfbfd] dark:bg-white/5 border border-[#d2d2d7]/30 dark:border-white/5 group"
-                          >
-                            <div className="flex items-center gap-3">
-                              <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
-                                <Zap size={18} />
-                              </div>
-                              <div>
-                                <p className="font-bold text-sm dark:text-white leading-none mb-1">{tx.title}</p>
-                                <p className="text-[10px] text-[#86868b] font-bold uppercase tracking-wider">{tx.category}</p>
-                              </div>
-                            </div>
-                            <div className="text-right">
-                              <p className="font-bold text-sm text-red-500 mb-1">{tx.amount}</p>
-                              <p className="text-[9px] text-[#86868b] font-medium">{tx.time}</p>
-                            </div>
-                          </motion.div>
-                        ))}
-                      </AnimatePresence>
-
-                      <div className="opacity-20 pointer-events-none space-y-4">
-                         {[1,2].map(i => (
-                           <div key={i} className="flex items-center justify-between p-4 rounded-2xl border border-dashed border-gray-400">
-                             <div className="w-8 h-8 rounded-full bg-gray-200" />
-                             <div className="w-24 h-4 bg-gray-200 rounded" />
-                             <div className="w-12 h-4 bg-gray-200 rounded" />
-                           </div>
-                         ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* SMS Notification Overlay */}
-                <AnimatePresence>
-                  {demoStep === 'receiving' && (
-                    <motion.div
-                      initial={{ y: -120, x: "-50%", opacity: 0 }}
-                      animate={{ y: 0, x: "-50%", opacity: 1 }}
-                      exit={{ y: -120, x: "-50%", opacity: 0 }}
-                      className="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] z-50 p-4 bg-white/95 dark:bg-[#1a1a1a]/95 backdrop-blur-2xl rounded-2xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.3)] ring-1 ring-black/5"
-                    >
-                      <div className="flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0071e3] to-blue-600 flex items-center justify-center text-white shadow-lg">
-                          <Bell size={22} className="animate-bounce" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex justify-between items-center mb-1">
-                            <p className="font-bold text-xs dark:text-white tracking-tight">System Message</p>
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3]" />
-                          </div>
-                          <p className="text-[11px] font-bold dark:text-white leading-snug">
-                            HDFC Bank: A/c ...0843 debited for Rs 350.00 to Starbucks. 🍩
-                          </p>
-                        </div>
-                      </div>
-                      <div className="mt-4 flex gap-2">
-                        <button
-                          onClick={approveTransaction}
-                          className="flex-1 py-2.5 bg-[#0071e3] text-white text-[10px] font-bold rounded-xl transition-all hover:bg-[#0077ed] active:scale-95 shadow-md shadow-blue-500/20"
-                        >
-                          Approve Expense
-                        </button>
-                        <button 
-                          onClick={() => setDemoStep('idle')}
-                          className="px-4 py-2.5 bg-gray-100 dark:bg-white/5 text-[#1a1a1a] dark:text-white text-[10px] font-bold rounded-xl hover:bg-gray-200 transition-colors"
-                        >
-                          Dismiss
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Approving Loader */}
-                <AnimatePresence>
-                  {demoStep === 'approving' && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="absolute inset-0 z-[60] bg-[#0a0a0a]/80 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center"
-                    >
-                      <div className="relative mb-8">
-                        <motion.div 
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                          className="w-16 h-16 rounded-full border-t-2 border-blue-500 border-r-2 border-transparent"
-                        />
-                        <Zap size={32} className="absolute inset-0 m-auto text-blue-400 animate-pulse" />
-                      </div>
-                      <p className="text-white font-bold text-xl tracking-tight">Smart Parsing...</p>
-                      <p className="text-white/40 text-xs mt-3 font-bold uppercase tracking-widest">Aignite Secure Engine</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Success Feedback overlay */}
-                <AnimatePresence>
-                  {demoStep === 'success' && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="absolute inset-0 z-[70] bg-blue-500/10 backdrop-blur-sm flex items-center justify-center pointer-events-none"
-                    >
-                       <motion.div
-                        initial={{ scale: 0.5, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1, y: -200 }}
-                        transition={{ duration: 1.5, ease: "easeOut" }}
-                        className="p-4 rounded-full bg-emerald-500 text-white shadow-2xl"
-                       >
-                         <CheckCircle2 size={32} />
-                       </motion.div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Feature Pillars */}
       <section className="px-6 py-24 bg-white dark:bg-[#0a0a0a]">
         <div className="max-w-6xl mx-auto">
@@ -468,7 +250,7 @@ export default function KakeiboPage() {
       {/* How It Works - 3-Step Visual */}
       <section className="px-6 py-24 bg-[#fbfbfd] dark:bg-[#111111] border-y border-[#d2d2d7]/30 dark:border-white/5 text-center">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold text-[#1a1a1a] dark:text-white mb-20 tracking-tight">The Modern Zen Workflow</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-[#1a1a1a] dark:text-white mb-20 tracking-tight">The Modern Mindful Workflow</h2>
           <div className="grid md:grid-cols-3 gap-12 relative">
             {/* Connection Line (Desktop only) */}
             <div className="hidden md:block absolute top-1/2 left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-transparent via-[#d2d2d7] dark:via-white/10 to-transparent -translate-y-24 z-0" />
