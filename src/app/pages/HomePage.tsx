@@ -11,6 +11,7 @@ import {
   Code,
   Layers,
   Linkedin,
+  CheckCircle2,
 } from "lucide-react";
 import { SEO } from "../components/SEO";
 import { Link } from "react-router";
@@ -46,7 +47,52 @@ const scaleIn: Variants = {
   },
 };
 
+const HorizontalMarquee = ({
+  images,
+  speed = 30,
+  reverse = false,
+}: {
+  images: string[];
+  speed?: number;
+  reverse?: boolean;
+}) => (
+  <motion.div
+    className="flex gap-6 py-4 px-4"
+    animate={{
+      x: reverse ? ["-50%", "0%"] : ["0%", "-50%"],
+    }}
+    transition={{
+      duration: speed,
+      repeat: Infinity,
+      ease: "linear",
+    }}
+    style={{ width: "max-content" }}
+  >
+    {[...images, ...images].map((src, i) => (
+      <div key={i} className="relative group/img flex-shrink-0">
+        <img
+          src={src}
+          alt="App Screenshot"
+          className="h-[350px] w-auto rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/5 transition-all duration-500 group-hover/img:scale-[1.05] group-hover/img:border-white/20"
+        />
+        <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+      </div>
+    ))}
+  </motion.div>
+);
+
 export default function HomePage() {
+  const [email, setEmail] = React.useState("");
+  const [subscribed, setSubscribed] = React.useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      setSubscribed(true);
+      setEmail("");
+    }
+  };
+
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -284,8 +330,8 @@ export default function HomePage() {
                 icon: <Users size={24} />,
               },
               {
-                value: "Beta",
-                label: "Kakeibo Stage",
+                value: "Launched",
+                label: "Kakeibo Status",
                 icon: <Zap size={24} />,
               },
               {
@@ -364,26 +410,39 @@ export default function HomePage() {
                 whileHover={{ rotateX: 1, rotateY: -1 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
-                <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-full bg-[#fef3c7] dark:bg-[#854d0e] w-fit">
-                    <div className="w-2 h-2 rounded-full bg-[#f59e0b] animate-pulse" />
+                <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center relative overflow-hidden">
+                  {/* Subtle Background Branding */}
+                  <img
+                    src="/assets/Kakeibo/Kakeibo-FG.png"
+                    alt=""
+                    className="absolute -right-24 -bottom-24 w-2/3 h-auto opacity-[0.03] dark:opacity-[0.05] pointer-events-none rotate-12"
+                  />
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-full bg-[#ecfdf5] dark:bg-[#064e3b] w-fit relative z-10">
+                    <div className="w-2 h-2 rounded-full bg-[#10b981]" />
                     <span
-                      className="text-[#92400e] dark:text-[#fef3c7]"
+                      className="text-[#065f46] dark:text-[#a7f3d0]"
                       style={{ fontSize: "0.75rem", fontWeight: 500 }}
                     >
-                      IN BETA
+                      LIVE
                     </span>
                   </div>
-                  <h3
-                    className="mb-3 text-[#1a1a1a] dark:text-white"
-                    style={{
-                      fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
-                      fontWeight: 600,
-                      letterSpacing: "-0.01em",
-                    }}
-                  >
-                    Kakeibo
-                  </h3>
+                  <div className="flex flex-row items-center gap-6 mb-8 relative z-10">
+                    <img
+                      src="/assets/Kakeibo/kakeibo_logo.png"
+                      alt="Kakeibo Logo"
+                      className="w-20 h-20 object-contain rounded-[1.5rem] shadow-xl border border-[#d2d2d7]/30 dark:border-[#2a2a2a]"
+                    />
+                    <h3
+                      className="text-[#1a1a1a] dark:text-white"
+                      style={{
+                        fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
+                        fontWeight: 600,
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
+                      Kakeibo
+                    </h3>
+                  </div>
                   <p
                     className="mb-5 text-[#1a1a1a] dark:text-white"
                     style={{
@@ -406,24 +465,26 @@ export default function HomePage() {
                     reflection.
                   </p>
                   <p
-                    className="mb-8 text-[#f59e0b] dark:text-[#fbbf24]"
+                    className="mb-8 text-[#10b981] dark:text-[#34d399]"
                     style={{
                       fontSize: "0.9375rem",
                       lineHeight: 1.5,
                       fontWeight: 500,
                     }}
                   >
-                    Currently in beta testing. Full launch coming soon.
+                    Official production release available now.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                    <Link
-                      to="/products/kakeibo"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#f59e0b] dark:bg-[#f59e0b] text-white rounded-full transition-all hover:bg-[#d97706] dark:hover:bg-[#d97706] hover:shadow-lg active:scale-[0.98]"
+                    <a
+                      href="https://play.google.com/store/apps/details?id=com.aignite.kakeibo&pcampaignid=web_share"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] hover:shadow-lg active:scale-[0.98]"
                       style={{ fontSize: "1rem", fontWeight: 500 }}
                     >
                       <Download size={16} />
-                      Try Beta
-                    </Link>
+                      Get App
+                    </a>
                     <Link
                       to="/products/kakeibo"
                       className="inline-flex items-center gap-2 px-6 py-3 bg-[#1a1a1a] dark:bg-white text-white dark:text-[#1a1a1a] rounded-full transition-all hover:bg-[#2a2a2a] dark:hover:bg-[#f5f5f7] hover:shadow-lg active:scale-[0.98]"
@@ -434,32 +495,53 @@ export default function HomePage() {
                     </Link>
                   </div>
                 </div>
-                <div className="relative h-64 md:h-auto overflow-hidden bg-gradient-to-br from-[#34c759]/10 to-[#34c759]/5 dark:from-[#34c759]/20 dark:to-[#34c759]/10 flex flex-col items-center justify-center group">
-                  {/* Image Placeholder (User can drop <img src="..." /> here later) */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                    <div className="text-center">
-                      <Code size={48} className="mx-auto mb-2 text-[#34c759]" />
-                      <span className="text-sm font-medium text-[#34c759]">
-                        Image Slot
-                      </span>
-                    </div>
+                <div className="relative h-[450px] md:h-full overflow-hidden flex items-center group bg-[#0a0a0a]">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#1a1a1a_0%,_#000000_100%)] opacity-80" />
+
+                  <div className="relative w-full overflow-hidden">
+                    <HorizontalMarquee
+                      images={[
+                        "/assets/Kakeibo/Homepage v2 Dark.png",
+                        "/assets/Kakeibo/Analystics.png",
+                        "/assets/Kakeibo/Calender.png",
+                        "/assets/Kakeibo/Search.png",
+                        "/assets/Kakeibo/Home Page v2 Light.png",
+                        "/assets/Kakeibo/Budget Over View.png",
+                        "/assets/Kakeibo/SMS Transaction.png",
+                        "/assets/Kakeibo/Add Expense v2 .png",
+                        "/assets/Kakeibo/Recurring Expenses.png",
+                      ]}
+                      speed={50}
+                    />
                   </div>
 
-                  {/* Floating Glassmorphic Playstore Badge */}
-                  <motion.div
-                    className="absolute top-6 right-6 md:top-8 md:right-8 z-10 flex items-center gap-3 px-4 py-2 bg-white/70 dark:bg-black/70 backdrop-blur-md rounded-full border border-white/20 dark:border-white/10 shadow-lg cursor-default"
+                  {/* Left and Right Fades for Infinite Look */}
+                  <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+                  <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+
+                  {/* Floating Glassmorphic Playstore Link */}
+                  <motion.a
+                    href="https://play.google.com/store/apps/details?id=com.aignite.kakeibo&pcampaignid=web_share"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute top-8 right-8 z-20 flex items-center gap-3 px-5 py-2.5 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 shadow-2xl cursor-pointer hover:bg-white/10 transition-all duration-300"
                     initial={{ y: 0 }}
-                    whileHover={{ y: -2, scale: 1.05 }}
+                    whileHover={{ y: -4, scale: 1.05 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
-                    <Download size={18} className="text-[#34c759]" />
+                    <div className="w-2 h-2 rounded-full bg-[#34c759] shadow-[0_0_10px_rgba(52,199,89,0.5)]" />
+                    <Download size={18} className="text-white/80" />
                     <span
-                      className="text-[#1a1a1a] dark:text-white"
-                      style={{ fontSize: "0.875rem", fontWeight: 600 }}
+                      className="text-white/90"
+                      style={{
+                        fontSize: "0.875rem",
+                        fontWeight: 600,
+                        letterSpacing: "0.01em",
+                      }}
                     >
-                      Coming to Playstore
+                      Available on Play Store
                     </span>
-                  </motion.div>
+                  </motion.a>
                 </div>
               </motion.div>
             </motion.div>
@@ -476,18 +558,28 @@ export default function HomePage() {
                 whileHover={{ rotateX: 1, rotateY: 1 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
-                <div className="relative h-64 md:h-auto overflow-hidden bg-gradient-to-br from-[#0071e3]/10 to-[#0071e3]/5 dark:from-[#0071e3]/20 dark:to-[#0071e3]/10 flex flex-col items-center justify-center group order-2 md:order-1">
-                  {/* Image Placeholder (User can drop <img src="..." /> here later) */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                    <div className="text-center">
-                      <Users
-                        size={48}
-                        className="mx-auto mb-2 text-[#0071e3]"
-                      />
-                      <span className="text-sm font-medium text-[#0071e3]">
-                        Image Slot
-                      </span>
-                    </div>
+                <div className="relative h-64 md:h-auto overflow-hidden bg-gradient-to-br from-[#0071e3]/10 to-[#0071e3]/5 dark:from-[#0071e3]/20 dark:to-[#0071e3]/10 flex flex-col items-center justify-center group order-2 md:order-1 overflow-hidden">
+                  {/* High-Fidelity Coming Soon Placeholder for Peerova */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#0071e3]/10 to-[#07c1ff]/5 dark:from-[#0071e3]/20 dark:to-[#07c1ff]/10">
+                    <motion.div
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 1 }}
+                      className="flex flex-col items-center gap-6"
+                    >
+                      <div className="p-10 rounded-full bg-white/10 backdrop-blur-3xl border border-white/20 shadow-2xl">
+                        <Users
+                          size={64}
+                          className="text-[#0071e3]"
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                      <div className="px-6 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
+                        <span className="text-[#1a1a1a] dark:text-white font-semibold tracking-wider text-sm">
+                          REVEALING SUMMER 2026
+                        </span>
+                      </div>
+                    </motion.div>
                   </div>
 
                   {/* Floating Glassmorphic Playstore Badge */}
@@ -1142,24 +1234,37 @@ export default function HomePage() {
               Building thoughtful web, mobile, and AI products designed with
               clarity and built for people.
             </p>
-            <form
-              className="relative max-w-sm"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="email"
-                placeholder="Join our newsletter"
-                className="w-full bg-white dark:bg-[#0a0a0a] border border-[#d2d2d7] dark:border-[#2a2a2a] rounded-full px-5 py-3 text-sm focus:outline-none focus:border-[#0071e3] dark:focus:border-[#0071e3] transition-colors text-[#1a1a1a] dark:text-white"
-                required
-              />
-              <button
-                type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-[#0071e3] text-white rounded-full hover:bg-[#0077ed] transition-colors"
-                aria-label="Subscribe to newsletter"
+            {!subscribed ? (
+              <form
+                className="relative max-w-sm group"
+                onSubmit={handleSubscribe}
               >
-                <ArrowRight size={16} />
-              </button>
-            </form>
+                <input
+                  type="email"
+                  placeholder="Join our newsletter"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full bg-white dark:bg-[#0a0a0a] border border-[#d2d2d7] dark:border-[#2a2a2a] rounded-full px-5 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0071e3]/50 focus:border-[#0071e3] transition-all text-[#1a1a1a] dark:text-white shadow-sm"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-[#0071e3] text-white rounded-full hover:bg-[#0077ed] hover:scale-110 active:scale-90 transition-all shadow-md group-focus-within:bg-[#0077ed]"
+                  aria-label="Subscribe to newsletter"
+                >
+                  <ArrowRight size={16} />
+                </button>
+              </form>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex items-center gap-2 text-emerald-500 font-bold text-sm"
+              >
+                <CheckCircle2 size={18} />
+                <span>You're subscribed to Aignite updates!</span>
+              </motion.div>
+            )}
           </div>
 
           <div>

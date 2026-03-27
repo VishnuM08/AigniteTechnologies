@@ -180,14 +180,27 @@ export default function PeerovaPage() {
           transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#d2d2d7]/30 dark:border-[#2a2a2a] bg-gradient-to-br from-[#0071e3]/10 to-[#0071e3]/5 dark:from-[#0071e3]/20 dark:to-[#0071e3]/10 aspect-[16/9] md:aspect-[21/9] flex flex-col items-center justify-center group">
-            {/* Image Placeholder (User can drop <img src="..." /> here later) */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-30">
-              <div className="text-center">
-                <Users size={64} className="mx-auto mb-3 text-[#0071e3]" />
-                <span className="text-lg font-medium text-[#0071e3]">
-                  Hero Image Slot
-                </span>
-              </div>
+            {/* High-Fidelity Coming Soon Placeholder for Peerova */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#0071e3]/10 to-[#07c1ff]/5 dark:from-[#0071e3]/20 dark:to-[#07c1ff]/10">
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 1 }}
+                className="flex flex-col items-center gap-6"
+              >
+                <div className="p-12 md:p-16 rounded-full bg-white/10 backdrop-blur-3xl border border-white/20 shadow-2xl">
+                  <Users
+                    size={80}
+                    className="text-[#0071e3]"
+                    strokeWidth={1}
+                  />
+                </div>
+                <div className="px-8 py-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-center">
+                  <span className="text-[#1a1a1a] dark:text-white font-semibold tracking-[0.2em] text-xs md:text-sm">
+                    REVEALING SUMMER 2026
+                  </span>
+                </div>
+              </motion.div>
             </div>
 
             {/* Floating Glassmorphic Playstore Badge */}
