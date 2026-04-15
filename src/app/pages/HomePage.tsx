@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { SEO } from "../components/SEO";
 import { Link } from "react-router";
+import { teamData } from "../data/team";
 
 import { Variants } from "motion/react";
 
@@ -901,216 +902,121 @@ export default function HomePage() {
             Who we are
           </motion.h2>
 
-          <div className="grid md:grid-cols-2 gap-12 md:gap-8 max-w-5xl mx-auto">
-            {/* Vishnu's Profile */}
-            <div className="text-center flex flex-col items-center h-full p-8 md:p-10 rounded-3xl bg-white dark:bg-[#1a1a1a] shadow-[0_2px_40px_-15px_rgba(0,0,0,0.05)] dark:shadow-none border border-[#d2d2d7]/30 dark:border-[#2a2a2a]/60">
-              <motion.div
-                className="mb-8 w-28 h-28 rounded-full bg-gradient-to-br from-[#0071e3] to-[#0077ed] flex items-center justify-center text-white shadow-xl"
-                style={{ fontSize: "2.5rem", fontWeight: 600 }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-              >
-                V
-              </motion.div>
-
-              <div className="min-h-[3.5rem] flex items-center justify-center mb-4">
-                <motion.div
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0071e3]/10 dark:bg-[#0071e3]/20 border border-[#0071e3]/20 text-center text-balance"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.25 }}
+          <div
+            className={
+              teamData.filter((m) => m.active).length > 1
+                ? "grid md:grid-cols-2 gap-12 md:gap-8 max-w-5xl mx-auto"
+                : "flex justify-center max-w-5xl mx-auto"
+            }
+          >
+            {teamData
+              .filter((m) => m.active)
+              .map((member, index) => (
+                <div
+                  key={member.id}
+                  className="text-center flex flex-col items-center h-full p-8 md:p-10 rounded-3xl bg-white dark:bg-[#1a1a1a] shadow-[0_2px_40px_-15px_rgba(0,0,0,0.05)] dark:shadow-none border border-[#d2d2d7]/30 dark:border-[#2a2a2a]/60"
                 >
-                  <span
-                    className="text-[#0071e3]"
-                    style={{
-                      fontSize: "0.8125rem",
-                      fontWeight: 600,
-                      letterSpacing: "0.05em",
-                      lineHeight: 1.4,
-                    }}
+                  <motion.div
+                    className={`mb-8 w-28 h-28 rounded-full bg-gradient-to-br ${member.gradient} flex items-center justify-center text-white shadow-xl`}
+                    style={{ fontSize: "2.5rem", fontWeight: 600 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 + index * 0.1 }}
                   >
-                    FOUNDER & CEO
-                  </span>
-                </motion.div>
-              </div>
+                    {member.initial}
+                  </motion.div>
 
-              <motion.h3
-                className="text-[#1a1a1a] dark:text-white mb-6"
-                style={{
-                  fontSize: "1.75rem",
-                  lineHeight: 1.3,
-                  fontWeight: 600,
-                  letterSpacing: "-0.01em",
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-              >
-                Vishnu M
-              </motion.h3>
+                  <div className="min-h-[3.5rem] flex items-center justify-center mb-4">
+                    <motion.div
+                      className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0071e3]/10 dark:bg-[#0071e3]/20 border border-[#0071e3]/20 text-center text-balance"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.25 + index * 0.1 }}
+                    >
+                      <span
+                        className="text-[#0071e3]"
+                        style={{
+                          fontSize: "0.8125rem",
+                          fontWeight: 600,
+                          letterSpacing: "0.05em",
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {member.role}
+                      </span>
+                    </motion.div>
+                  </div>
 
-              <motion.p
-                className="text-[#1a1a1a] dark:text-white mb-6"
-                style={{
-                  fontSize: "1.0625rem",
-                  lineHeight: 1.6,
-                  fontWeight: 400,
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.35 }}
-              >
-                Leading Aignite Technologies from India, Vishnu brings a unique
-                vision to software development— one rooted in clarity,
-                intentionality, and respect for the people who use our products.
-              </motion.p>
-
-              <motion.p
-                className="text-[#86868b] mt-auto"
-                style={{
-                  fontSize: "0.9375rem",
-                  lineHeight: 1.6,
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
-                With years of experience in building web, mobile, and AI-powered
-                applications, his approach combines technical excellence with a
-                deep understanding of human needs.
-              </motion.p>
-
-              <motion.a
-                href="https://www.linkedin.com/in/vishnum08/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 flex items-center justify-center gap-2 w-full max-w-[200px] mx-auto py-2.5 px-4 rounded-full border border-[#d2d2d7] dark:border-[#2a2a2a] bg-[#fbfbfd] dark:bg-[#0a0a0a] text-[#1a1a1a] dark:text-white hover:bg-white dark:hover:bg-[#1f1f1f] hover:border-[#0A66C2] dark:hover:border-[#0A66C2] transition-all group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.45 }}
-                title="Connect with Vishnu on LinkedIn"
-              >
-                <Linkedin
-                  size={18}
-                  className="text-[#86868b] group-hover:text-[#0A66C2] transition-colors"
-                />
-                <span style={{ fontSize: "0.875rem", fontWeight: 500 }}>
-                  LinkedIn
-                </span>
-              </motion.a>
-            </div>
-
-            {/* Lavanya's Profile */}
-            <div className="text-center flex flex-col items-center h-full p-8 md:p-10 rounded-3xl bg-white dark:bg-[#1a1a1a] shadow-[0_2px_40px_-15px_rgba(0,0,0,0.05)] dark:shadow-none border border-[#d2d2d7]/30 dark:border-[#2a2a2a]/60">
-              <motion.div
-                className="mb-8 w-28 h-28 rounded-full bg-gradient-to-br from-[#34c759] to-[#28a745] flex items-center justify-center text-white shadow-xl"
-                style={{ fontSize: "2.5rem", fontWeight: 600 }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-              >
-                L
-              </motion.div>
-
-              <div className="min-h-[3.5rem] flex items-center justify-center mb-4">
-                <motion.div
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#34c759]/10 dark:bg-[#34c759]/20 border border-[#34c759]/20 text-center text-balance"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.35 }}
-                >
-                  <span
-                    className="text-[#34c759] dark:text-[#4cd964]"
+                  <motion.h3
+                    className="text-[#1a1a1a] dark:text-white mb-6"
                     style={{
-                      fontSize: "0.8125rem",
+                      fontSize: "1.75rem",
+                      lineHeight: 1.3,
                       fontWeight: 600,
-                      letterSpacing: "0.05em",
-                      lineHeight: 1.4,
+                      letterSpacing: "-0.01em",
                     }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + index * 0.1 }}
                   >
-                    CO-FOUNDER, ADVISOR & QA LEAD
-                  </span>
-                </motion.div>
-              </div>
+                    {member.name}
+                  </motion.h3>
 
-              <motion.h3
-                className="text-[#1a1a1a] dark:text-white mb-6"
-                style={{
-                  fontSize: "1.75rem",
-                  lineHeight: 1.3,
-                  fontWeight: 600,
-                  letterSpacing: "-0.01em",
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
-                Lavanya L
-              </motion.h3>
+                  <motion.p
+                    className="text-[#1a1a1a] dark:text-white mb-6"
+                    style={{
+                      fontSize: "1.0625rem",
+                      lineHeight: 1.6,
+                      fontWeight: 400,
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.35 + index * 0.1 }}
+                  >
+                    {member.bio}
+                  </motion.p>
 
-              <motion.p
-                className="text-[#1a1a1a] dark:text-white mb-6"
-                style={{
-                  fontSize: "1.0625rem",
-                  lineHeight: 1.6,
-                  fontWeight: 400,
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.45 }}
-              >
-                Instrumental to the founding vision of Aignite Technologies,
-                Lavanya handles the main testing operations and provides
-                strategic guidance that shapes our long-term direction.
-              </motion.p>
+                  {member.additionalBio && (
+                    <motion.p
+                      className="text-[#86868b] mt-auto"
+                      style={{
+                        fontSize: "0.9375rem",
+                        lineHeight: 1.6,
+                      }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 + index * 0.1 }}
+                    >
+                      {member.additionalBio}
+                    </motion.p>
+                  )}
 
-              <motion.p
-                className="text-[#86868b] mt-auto"
-                style={{
-                  fontSize: "0.9375rem",
-                  lineHeight: 1.6,
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-              >
-                Her insights ensure that as we scale our engineering efforts, we
-                remain deeply committed to building human-centered, impactful
-                digital products without compromise.
-              </motion.p>
-
-              <motion.a
-                href="https://www.linkedin.com/in/lavanya2002/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 flex items-center justify-center gap-2 w-full max-w-[200px] mx-auto py-2.5 px-4 rounded-full border border-[#d2d2d7] dark:border-[#2a2a2a] bg-[#fbfbfd] dark:bg-[#0a0a0a] text-[#1a1a1a] dark:text-white hover:bg-white dark:hover:bg-[#1f1f1f] hover:border-[#0A66C2] dark:hover:border-[#0A66C2] transition-all group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.55 }}
-                title="Connect with Lavanya on LinkedIn"
-              >
-                <Linkedin
-                  size={18}
-                  className="text-[#86868b] group-hover:text-[#0A66C2] transition-colors"
-                />
-                <span style={{ fontSize: "0.875rem", fontWeight: 500 }}>
-                  LinkedIn
-                </span>
-              </motion.a>
-            </div>
+                  <motion.a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-8 flex items-center justify-center gap-2 w-full max-w-[200px] mx-auto py-2.5 px-4 rounded-full border border-[#d2d2d7] dark:border-[#2a2a2a] bg-[#fbfbfd] dark:bg-[#0a0a0a] text-[#1a1a1a] dark:text-white hover:bg-white dark:hover:bg-[#1f1f1f] hover:border-[#0A66C2] dark:hover:border-[#0A66C2] transition-all group"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.45 + index * 0.1 }}
+                    title={`Connect with ${member.name} on LinkedIn`}
+                  >
+                    <Linkedin
+                      size={18}
+                      className="text-[#86868b] group-hover:text-[#0A66C2] transition-colors"
+                    />
+                    <span style={{ fontSize: "0.875rem", fontWeight: 500 }}>
+                      LinkedIn
+                    </span>
+                  </motion.a>
+                </div>
+              ))}
           </div>
         </div>
       </motion.section>
@@ -1379,15 +1285,6 @@ export default function HomePage() {
               rel="noopener noreferrer"
               className="text-[#86868b] hover:text-[#0A66C2] transition-colors"
               title="Vishnu's LinkedIn"
-            >
-              <Linkedin size={20} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/lavanya2002/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#86868b] hover:text-[#0A66C2] transition-colors"
-              title="Lavanya's LinkedIn"
             >
               <Linkedin size={20} />
             </a>

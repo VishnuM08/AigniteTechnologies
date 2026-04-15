@@ -64,9 +64,6 @@ Every product is designed with real users in mind, prioritizing trust, performan
 **Vishnu Magesh**  
 Founder & CEO | Full Stack Engineer
 
-**Lavanya L.**  
-Co-founder & Strategic Advisor
-
 ---
 
 ## 📫 Contact
