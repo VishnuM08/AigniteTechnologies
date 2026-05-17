@@ -8,6 +8,7 @@ import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import AignitePrivacyPolicyPage from "./pages/AignitePrivacyPolicyPage";
 import TermsOfServicePage from "./pages/TermsOfServicePage";
 import DeleteAccountPage from "./pages/DeleteAccountPage";
+import AcademyPage from "./pages/AcademyPage";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "/insights",
         element: <InsightsPage />,
+      },
+      {
+        path: "/academy",
+        element: <AcademyPage />,
       },
       {
         path: "/privacy/kakeibo",

@@ -25,7 +25,7 @@ export function Navigation() {
     { name: "Home", href: "/" },
     { name: "Products", href: "/#products" },
     { name: "Insights", href: "/insights" },
-    { name: "Academy", href: "/java-versions_5.html" },
+    { name: "Academy", href: "/academy" },
     { name: "About", href: "/#who-we-are" },
     { name: "Contact", href: "/#contact" },
   ];
@@ -55,9 +55,9 @@ export function Navigation() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   className="flex items-center gap-1.5 text-[#86868b] dark:text-[#a1a1a6] hover:text-[#1a1a1a] dark:hover:text-white transition-colors"
                   style={{ fontSize: "0.9375rem", fontWeight: 500 }}
                 >
@@ -67,7 +67,7 @@ export function Navigation() {
                       New
                     </span>
                   )}
-                </a>
+                </Link>
               ))}
             </div>
 
