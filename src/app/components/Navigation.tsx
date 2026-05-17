@@ -25,6 +25,7 @@ export function Navigation() {
     { name: "Home", href: "/" },
     { name: "Products", href: "/#products" },
     { name: "Insights", href: "/insights" },
+    { name: "Academy", href: "/java-versions_5.html" },
     { name: "About", href: "/#who-we-are" },
     { name: "Contact", href: "/#contact" },
   ];
@@ -57,10 +58,15 @@ export function Navigation() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-[#86868b] dark:text-[#a1a1a6] hover:text-[#1a1a1a] dark:hover:text-white transition-colors"
+                  className="flex items-center gap-1.5 text-[#86868b] dark:text-[#a1a1a6] hover:text-[#1a1a1a] dark:hover:text-white transition-colors"
                   style={{ fontSize: "0.9375rem", fontWeight: 500 }}
                 >
                   {link.name}
+                  {link.name === "Academy" && (
+                    <span className="bg-[#0071e3]/10 dark:bg-[#3b82f6]/15 text-[#0071e3] dark:text-[#3b82f6] text-[0.65rem] font-semibold px-1.5 py-0.5 rounded-full uppercase tracking-wider">
+                      New
+                    </span>
+                  )}
                 </a>
               ))}
             </div>
@@ -98,13 +104,18 @@ export function Navigation() {
                   <motion.a
                     key={link.name}
                     href={link.href}
-                    className="text-[#1a1a1a] dark:text-white hover:text-[#0071e3] dark:hover:text-[#3b82f6] transition-colors"
+                    className="flex items-center gap-3 text-[#1a1a1a] dark:text-white hover:text-[#0071e3] dark:hover:text-[#3b82f6] transition-colors"
                     style={{ fontSize: "1.5rem", fontWeight: 600 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
                     {link.name}
+                    {link.name === "Academy" && (
+                      <span className="bg-[#0071e3]/10 dark:bg-[#3b82f6]/15 text-[#0071e3] dark:text-[#3b82f6] text-xs font-semibold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                        New
+                      </span>
+                    )}
                   </motion.a>
                 ))}
               </div>
