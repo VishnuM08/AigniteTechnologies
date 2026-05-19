@@ -711,7 +711,7 @@ code:`<span class="cmt">// Import the entire java.base module</span>
   <span class="cmt">// All available — no individual imports needed!</span>
 }`}
 ]}
-];
+];;
 
 export const dsaCategories = [
 {label:'Linear Structures',color:'#38bdf8',badge:'Core',topics:[
@@ -722,3 +722,377 @@ code:`<span class="cmt">// Sliding window — max sum subarray of size k</span>
 <span class="kw">int</span> maxSumK(<span class="kw">int</span>[] a, <span class="kw">int</span> k) {
   <span class="kw">int</span> sum=<span class="num">0</span>;
   <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>;i&lt;k;i++) sum+=a[i];
+  <span class="kw">int</span> max=sum;
+  <span class="kw">for</span>(<span class="kw">int</span> i=k;i&lt;a.length;i++){
+    sum+=a[i]-a[i-k]; <span class="cmt">// slide right</span>
+    max=Math.max(max,sum);
+  }
+  <span class="kw">return</span> max;
+}
+<span class="cmt">// Two-pointer — find pair summing to target</span>
+Arrays.sort(a);
+<span class="kw">int</span> l=<span class="num">0</span>,r=a.length-<span class="num">1</span>;
+<span class="kw">while</span>(l&lt;r){
+  <span class="kw">int</span> s=a[l]+a[r];
+  <span class="kw">if</span>(s==target) <span class="kw">break</span>;
+  <span class="kw">else if</span>(s&lt;target) l++;
+  <span class="kw">else</span> r--;
+}`,
+lc:[{n:'Two Sum',d:'Easy',u:'https://leetcode.com/problems/two-sum/'},{n:'Maximum Subarray',d:'Medium',u:'https://leetcode.com/problems/maximum-subarray/'},{n:'Product of Array Except Self',d:'Medium',u:'https://leetcode.com/problems/product-of-array-except-self/'},{n:'Trapping Rain Water',d:'Hard',u:'https://leetcode.com/problems/trapping-rain-water/'}]},
+{icon:'📝',name:'Strings',sub:'Immutable char sequences',diff:'e',color:'#38bdf8',
+ex:`Strings in Java are <strong>immutable</strong> — every edit creates a new object. Use <code>StringBuilder</code> for building. Three patterns dominate: <strong>sliding window + HashMap</strong> for longest/shortest constrained substrings, <strong>two pointers</strong> for palindromes, and <strong>frequency count</strong> for anagram detection. Know these cold and you can solve 80% of string problems.`,
+pts:['Immutable: use StringBuilder for O(n) building','charAt(i) O(1); substring() O(n) — creates new object','Frequency map char→count: anagrams, permutations, character problems','Sliding window + map: longest/shortest substring with constraint'],
+code:`<span class="cmt">// Longest substring without repeating characters</span>
+<span class="kw">int</span> longest(String s){
+  Map&lt;Character,Integer&gt; map=<span class="kw">new</span> HashMap&lt;&gt;();
+  <span class="kw">int</span> max=<span class="num">0</span>,left=<span class="num">0</span>;
+  <span class="kw">for</span>(<span class="kw">int</span> r=<span class="num">0</span>;r&lt;s.length();r++){
+    <span class="kw">char</span> c=s.charAt(r);
+    <span class="kw">if</span>(map.containsKey(c))
+      left=Math.max(left,map.get(c)+<span class="num">1</span>);
+    map.put(c,r);
+    max=Math.max(max,r-left+<span class="num">1</span>);
+  }
+  <span class="kw">return</span> max;
+}`,
+lc:[{n:'Valid Anagram',d:'Easy',u:'https://leetcode.com/problems/valid-anagram/'},{n:'Longest Substring Without Repeating',d:'Medium',u:'https://leetcode.com/problems/longest-substring-without-repeating-characters/'},{n:'Longest Palindromic Substring',d:'Medium',u:'https://leetcode.com/problems/longest-palindromic-substring/'},{n:'Minimum Window Substring',d:'Hard',u:'https://leetcode.com/problems/minimum-window-substring/'}]},
+{icon:'🔗',name:'Linked List',sub:'Chain of nodes with pointers',diff:'e',color:'#38bdf8',
+ex:`A <strong>linked list is a chain of nodes</strong> — each holds a value and a pointer to the next. No index: reaching element n costs O(n). But inserting/deleting is O(1) once you hold the node. The killer technique is <strong>fast/slow pointers</strong>: fast moves 2 steps per iteration, slow moves 1. When fast hits the end, slow is at the middle. If they ever meet inside the list, there's a cycle.`,
+pts:['No random access — traversal O(n)','Fast/slow pointers: cycle detection, find middle, nth from end','Dummy head simplifies edge cases (prepend, delete head)','Reverse: prev=null, walk and flip pointers, return prev'],
+code:`<span class="cmt">// Reverse linked list (iterative)</span>
+<span class="cls">ListNode</span> reverse(<span class="cls">ListNode</span> head){
+  <span class="cls">ListNode</span> prev=<span class="kw">null</span>,cur=head;
+  <span class="kw">while</span>(cur!=<span class="kw">null</span>){
+    <span class="cls">ListNode</span> nxt=cur.next;
+    cur.next=prev; prev=cur; cur=nxt;
+  }
+  <span class="kw">return</span> prev;
+}
+<span class="cmt">// Find middle via fast/slow</span>
+<span class="cls">ListNode</span> mid=head,fast=head;
+<span class="kw">while</span>(fast!=<span class="kw">null</span>&&fast.next!=<span class="kw">null</span>){
+  mid=mid.next; fast=fast.next.next;
+}`,
+lc:[{n:'Reverse Linked List',d:'Easy',u:'https://leetcode.com/problems/reverse-linked-list/'},{n:'Linked List Cycle',d:'Easy',u:'https://leetcode.com/problems/linked-list-cycle/'},{n:'Merge Two Sorted Lists',d:'Easy',u:'https://leetcode.com/problems/merge-two-sorted-lists/'},{n:'Reorder List',d:'Medium',u:'https://leetcode.com/problems/reorder-list/'}]},
+{icon:'📚',name:'Stack',sub:'LIFO — Last In First Out',diff:'e',color:'#38bdf8',
+ex:`A <strong>stack is LIFO</strong> — last pushed, first popped. Use it when you need to <em>remember what you were doing before going deeper</em>: bracket matching, undo history, DFS. The advanced form is the <strong>monotonic stack</strong>: maintain elements in increasing or decreasing order by popping when you see something larger/smaller. This answers "nearest larger element to the right" for every element in one O(n) pass.`,
+pts:['Use ArrayDeque as stack in Java — not legacy Stack class','push/pop/peek all O(1)','Monotonic stack: maintain order to answer span/range questions in O(n)','Iterative DFS uses an explicit stack instead of recursion'],
+code:`<span class="cmt">// Monotonic stack — next greater element</span>
+<span class="kw">int</span>[] nextGreater(<span class="kw">int</span>[] nums){
+  <span class="kw">int</span>[] res=<span class="kw">new int</span>[nums.length];
+  Arrays.fill(res,-<span class="num">1</span>);
+  Deque&lt;Integer&gt; st=<span class="kw">new</span> ArrayDeque&lt;&gt;();
+  <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>;i&lt;nums.length;i++){
+    <span class="kw">while</span>(!st.isEmpty()&&nums[st.peek()]&lt;nums[i])
+      res[st.pop()]=nums[i];
+    st.push(i);
+  }
+  <span class="kw">return</span> res;
+}`,
+lc:[{n:'Valid Parentheses',d:'Easy',u:'https://leetcode.com/problems/valid-parentheses/'},{n:'Daily Temperatures',d:'Medium',u:'https://leetcode.com/problems/daily-temperatures/'},{n:'Largest Rectangle in Histogram',d:'Hard',u:'https://leetcode.com/problems/largest-rectangle-in-histogram/'},{n:'Min Stack',d:'Easy',u:'https://leetcode.com/problems/min-stack/'}]},
+{icon:'🚦',name:'Queue / Deque',sub:'FIFO and double-ended queue',diff:'e',color:'#38bdf8',
+ex:`A <strong>queue is FIFO</strong> — first in, first out. It is the backbone of <strong>BFS (Breadth-First Search)</strong>. Every BFS problem — shortest path in a grid, level-order tree traversal, minimum steps — uses a queue. A <strong>Deque</strong> (double-ended queue) adds front/back operations. The monotonic deque solves sliding window maximum in O(n) — outperforming the naive O(nk) approach.`,
+pts:['offer/poll O(1) — use LinkedList or ArrayDeque','BFS processes level by level — gives shortest path in unweighted graphs','Monotonic deque: sliding window max/min in O(n) total','PriorityQueue: sorted queue, O(log n) poll — used for Dijkstra, top-K'],
+code:`<span class="cmt">// Sliding window maximum — monotonic deque</span>
+<span class="kw">int</span>[] maxWin(<span class="kw">int</span>[] nums,<span class="kw">int</span> k){
+  <span class="kw">int</span>[] res=<span class="kw">new int</span>[nums.length-k+<span class="num">1</span>];
+  Deque&lt;Integer&gt; dq=<span class="kw">new</span> ArrayDeque&lt;&gt;();
+  <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>;i&lt;nums.length;i++){
+    <span class="kw">while</span>(!dq.isEmpty()&&dq.peekFirst()&lt;i-k+<span class="num">1</span>)
+      dq.pollFirst();
+    <span class="kw">while</span>(!dq.isEmpty()&&nums[dq.peekLast()]&lt;nums[i])
+      dq.pollLast();
+    dq.offerLast(i);
+    <span class="kw">if</span>(i>=k-<span class="num">1</span>) res[i-k+<span class="num">1</span>]=nums[dq.peekFirst()];
+  }
+  <span class="kw">return</span> res;
+}`,
+lc:[{n:'Number of Islands (BFS)',d:'Medium',u:'https://leetcode.com/problems/number-of-islands/'},{n:'Binary Tree Level Order Traversal',d:'Medium',u:'https://leetcode.com/problems/binary-tree-level-order-traversal/'},{n:'Sliding Window Maximum',d:'Hard',u:'https://leetcode.com/problems/sliding-window-maximum/'},{n:'Rotting Oranges',d:'Medium',u:'https://leetcode.com/problems/rotting-oranges/'}]},
+]},
+{label:'Trees & Graphs',color:'#a78bfa',badge:'Core',topics:[
+{icon:'🌳',name:'Binary Tree',sub:'Recursive hierarchical structure',diff:'m',color:'#a78bfa',
+ex:`A <strong>binary tree node has at most two children</strong>. Most tree problems have elegant recursive solutions because every subtree is itself a tree — same problem, smaller scale. Three traversals: <strong>inorder</strong> (L→N→R, gives sorted output for BST), <strong>preorder</strong> (N→L→R, serialize), and <strong>postorder</strong> (L→R→N, evaluate/delete). A global variable can track state across recursive calls without threading it through parameters.`,
+pts:['Recursion is natural: base case = null node, return leaf result upward','Inorder gives sorted output for BST — use this constantly','Global variable: track diameter, max path sum across recursive calls','BFS (queue) for level-order; DFS (recursion) for depth/path problems'],
+code:`<span class="cmt">// Max diameter — single DFS pass</span>
+<span class="kw">int</span> diam=<span class="num">0</span>;
+<span class="kw">int</span> dfs(<span class="cls">TreeNode</span> n){
+  <span class="kw">if</span>(n==<span class="kw">null</span>) <span class="kw">return</span> <span class="num">0</span>;
+  <span class="kw">int</span> L=dfs(n.left),R=dfs(n.right);
+  diam=Math.max(diam,L+R);
+  <span class="kw">return</span> <span class="num">1</span>+Math.max(L,R);
+}
+<span class="cmt">// Path sum root→leaf</span>
+<span class="kw">boolean</span> hasPath(<span class="cls">TreeNode</span> n,<span class="kw">int</span> rem){
+  <span class="kw">if</span>(n==<span class="kw">null</span>) <span class="kw">return false</span>;
+  rem-=n.val;
+  <span class="kw">if</span>(n.left==<span class="kw">null</span>&&n.right==<span class="kw">null</span>) <span class="kw">return</span> rem==<span class="num">0</span>;
+  <span class="kw">return</span> hasPath(n.left,rem)||hasPath(n.right,rem);
+}`,
+lc:[{n:'Invert Binary Tree',d:'Easy',u:'https://leetcode.com/problems/invert-binary-tree/'},{n:'Diameter of Binary Tree',d:'Easy',u:'https://leetcode.com/problems/diameter-of-binary-tree/'},{n:'Binary Tree Right Side View',d:'Medium',u:'https://leetcode.com/problems/binary-tree-right-side-view/'},{n:'Binary Tree Maximum Path Sum',d:'Hard',u:'https://leetcode.com/problems/binary-tree-maximum-path-sum/'}]},
+{icon:'🔍',name:'Binary Search Tree',sub:'Ordered: left < node < right',diff:'m',color:'#a78bfa',
+ex:`A <strong>BST enforces: every left child < node < every right child</strong>. This gives O(log n) search/insert/delete on a balanced tree. The golden rule: <strong>inorder traversal of a BST always returns elements in sorted order</strong>. Use this to convert BST problems into sorted-array problems. Validate a BST by passing down valid (min, max) bounds — each node must lie strictly between them.`,
+pts:['BST property: all left descendants < node.val < all right descendants','Inorder = sorted output: kth smallest, check sorted, convert to array','Validate: carry (lo, hi) bounds recursively down the tree','Unbalanced BST degrades to O(n) — AVL/Red-Black keep O(log n)'],
+code:`<span class="cmt">// Validate BST with min/max bounds</span>
+<span class="kw">boolean</span> valid(<span class="cls">TreeNode</span> n,<span class="kw">long</span> lo,<span class="kw">long</span> hi){
+  <span class="kw">if</span>(n==<span class="kw">null</span>) <span class="kw">return true</span>;
+  <span class="kw">if</span>(n.val<=lo||n.val>=hi) <span class="kw">return false</span>;
+  <span class="kw">return</span> valid(n.left,lo,n.val)
+      &&valid(n.right,n.val,hi);
+}
+<span class="cmt">// Kth smallest — inorder counting</span>
+<span class="kw">int</span> k,ans;
+<span class="kw">void</span> inorder(<span class="cls">TreeNode</span> n){
+  <span class="kw">if</span>(n==<span class="kw">null</span>||k==<span class="num">0</span>) <span class="kw">return</span>;
+  inorder(n.left);
+  <span class="kw">if</span>(--k==<span class="num">0</span>) ans=n.val;
+  inorder(n.right);
+}`,
+lc:[{n:'Validate Binary Search Tree',d:'Medium',u:'https://leetcode.com/problems/validate-binary-search-tree/'},{n:'Kth Smallest Element in BST',d:'Medium',u:'https://leetcode.com/problems/kth-smallest-element-in-a-bst/'},{n:'Lowest Common Ancestor of BST',d:'Medium',u:'https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/'},{n:'Convert Sorted Array to BST',d:'Easy',u:'https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/'}]},
+{icon:'🗺️',name:'Graphs (BFS/DFS)',sub:'Nodes + edges: connected networks',diff:'m',color:'#a78bfa',
+ex:`A <strong>graph is a set of nodes (vertices) connected by edges</strong> — trees are a special case. BFS gives <strong>shortest path in unweighted graphs</strong>. DFS is better for <strong>cycle detection, connected components, and topological sort</strong>. Topological sort (Kahn's BFS algorithm) orders nodes with dependencies — course prerequisites, build systems. Always use a visited array to avoid infinite loops.`,
+pts:['Represent as adjacency list: List<List<Integer>> adj or Map','BFS with queue = shortest path in unweighted graphs','DFS with visited[] = cycle detection, components','Topological sort (Kahn\'s): indegree[] + queue of zero-indegree nodes'],
+code:`<span class="cmt">// Topological sort — Kahn's BFS</span>
+List&lt;Integer&gt; topo(<span class="kw">int</span> n,<span class="kw">int</span>[][] edges){
+  List&lt;List&lt;Integer&gt;&gt; adj=<span class="kw">new</span> ArrayList&lt;&gt;();
+  <span class="kw">int</span>[] in=<span class="kw">new int</span>[n];
+  <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>;i&lt;n;i++) adj.add(<span class="kw">new</span> ArrayList&lt;&gt;());
+  <span class="kw">for</span>(<span class="kw">int</span>[] e:edges){ adj.get(e[<span class="num">0</span>]).add(e[<span class="num">1</span>]); in[e[<span class="num">1</span>]]++; }
+  Queue&lt;Integer&gt; q=<span class="kw">new</span> LinkedList&lt;&gt;();
+  <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>;i&lt;n;i++) <span class="kw">if</span>(in[i]==<span class="num">0</span>) q.offer(i);
+  List&lt;Integer&gt; ord=<span class="kw">new</span> ArrayList&lt;&gt;();
+  <span class="kw">while</span>(!q.isEmpty()){
+    <span class="kw">int</span> u=q.poll(); ord.add(u);
+    <span class="kw">for</span>(<span class="kw">int</span> v:adj.get(u)) <span class="kw">if</span>(--in[v]==<span class="num">0</span>) q.offer(v);
+  }
+  <span class="kw">return</span> ord;
+}`,
+lc:[{n:'Number of Islands',d:'Medium',u:'https://leetcode.com/problems/number-of-islands/'},{n:'Course Schedule',d:'Medium',u:'https://leetcode.com/problems/course-schedule/'},{n:'Pacific Atlantic Water Flow',d:'Medium',u:'https://leetcode.com/problems/pacific-atlantic-water-flow/'},{n:'Word Ladder',d:'Hard',u:'https://leetcode.com/problems/word-ladder/'}]},
+{icon:'🌐',name:'Advanced Graphs',sub:'Dijkstra, Bellman-Ford, Floyd-Warshall',diff:'h',color:'#a78bfa',
+ex:`Beyond BFS/DFS, weighted graphs need <strong>shortest-path algorithms</strong>. <strong>Dijkstra</strong> (greedy + min-heap) finds shortest paths from one source in O((V+E) log V) — non-negative weights only. <strong>Bellman-Ford</strong> handles negative weights and detects negative cycles with V-1 edge relaxations. <strong>Floyd-Warshall</strong> gives all-pairs shortest paths in O(V³). <strong>Kruskal's + Union-Find</strong> builds Minimum Spanning Trees.`,
+pts:['Dijkstra: relax edges via min-heap, mark visited — no negative weights','Bellman-Ford: relax all E edges V-1 times, O(VE)','Floyd-Warshall: dp[i][j] = min(dp[i][j], dp[i][k]+dp[k][j])','Kruskal MST: sort edges by weight, union-find to skip cycles'],
+code:`<span class="cmt">// Dijkstra from src</span>
+<span class="kw">int</span>[] dijkstra(<span class="kw">int</span> n,List&lt;<span class="kw">int</span>[]&gt;[] adj,<span class="kw">int</span> src){
+  <span class="kw">int</span>[] dist=<span class="kw">new int</span>[n];
+  Arrays.fill(dist,Integer.MAX_VALUE);
+  dist[src]=<span class="num">0</span>;
+  PriorityQueue&lt;<span class="kw">int</span>[]&gt; pq=
+    <span class="kw">new</span> PriorityQueue&lt;&gt;((a,b)->a[<span class="num">0</span>]-b[<span class="num">0</span>]);
+  pq.offer(<span class="kw">new int</span>[]{<span class="num">0</span>,src});
+  <span class="kw">while</span>(!pq.isEmpty()){
+    <span class="kw">int</span>[] c=pq.poll(); <span class="kw">int</span> d=c[<span class="num">0</span>],u=c[<span class="num">1</span>];
+    <span class="kw">if</span>(d>dist[u]) <span class="kw">continue</span>;
+    <span class="kw">for</span>(<span class="kw">int</span>[] e:adj[u])
+      <span class="kw">if</span>(dist[u]+e[<span class="num">1</span>]&lt;dist[e[<span class="num">0</span>]]){
+        dist[e[<span class="num">0</span>]]=dist[u]+e[<span class="num">1</span>];
+        pq.offer(<span class="kw">new int</span>[]{dist[e[<span class="num">0</span>]],e[<span class="num">0</span>]});
+      }
+  }
+  <span class="kw">return</span> dist;
+}`,
+lc:[{n:'Network Delay Time (Dijkstra)',d:'Medium',u:'https://leetcode.com/problems/network-delay-time/'},{n:'Cheapest Flights Within K Stops',d:'Medium',u:'https://leetcode.com/problems/cheapest-flights-within-k-stops/'},{n:'Path with Minimum Effort',d:'Medium',u:'https://leetcode.com/problems/path-with-minimum-effort/'},{n:'Find City With Smallest Neighbours (Floyd)',d:'Medium',u:'https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/'}]},
+]},
+{label:'Sorting, Searching & Hashing',color:'#f97316',badge:'Core',topics:[
+{icon:'🔃',name:'Sorting',sub:'O(n log n) comparison-based sorts',diff:'e',color:'#f97316',
+ex:`Sorting unlocks easier solutions to countless problems — intervals, greedy, binary search all require sorted input. Know three algorithms: <strong>Merge Sort</strong> (stable, O(n log n) always, counting inversions), <strong>Quick Sort</strong> (O(n log n) average, in-place, fastest in practice), <strong>Heap Sort</strong> (O(n log n), in-place, not stable). In Java use <code>Arrays.sort()</code> and a Comparator lambda — you'll use this in almost every medium/hard problem.`,
+pts:['Arrays.sort() O(n log n) — use it freely in solutions','Comparator: (a,b)->a[0]-b[0] sort by first element ascending','Merge sort counts inversions; stable sort preserves equal-element order','Counting sort O(n+k) when value range k is bounded and small'],
+code:`<span class="cmt">// Sort meetings by start time</span>
+<span class="kw">int</span>[][] m={{<span class="num">0</span>,<span class="num">30</span>},{<span class="num">5</span>,<span class="num">10</span>},{<span class="num">15</span>,<span class="num">20</span>}};
+Arrays.sort(m,(a,b)->a[<span class="num">0</span>]-b[<span class="num">0</span>]);
+
+<span class="cmt">// Merge sort — count inversions</span>
+<span class="kw">long</span> merge(<span class="kw">int</span>[] a,<span class="kw">int</span> l,<span class="kw">int</span> m,<span class="kw">int</span> r){
+  <span class="kw">int</span>[] L=Arrays.copyOfRange(a,l,m+<span class="num">1</span>);
+  <span class="kw">int</span>[] R=Arrays.copyOfRange(a,m+<span class="num">1</span>,r+<span class="num">1</span>);
+  <span class="kw">int</span> i=<span class="num">0</span>,j=<span class="num">0</span>,k=l; <span class="kw">long</span> inv=<span class="num">0</span>;
+  <span class="kw">while</span>(i&lt;L.length&&j&lt;R.length)
+    <span class="kw">if</span>(L[i]&lt;=R[j]) a[k++]=L[i++];
+    <span class="kw">else</span>{ inv+=L.length-i; a[k++]=R[j++]; }
+  <span class="kw">while</span>(i&lt;L.length) a[k++]=L[i++];
+  <span class="kw">while</span>(j&lt;R.length) a[k++]=R[j++];
+  <span class="kw">return</span> inv;
+}`,
+lc:[{n:'Sort Colors (Dutch flag)',d:'Medium',u:'https://leetcode.com/problems/sort-colors/'},{n:'Merge Intervals',d:'Medium',u:'https://leetcode.com/problems/merge-intervals/'},{n:'Sort List',d:'Medium',u:'https://leetcode.com/problems/sort-list/'},{n:'Count of Smaller Numbers After Self',d:'Hard',u:'https://leetcode.com/problems/count-of-smaller-numbers-after-self/'}]},
+{icon:'🔭',name:'Binary Search',sub:'O(log n) on any monotonic space',diff:'e',color:'#f97316',
+ex:`Binary search is far more powerful than just finding an element in a sorted array. The real skill: <strong>binary search on any monotonic answer space</strong>. Define the search space as [lo, hi] where lo is the smallest possible answer and hi is the largest. Pick mid; check if mid satisfies the condition; eliminate the wrong half. "Minimum X such that condition(X) is true" = binary search.`,
+pts:['mid = left + (right-left)/2 — avoids integer overflow','Search on answer: lo=min_possible, hi=max_possible, narrow by condition','Bisect left: hi=mid when feasible; bisect right: lo=mid when feasible','Classic: first/last occurrence, peak element, rotated array'],
+code:`<span class="cmt">// Binary search on answer — min eating speed</span>
+<span class="kw">int</span> minSpeed(<span class="kw">int</span>[] piles,<span class="kw">int</span> h){
+  <span class="kw">int</span> lo=<span class="num">1</span>,hi=Arrays.stream(piles).max().getAsInt();
+  <span class="kw">while</span>(lo&lt;hi){
+    <span class="kw">int</span> mid=lo+(hi-lo)/<span class="num">2</span>;
+    <span class="kw">long</span> hrs=<span class="num">0</span>;
+    <span class="kw">for</span>(<span class="kw">int</span> p:piles) hrs+=(p+mid-<span class="num">1</span>)/mid;
+    <span class="kw">if</span>(hrs&lt;=h) hi=mid;  <span class="cmt">// feasible, try lower</span>
+    <span class="kw">else</span>       lo=mid+<span class="num">1</span>; <span class="cmt">// too slow</span>
+  }
+  <span class="kw">return</span> lo;
+}`,
+lc:[{n:'Binary Search',d:'Easy',u:'https://leetcode.com/problems/binary-search/'},{n:'Search in Rotated Sorted Array',d:'Medium',u:'https://leetcode.com/problems/search-in-rotated-sorted-array/'},{n:'Koko Eating Bananas',d:'Medium',u:'https://leetcode.com/problems/koko-eating-bananas/'},{n:'Median of Two Sorted Arrays',d:'Hard',u:'https://leetcode.com/problems/median-of-two-sorted-arrays/'}]},
+{icon:'🗂️',name:'HashMap & HashSet',sub:'O(1) lookup — interview workhorse',diff:'e',color:'#f97316',
+ex:`<strong>HashMap is the most-used structure in interview solutions</strong>. "Count frequencies", "check if seen before", "store complement for later" — HashMap. O(1) average for put/get/containsKey. HashSet is the same but keys only. The <strong>prefix sum + HashMap</strong> combo solves "subarray sum equals k" in O(n) instead of O(n²) — a classic and extremely common pattern.`,
+pts:['getOrDefault(key,0) for clean frequency counting','merge(key, 1, Integer::sum) for concise increment','Prefix sum + HashMap: count subarrays with given sum in O(n)','HashSet: O(1) contains() for seen-before deduplication'],
+code:`<span class="cmt">// Subarray sum = k — prefix + hashmap O(n)</span>
+<span class="kw">int</span> subarraySum(<span class="kw">int</span>[] nums,<span class="kw">int</span> k){
+  Map&lt;Integer,Integer&gt; cnt=<span class="kw">new</span> HashMap&lt;&gt;();
+  cnt.put(<span class="num">0</span>,<span class="num">1</span>); <span class="cmt">// empty prefix</span>
+  <span class="kw">int</span> sum=<span class="num">0</span>,res=<span class="num">0</span>;
+  <span class="kw">for</span>(<span class="kw">int</span> n:nums){
+    sum+=n;
+    res+=cnt.getOrDefault(sum-k,<span class="num">0</span>);
+    cnt.merge(sum,<span class="num">1</span>,Integer::sum);
+  }
+  <span class="kw">return</span> res;
+}`,
+lc:[{n:'Two Sum',d:'Easy',u:'https://leetcode.com/problems/two-sum/'},{n:'Group Anagrams',d:'Medium',u:'https://leetcode.com/problems/group-anagrams/'},{n:'Subarray Sum Equals K',d:'Medium',u:'https://leetcode.com/problems/subarray-sum-equals-k/'},{n:'Longest Consecutive Sequence',d:'Medium',u:'https://leetcode.com/problems/longest-consecutive-sequence/'}]},
+]},
+{label:'Advanced Algorithms',color:'#22c55e',badge:'Advanced',topics:[
+{icon:'🧩',name:'Dynamic Programming',sub:'Memoize overlapping subproblems',diff:'h',color:'#22c55e',
+ex:`<strong>DP avoids recomputing the same subproblem</strong>. Two requirements: overlapping subproblems and optimal substructure. Always start by defining <em>what dp[i] represents</em>, then derive the <em>recurrence relation</em>. Top-down (recursion + memo) is easier to write. Bottom-up (tabulation) is faster and avoids stack overflow. 2D DP handles two-sequence problems like LCS and edit distance.`,
+pts:['Define dp[i]: "min cost to reach step i", "ways to form amount i"','Recurrence: dp[i] = f(dp[i-1], dp[i-2], ...) — derive from semantics','Top-down: HashMap/array cache for recursive results','2D DP: dp[i][j] for two strings/arrays (LCS, edit distance, knapsack)'],
+code:`<span class="cmt">// Coin change — min coins to make amount</span>
+<span class="kw">int</span> coinChange(<span class="kw">int</span>[] coins,<span class="kw">int</span> amount){
+  <span class="kw">int</span>[] dp=<span class="kw">new int</span>[amount+<span class="num">1</span>];
+  Arrays.fill(dp,amount+<span class="num">1</span>); dp[<span class="num">0</span>]=<span class="num">0</span>;
+  <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">1</span>;i&lt;=amount;i++)
+    <span class="kw">for</span>(<span class="kw">int</span> c:coins)
+      <span class="kw">if</span>(c&lt;=i) dp[i]=Math.min(dp[i],dp[i-c]+<span class="num">1</span>);
+  <span class="kw">return</span> dp[amount]>amount?-<span class="num">1</span>:dp[amount];
+}`,
+lc:[{n:'Climbing Stairs',d:'Easy',u:'https://leetcode.com/problems/climbing-stairs/'},{n:'Coin Change',d:'Medium',u:'https://leetcode.com/problems/coin-change/'},{n:'Longest Increasing Subsequence',d:'Medium',u:'https://leetcode.com/problems/longest-increasing-subsequence/'},{n:'Edit Distance',d:'Medium',u:'https://leetcode.com/problems/edit-distance/'}]},
+{icon:'💰',name:'Greedy',sub:'Locally best → globally optimal',diff:'m',color:'#22c55e',
+ex:`<strong>Greedy commits to the locally optimal choice at each step without backtracking</strong>. The hard part: proving greedy works. Interval problems — always pick the interval ending earliest. Jump game — always jump as far as possible. When greedy applies it beats DP in speed, but you must prove no local choice makes the global answer worse (exchange argument).`,
+pts:['Interval scheduling: sort by end time, always take non-overlapping','Jump game: track farthest reachable index, O(n)','Exchange argument: show swapping adjacent choices doesn\'t improve result','If greedy fails, fall back to DP — try a counterexample first'],
+code:`<span class="cmt">// Non-overlapping intervals — min removals</span>
+<span class="kw">int</span> eraseOverlap(<span class="kw">int</span>[][] ivs){
+  Arrays.sort(ivs,(a,b)->a[<span class="num">1</span>]-b[<span class="num">1</span>]);
+  <span class="kw">int</span> removed=<span class="num">0</span>,end=Integer.MIN_VALUE;
+  <span class="kw">for</span>(<span class="kw">int</span>[] iv:ivs){
+    <span class="kw">if</span>(iv[<span class="num">0</span>]>=end) end=iv[<span class="num">1</span>]; <span class="cmt">// keep it</span>
+    <span class="kw">else</span>          removed++;   <span class="cmt">// overlaps: remove</span>
+  }
+  <span class="kw">return</span> removed;
+}`,
+lc:[{n:'Jump Game',d:'Medium',u:'https://leetcode.com/problems/jump-game/'},{n:'Non-overlapping Intervals',d:'Medium',u:'https://leetcode.com/problems/non-overlapping-intervals/'},{n:'Gas Station',d:'Medium',u:'https://leetcode.com/problems/gas-station/'},{n:'Task Scheduler',d:'Medium',u:'https://leetcode.com/problems/task-scheduler/'}]},
+{icon:'🔙',name:'Backtracking',sub:'Try all paths, undo bad ones',diff:'h',color:'#22c55e',
+ex:`<strong>Backtracking is systematic exhaustive search with pruning</strong>. Build a solution step-by-step; when a partial solution can't possibly lead to a valid complete one, undo the last step and try the next option. Template always: <em>choose → recurse → unchoose</em>. Pruning skips hopeless branches early, making it practical. Common problems: permutations, combinations, subsets, N-Queens, Sudoku.`,
+pts:['Template: for each option: add it, recurse, remove it','Sort input first to prune duplicate branches easily','Break early: if sum > target or remaining count < needed — stop','Swap-based permutation avoids extra boolean[] used array'],
+code:`<span class="cmt">// Combination sum — pick with repetition</span>
+<span class="kw">void</span> dfs(<span class="kw">int</span>[] c,<span class="kw">int</span> start,<span class="kw">int</span> rem,
+         List&lt;Integer&gt; path,List&lt;List&lt;Integer&gt;&gt; res){
+  <span class="kw">if</span>(rem==<span class="num">0</span>){res.add(<span class="kw">new</span> ArrayList&lt;&gt;(path));<span class="kw">return</span>;}
+  <span class="kw">for</span>(<span class="kw">int</span> i=start;i&lt;c.length;i++){
+    <span class="kw">if</span>(c[i]>rem) <span class="kw">break</span>; <span class="cmt">// prune (sorted)</span>
+    path.add(c[i]);
+    dfs(c,i,rem-c[i],path,res); <span class="cmt">// allow reuse: i not i+1</span>
+    path.remove(path.size()-<span class="num">1</span>);
+  }
+}`,
+lc:[{n:'Subsets',d:'Medium',u:'https://leetcode.com/problems/subsets/'},{n:'Combination Sum',d:'Medium',u:'https://leetcode.com/problems/combination-sum/'},{n:'Permutations',d:'Medium',u:'https://leetcode.com/problems/permutations/'},{n:'N-Queens',d:'Hard',u:'https://leetcode.com/problems/n-queens/'}]},
+]},
+{label:'Advanced Data Structures',color:'#f43f5e',badge:'Advanced',topics:[
+{icon:'🔺',name:'Heap / Priority Queue',sub:'Always get min or max in O(log n)',diff:'m',color:'#f43f5e',
+ex:`A <strong>heap is a tree where parent ≤ children (min-heap)</strong>. Java's <code>PriorityQueue</code> is a min-heap. <code>poll()</code> removes the smallest in O(log n). Use it whenever you need to <strong>repeatedly extract the smallest or largest</strong>. The K-size heap trick: maintain a heap of size K — adding the (K+1)th forces eviction of the extremal, keeping only the K largest. Two-heap trick gives the running median.`,
+pts:['PriorityQueue: min-heap; (a,b)->b-a for max-heap','poll() O(log n), peek() O(1), offer() O(log n)','K-size min-heap: keeps K largest elements — poll evicts smallest','Two-heap trick: maxHeap lower half + minHeap upper half = O(log n) median'],
+code:`<span class="cmt">// Merge K sorted lists — min-heap</span>
+<span class="cls">ListNode</span> mergeK(<span class="cls">ListNode</span>[] lists){
+  PriorityQueue&lt;<span class="cls">ListNode</span>&gt; pq=
+    <span class="kw">new</span> PriorityQueue&lt;&gt;((a,b)->a.val-b.val);
+  <span class="kw">for</span>(<span class="cls">ListNode</span> l:lists) <span class="kw">if</span>(l!=<span class="kw">null</span>) pq.offer(l);
+  <span class="cls">ListNode</span> dummy=<span class="kw">new</span> <span class="cls">ListNode</span>(<span class="num">0</span>),cur=dummy;
+  <span class="kw">while</span>(!pq.isEmpty()){
+    cur.next=pq.poll(); cur=cur.next;
+    <span class="kw">if</span>(cur.next!=<span class="kw">null</span>) pq.offer(cur.next);
+  }
+  <span class="kw">return</span> dummy.next;
+}`,
+lc:[{n:'Kth Largest Element in Array',d:'Medium',u:'https://leetcode.com/problems/kth-largest-element-in-an-array/'},{n:'Top K Frequent Elements',d:'Medium',u:'https://leetcode.com/problems/top-k-frequent-elements/'},{n:'Find Median from Data Stream',d:'Hard',u:'https://leetcode.com/problems/find-median-from-data-stream/'},{n:'Merge K Sorted Lists',d:'Hard',u:'https://leetcode.com/problems/merge-k-sorted-lists/'}]},
+{icon:'🔤',name:'Trie (Prefix Tree)',sub:'Word lookups and prefix search in O(L)',diff:'m',color:'#f43f5e',
+ex:`A <strong>Trie is a tree where each root-to-leaf path spells a word</strong>. Each node has 26 children (one per letter) and a boolean <code>isEnd</code>. Insert and search are O(L) where L = word length. Far faster than HashSet for prefix matching — a HashSet can't answer "does anything start with 'pre'?" efficiently, but a Trie can in O(L). Essential for autocomplete, spell-check, and word search problems.`,
+pts:['TrieNode: children[26] + boolean isEnd','insert: walk/create children for each char, mark isEnd at end','search: same walk, return isEnd of last node','startsWith: same walk, don\'t check isEnd — just return true if path exists'],
+code:`<span class="kw">class</span> <span class="cls">Trie</span> {
+  <span class="cls">TrieNode</span> root=<span class="kw">new</span> <span class="cls">TrieNode</span>();
+  <span class="kw">void</span> insert(String w){
+    <span class="cls">TrieNode</span> n=root;
+    <span class="kw">for</span>(<span class="kw">char</span> c:w.toCharArray()){
+      <span class="kw">int</span> i=c-<span class="str">'a'</span>;
+      <span class="kw">if</span>(n.ch[i]==<span class="kw">null</span>) n.ch[i]=<span class="kw">new</span> <span class="cls">TrieNode</span>();
+      n=n.ch[i];
+    }
+    n.end=<span class="kw">true</span>;
+  }
+  <span class="kw">boolean</span> startsWith(String p){
+    <span class="cls">TrieNode</span> n=root;
+    <span class="kw">for</span>(<span class="kw">char</span> c:p.toCharArray()){
+      <span class="kw">int</span> i=c-<span class="str">'a'</span>;
+      <span class="kw">if</span>(n.ch[i]==<span class="kw">null</span>) <span class="kw">return false</span>;
+      n=n.ch[i];
+    }
+    <span class="kw">return true</span>;
+  }
+}`,
+lc:[{n:'Implement Trie',d:'Medium',u:'https://leetcode.com/problems/implement-trie-prefix-tree/'},{n:'Design Add and Search Words',d:'Medium',u:'https://leetcode.com/problems/design-add-and-search-words-data-structure/'},{n:'Word Search II',d:'Hard',u:'https://leetcode.com/problems/word-search-ii/'},{n:'Replace Words',d:'Medium',u:'https://leetcode.com/problems/replace-words/'}]},
+{icon:'🔗',name:'Disjoint Set (Union-Find)',sub:'Group merging with path compression',diff:'m',color:'#f43f5e',
+ex:`<strong>Union-Find tracks which elements belong to the same group</strong>. Two operations: <code>union(a, b)</code> merges a's group with b's; <code>find(a)</code> returns a's group representative. With <strong>path compression</strong> (flatten the tree during find) and <strong>union by rank</strong> (attach smaller tree under larger), both operations are near O(1) amortized. Essential for: Kruskal's MST, detecting cycles, and merging connected components.`,
+pts:['parent[i]=i: every node starts as its own root','find(): path compression — parent[x] = find(parent[x])','union(): attach smaller rank tree under larger rank root','Cycle detection: if union(a,b) finds same root → edge creates cycle'],
+code:`<span class="kw">class</span> <span class="cls">UF</span> {
+  <span class="kw">int</span>[] p,rank;
+  <span class="cls">UF</span>(<span class="kw">int</span> n){ p=<span class="kw">new int</span>[n]; rank=<span class="kw">new int</span>[n];
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>;i&lt;n;i++) p[i]=i; }
+  <span class="kw">int</span> find(<span class="kw">int</span> x){
+    <span class="kw">if</span>(p[x]!=x) p[x]=find(p[x]); <span class="cmt">// compress</span>
+    <span class="kw">return</span> p[x];
+  }
+  <span class="kw">boolean</span> union(<span class="kw">int</span> a,<span class="kw">int</span> b){
+    <span class="kw">int</span> ra=find(a),rb=find(b);
+    <span class="kw">if</span>(ra==rb) <span class="kw">return false</span>; <span class="cmt">// same group already</span>
+    <span class="kw">if</span>(rank[ra]&lt;rank[rb]){<span class="kw">int</span> t=ra;ra=rb;rb=t;}
+    p[rb]=ra;
+    <span class="kw">if</span>(rank[ra]==rank[rb]) rank[ra]++;
+    <span class="kw">return true</span>;
+  }
+}`,
+lc:[{n:'Number of Connected Components',d:'Medium',u:'https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/'},{n:'Redundant Connection',d:'Medium',u:'https://leetcode.com/problems/redundant-connection/'},{n:'Accounts Merge',d:'Medium',u:'https://leetcode.com/problems/accounts-merge/'},{n:'Number of Operations to Make Network Connected',d:'Medium',u:'https://leetcode.com/problems/number-of-operations-to-make-network-connected/'}]},
+{icon:'🌿',name:'Segment Tree',sub:'Range queries & updates in O(log n)',diff:'h',color:'#f43f5e',
+ex:`A <strong>Segment Tree answers range queries and point updates in O(log n)</strong>. Without it: range sum O(n) per query. With prefix array: O(1) query but O(n) update. Segment Tree gives O(log n) for both. Build a complete binary tree where each node stores the aggregate (sum/min/max) of its range. Update one element → update O(log n) ancestor nodes. Query a range → combine O(log n) nodes that partition it.`,
+pts:['Build O(n): fill leaves then merge upward','Update O(log n): update leaf, propagate changes up','Query O(log n): if range ⊆ node range return; else recurse both children','Lazy propagation: defer range updates, O(log n) for range updates too'],
+code:`<span class="kw">class</span> <span class="cls">SegTree</span> {
+  <span class="kw">int</span>[] t; <span class="kw">int</span> n;
+  <span class="cls">SegTree</span>(<span class="kw">int</span>[] a){ n=a.length; t=<span class="kw">new int</span>[<span class="num">4</span>*n]; build(a,<span class="num">0</span>,<span class="num">0</span>,n-<span class="num">1</span>); }
+  <span class="kw">void</span> build(<span class="kw">int</span>[] a,<span class="kw">int</span> v,<span class="kw">int</span> l,<span class="kw">int</span> r){
+    <span class="kw">if</span>(l==r){t[v]=a[l];<span class="kw">return</span>;}
+    <span class="kw">int</span> m=(l+r)/<span class="num">2</span>;
+    build(a,<span class="num">2</span>*v+<span class="num">1</span>,l,m); build(a,<span class="num">2</span>*v+<span class="num">2</span>,m+<span class="num">1</span>,r);
+    t[v]=t[<span class="num">2</span>*v+<span class="num">1</span>]+t[<span class="num">2</span>*v+<span class="num">2</span>];
+  }
+  <span class="kw">int</span> query(<span class="kw">int</span> v,<span class="kw">int</span> l,<span class="kw">int</span> r,<span class="kw">int</span> ql,<span class="kw">int</span> qr){
+    <span class="kw">if</span>(qr&lt;l||r&lt;ql) <span class="kw">return</span> <span class="num">0</span>;
+    <span class="kw">if</span>(ql&lt;=l&&r&lt;=qr) <span class="kw">return</span> t[v];
+    <span class="kw">int</span> m=(l+r)/<span class="num">2</span>;
+    <span class="kw">return</span> query(<span class="num">2</span>*v+<span class="num">1</span>,l,m,ql,qr)
+          +query(<span class="num">2</span>*v+<span class="num">2</span>,m+<span class="num">1</span>,r,ql,qr);
+  }
+}`,
+lc:[{n:'Range Sum Query — Mutable',d:'Medium',u:'https://leetcode.com/problems/range-sum-query-mutable/'},{n:'My Calendar III',d:'Hard',u:'https://leetcode.com/problems/my-calendar-iii/'},{n:'Count of Range Sum',d:'Hard',u:'https://leetcode.com/problems/count-of-range-sum/'},{n:'The Skyline Problem',d:'Hard',u:'https://leetcode.com/problems/the-skyline-problem/'}]},
+{icon:'🧮',name:'Bit Manipulation',sub:'XOR, shifts, bitmasks — O(1) tricks',diff:'m',color:'#f43f5e',
+ex:`<strong>Bitwise operations are the fastest CPU instructions</strong>. XOR magic: <code>x^x=0, x^0=x</code> — XOR all elements and duplicates cancel, leaving the unique one. <code>n & (n-1)</code> clears the lowest set bit — repeatedly applying it counts set bits. Bitmask DP uses an integer's bits to represent a subset — enables O(2^n × n) solutions for subset enumeration problems like Travelling Salesman.`,
+pts:['XOR: a^a=0, a^0=a — find single unique element in O(n) O(1) space','n & (n-1): clear lowest set bit; n & 1: check odd','Bitmask DP: dp[mask] where bit i=1 means element i is in subset','Left shift n<<k = × 2^k; right shift n>>k = ÷ 2^k'],
+code:`<span class="cmt">// Single number — XOR cancels all duplicates</span>
+<span class="kw">int</span> single(<span class="kw">int</span>[] n){ <span class="kw">int</span> r=<span class="num">0</span>; <span class="kw">for</span>(<span class="kw">int</span> x:n) r^=x; <span class="kw">return</span> r; }
+
+<span class="cmt">// Count set bits (Brian Kernighan)</span>
+<span class="kw">int</span> bits(<span class="kw">int</span> n){
+  <span class="kw">int</span> c=<span class="num">0</span>;
+  <span class="kw">while</span>(n!=<span class="num">0</span>){ n&=(n-<span class="num">1</span>); c++; }
+  <span class="kw">return</span> c;
+}
+
+<span class="cmt">// Bitmask DP — visit all subsets</span>
+<span class="kw">int</span>[][] dp=<span class="kw">new int</span>[<span class="num">1</span>&lt;&lt;n][n];
+<span class="cmt">// dp[mask][i] = answer ending at i</span>
+<span class="cmt">// visiting exactly nodes in mask</span>
+<span class="kw">for</span>(<span class="kw">int</span> mask=<span class="num">0</span>;mask&lt;(<span class="num">1</span>&lt;&lt;n);mask++)
+  <span class="kw">for</span>(<span class="kw">int</span> u=<span class="num">0</span>;u&lt;n;u++)
+    <span class="kw">if</span>((mask>>u&<span class="num">1</span>)==<span class="num">1</span>) <span class="cmt">/* u is in mask */</span> ;`,
+lc:[{n:'Single Number',d:'Easy',u:'https://leetcode.com/problems/single-number/'},{n:'Number of 1 Bits',d:'Easy',u:'https://leetcode.com/problems/number-of-1-bits/'},{n:'Sum of Two Integers (no + or -)',d:'Medium',u:'https://leetcode.com/problems/sum-of-two-integers/'},{n:'Counting Bits',d:'Easy',u:'https://leetcode.com/problems/counting-bits/'}]},
+]},
+];;
