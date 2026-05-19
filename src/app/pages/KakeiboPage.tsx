@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 import { SEO } from "../components/SEO";
+import { playSound } from "../components/SoundToggle";
 
 import { Variants } from "motion/react";
 
@@ -127,7 +128,8 @@ export default function KakeiboPage() {
         <div className="max-w-6xl mx-auto relative z-10">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 mb-10 text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-all group"
+            onClick={() => playSound('click')}
+            className="inline-flex items-center gap-2 mb-10 text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-all group cursor-pointer"
             style={{ fontSize: "0.9375rem", fontWeight: 500 }}
           >
             <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" />
@@ -187,7 +189,8 @@ export default function KakeiboPage() {
                   href="https://play.google.com/store/apps/details?id=com.aignite.kakeibo&pcampaignid=web_share"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#0071e3] text-white rounded-2xl transition-all hover:bg-[#0077ed] hover:shadow-xl hover:shadow-blue-500/20 active:scale-[0.98] group"
+                  onClick={() => playSound('click')}
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#0071e3] text-white rounded-2xl transition-all hover:bg-[#0077ed] hover:shadow-xl hover:shadow-blue-500/20 active:scale-[0.98] group cursor-pointer"
                 >
                   <Download size={20} />
                   <span className="font-semibold text-lg">Get on Play Store</span>
@@ -197,7 +200,8 @@ export default function KakeiboPage() {
                   href="https://kakeibo.theaignite.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white dark:bg-white/5 text-[#1a1a1a] dark:text-white border border-[#d2d2d7] dark:border-white/10 rounded-2xl transition-all hover:bg-black/5 dark:hover:bg-white/10 hover:border-[#1a1a1a] dark:hover:border-white active:scale-[0.98]"
+                  onClick={() => playSound('click')}
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white dark:bg-white/5 text-[#1a1a1a] dark:text-white border border-[#d2d2d7] dark:border-white/10 rounded-2xl transition-all hover:bg-black/5 dark:hover:bg-white/10 hover:border-[#1a1a1a] dark:hover:border-white active:scale-[0.98] cursor-pointer"
                 >
                   <ExternalLink size={20} />
                   <span className="font-semibold text-lg">Try Web App</span>
@@ -233,7 +237,8 @@ export default function KakeiboPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="group relative p-10 rounded-3xl bg-[#fbfbfd] dark:bg-[#111111] border border-[#d2d2d7]/50 dark:border-white/5 hover:border-[#0071e3]/50 transition-all duration-500"
+                onClick={() => playSound('switch')}
+                className="group relative p-10 rounded-3xl bg-[#fbfbfd] dark:bg-[#111111] border border-[#d2d2d7]/50 dark:border-white/5 hover:border-[#0071e3]/50 transition-all duration-500 cursor-pointer"
               >
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${pillar.color} text-white flex items-center justify-center mb-8 shadow-lg shadow-blue-500/10 group-hover:scale-110 transition-transform duration-500`}>
                   {pillar.icon}
@@ -362,7 +367,8 @@ export default function KakeiboPage() {
                 href="https://play.google.com/store/apps/details?id=com.aignite.kakeibo&pcampaignid=web_share"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 px-10 py-5 bg-[#1a1a1a] dark:bg-white text-white dark:text-[#1a1a1a] rounded-2xl transition-all hover:scale-105 active:scale-[0.98] shadow-2xl hover:shadow-[#0071e3]/20"
+                onClick={() => playSound('click')}
+                className="inline-flex items-center gap-4 px-10 py-5 bg-[#1a1a1a] dark:bg-white text-white dark:text-[#1a1a1a] rounded-2xl transition-all hover:scale-105 active:scale-[0.98] shadow-2xl hover:shadow-[#0071e3]/20 cursor-pointer"
               >
                 <Download size={24} />
                 <div className="text-left">
@@ -374,7 +380,8 @@ export default function KakeiboPage() {
                 href="https://kakeibo.theaignite.app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 px-10 py-5 bg-[#0071e3] text-white rounded-2xl transition-all hover:scale-105 active:scale-[0.98] shadow-2xl hover:shadow-[#0071e3]/30"
+                onClick={() => playSound('click')}
+                className="inline-flex items-center gap-4 px-10 py-5 bg-[#0071e3] text-white rounded-2xl transition-all hover:scale-105 active:scale-[0.98] shadow-2xl hover:shadow-[#0071e3]/30 cursor-pointer"
               >
                 <Smartphone size={24} />
                 <div className="text-left">
@@ -395,8 +402,8 @@ export default function KakeiboPage() {
             <p className="text-xs font-bold tracking-widest uppercase dark:text-white">Aignite Tech</p>
           </div>
           <div className="flex gap-8 text-[#86868b] dark:text-[#a1a1a6] text-xs font-bold tracking-widest uppercase">
-            <Link to="/privacy" className="hover:text-[#0071e3] transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-[#0071e3] transition-colors">Terms of Service</Link>
+            <Link to="/privacy" onClick={() => playSound('click')} className="hover:text-[#0071e3] transition-colors cursor-pointer">Privacy Policy</Link>
+            <Link to="/terms" onClick={() => playSound('click')} className="hover:text-[#0071e3] transition-colors cursor-pointer">Terms of Service</Link>
           </div>
           <p className="text-[#86868b] dark:text-[#a1a1a6] text-xs font-medium">
             © 2026 Aignite Technologies. All rights reserved.

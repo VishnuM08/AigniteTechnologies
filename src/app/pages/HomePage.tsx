@@ -16,6 +16,9 @@ import {
 import { SEO } from "../components/SEO";
 import { Link } from "react-router";
 import { teamData } from "../data/team";
+import { playSound } from "../components/SoundToggle";
+import { NeuralBackground } from "../components/NeuralBackground";
+import { Magnetic } from "../components/Magnetic";
 
 import { Variants } from "motion/react";
 
@@ -88,9 +91,12 @@ export default function HomePage() {
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (email.trim() !== "") {
       setSubscribed(true);
       setEmail("");
+      playSound('success');
+    } else {
+      playSound('error');
     }
   };
 
@@ -132,6 +138,7 @@ export default function HomePage() {
         ref={heroRef}
         className="relative px-6 pt-32 pb-24 md:pt-40 md:pb-32 lg:pt-48 lg:pb-48 overflow-hidden bg-gradient-to-br from-indigo-50/40 via-purple-50/40 to-blue-50/40 dark:from-transparent dark:via-transparent dark:to-transparent transition-colors duration-700"
       >
+        <NeuralBackground />
         {/* Soft Animated Mesh Background (Light Mode Only) */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-100 dark:opacity-0 transition-opacity duration-700">
           <motion.div
@@ -276,32 +283,38 @@ export default function HomePage() {
               ease: [0.6, 0.05, 0.01, 0.9],
             }}
           >
-            <motion.a
-              href="#products"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] hover:shadow-lg hover:shadow-[#0071e3]/20 hover:scale-[1.02] active:scale-[0.98]"
-              style={{ fontSize: "1.0625rem", fontWeight: 500 }}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
-            >
-              Explore products
-              <motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+            <Magnetic>
+              <motion.a
+                href="#products"
+                onClick={() => playSound('click')}
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] hover:shadow-lg hover:shadow-[#0071e3]/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                style={{ fontSize: "1.0625rem", fontWeight: 500 }}
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0 }}
               >
-                <ArrowRight size={18} />
-              </motion.div>
-            </motion.a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent text-[#0071e3] border border-[#0071e3] rounded-full transition-all hover:bg-[#0071e3]/5 active:scale-[0.98]"
-              style={{ fontSize: "1.0625rem", fontWeight: 500 }}
-            >
-              Contact
-            </a>
+                Explore products
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <ArrowRight size={18} />
+                </motion.div>
+              </motion.a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href="#contact"
+                onClick={() => playSound('click')}
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent text-[#0071e3] border border-[#0071e3] rounded-full transition-all hover:bg-[#0071e3]/5 active:scale-[0.98] cursor-pointer"
+                style={{ fontSize: "1.0625rem", fontWeight: 500 }}
+              >
+                Contact
+              </a>
+            </Magnetic>
           </motion.div>
         </motion.div>
       </section>
@@ -480,7 +493,8 @@ export default function HomePage() {
                       href="https://play.google.com/store/apps/details?id=com.aignite.kakeibo&pcampaignid=web_share"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] hover:shadow-lg active:scale-[0.98]"
+                      onClick={() => playSound('click')}
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] hover:shadow-lg active:scale-[0.98] cursor-pointer"
                       style={{ fontSize: "1rem", fontWeight: 500 }}
                     >
                       <Download size={16} />
@@ -488,7 +502,8 @@ export default function HomePage() {
                     </a>
                     <Link
                       to="/products/kakeibo"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#1a1a1a] dark:bg-white text-white dark:text-[#1a1a1a] rounded-full transition-all hover:bg-[#2a2a2a] dark:hover:bg-[#f5f5f7] hover:shadow-lg active:scale-[0.98]"
+                      onClick={() => playSound('click')}
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#1a1a1a] dark:bg-white text-white dark:text-[#1a1a1a] rounded-full transition-all hover:bg-[#2a2a2a] dark:hover:bg-[#f5f5f7] hover:shadow-lg active:scale-[0.98] cursor-pointer"
                       style={{ fontSize: "1rem", fontWeight: 500 }}
                     >
                       Learn more
@@ -525,6 +540,7 @@ export default function HomePage() {
                     href="https://play.google.com/store/apps/details?id=com.aignite.kakeibo&pcampaignid=web_share"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => playSound('click')}
                     className="absolute top-8 right-8 z-20 flex items-center gap-3 px-5 py-2.5 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 shadow-2xl cursor-pointer hover:bg-white/10 transition-all duration-300"
                     initial={{ y: 0 }}
                     whileHover={{ y: -4, scale: 1.05 }}
@@ -653,7 +669,8 @@ export default function HomePage() {
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link
                       to="/products/peerova"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#1a1a1a] dark:bg-white text-white dark:text-[#1a1a1a] rounded-full transition-all hover:bg-[#2a2a2a] dark:hover:bg-[#f5f5f7] hover:shadow-lg active:scale-[0.98]"
+                      onClick={() => playSound('click')}
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#1a1a1a] dark:bg-white text-white dark:text-[#1a1a1a] rounded-full transition-all hover:bg-[#2a2a2a] dark:hover:bg-[#f5f5f7] hover:shadow-lg active:scale-[0.98] cursor-pointer"
                       style={{ fontSize: "1rem", fontWeight: 500 }}
                     >
                       Learn more
@@ -859,7 +876,8 @@ export default function HomePage() {
             ].map((faq, index) => (
               <motion.div
                 key={index}
-                className="p-6 rounded-2xl bg-[#fbfbfd] dark:bg-[#0a0a0a] border border-[#d2d2d7]/20 dark:border-[#2a2a2a]/50 hover:border-[#0071e3]/30 transition-all duration-300"
+                onClick={() => playSound('switch')}
+                className="p-6 rounded-2xl bg-[#fbfbfd] dark:bg-[#0a0a0a] border border-[#d2d2d7]/20 dark:border-[#2a2a2a]/50 hover:border-[#0071e3]/30 transition-all duration-300 cursor-pointer"
                 variants={scaleIn}
               >
                 <h3

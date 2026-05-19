@@ -43,11 +43,53 @@ export function ThemeToggle() {
     }
   }, [isDark]);
 
+  const toggleTheme = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const doc = document as any;
+    const isAppearanceTransition =
+      doc.startViewTransition &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!isAppearanceTransition) {
+      setIsDark(!isDark);
+      return;
+    }
+
+    const x = event.clientX;
+    const y = event.clientY;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = doc.startViewTransition(() => {
+      setIsDark(!isDark);
+    });
+
+    transition.ready.then(() => {
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`,
+      ];
+      document.documentElement.animate(
+        {
+          clipPath: isDark ? [...clipPath].reverse() : clipPath,
+        },
+        {
+          duration: 450,
+          easing: 'ease-out',
+          pseudoElement: isDark
+            ? '::view-transition-old(root)'
+            : '::view-transition-new(root)',
+        }
+      );
+    });
+  };
+
   if (isDark === null) return null; // Avoid flicker during hydration
 
   return (
     <motion.button
-      onClick={() => setIsDark(!isDark)}
+      onClick={toggleTheme}
       className="fixed bottom-8 left-8 p-4 bg-[#1a1a1a] dark:bg-white text-white dark:text-[#1a1a1a] rounded-full shadow-lg transition-colors z-[10000]"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
@@ -57,3 +99,4 @@ export function ThemeToggle() {
     </motion.button>
   );
 }
+

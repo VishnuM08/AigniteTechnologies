@@ -12,6 +12,7 @@ import {
 import { Link } from "react-router";
 
 import { SEO } from "../components/SEO";
+import { playSound } from "../components/SoundToggle";
 
 import { Variants } from "motion/react";
 
@@ -97,7 +98,8 @@ export default function PeerovaPage() {
         <div className="max-w-5xl mx-auto relative z-10">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 mb-8 text-[#86868b] hover:text-[#1a1a1a] dark:hover:text-white transition-colors"
+            onClick={() => playSound('click')}
+            className="inline-flex items-center gap-2 mb-8 text-[#86868b] hover:text-[#1a1a1a] dark:hover:text-white transition-colors cursor-pointer"
             style={{ fontSize: "0.9375rem", fontWeight: 500 }}
           >
             <ArrowLeft size={18} />
@@ -154,7 +156,8 @@ export default function PeerovaPage() {
             >
               <a
                 href="#"
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] active:scale-[0.98]"
+                onClick={() => playSound('click')}
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] active:scale-[0.98] cursor-pointer"
                 style={{ fontSize: "1.0625rem", fontWeight: 500 }}
               >
                 <ExternalLink size={18} />
@@ -162,7 +165,8 @@ export default function PeerovaPage() {
               </a>
               <a
                 href="#"
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent text-[#0071e3] border border-[#0071e3] rounded-full transition-all hover:bg-[#0071e3]/5 active:scale-[0.98]"
+                onClick={() => playSound('click')}
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent text-[#0071e3] border border-[#0071e3] rounded-full transition-all hover:bg-[#0071e3]/5 active:scale-[0.98] cursor-pointer"
                 style={{ fontSize: "1.0625rem", fontWeight: 500 }}
               >
                 <Download size={18} />
@@ -374,7 +378,8 @@ export default function PeerovaPage() {
           <motion.div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="#"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] active:scale-[0.98]"
+              onClick={() => playSound('click')}
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] active:scale-[0.98] cursor-pointer"
               style={{ fontSize: "1.0625rem", fontWeight: 500 }}
             >
               <ExternalLink size={18} />
@@ -389,14 +394,16 @@ export default function PeerovaPage() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
           <Link
             to="/"
-            className="text-[#86868b] hover:text-[#1a1a1a] dark:hover:text-white transition-colors"
+            onClick={() => playSound('click')}
+            className="text-[#86868b] hover:text-[#1a1a1a] dark:hover:text-white transition-colors cursor-pointer"
             style={{ fontSize: "0.875rem" }}
           >
             © 2026 Aignite Technologies
           </Link>
           <Link
             to="/privacy/kakeibo"
-            className="text-[#86868b] hover:text-[#0071e3] transition-colors"
+            onClick={() => playSound('click')}
+            className="text-[#86868b] hover:text-[#0071e3] transition-colors cursor-pointer"
             style={{ fontSize: "0.875rem" }}
           >
             Privacy Policy

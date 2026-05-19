@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "motion/react";
 import { Calendar, ArrowRight } from "lucide-react";
 
 import { SEO } from "../components/SEO";
 import { Link } from "react-router";
+import { playSound } from "../components/SoundToggle";
 
 import { Variants } from "motion/react";
 
@@ -27,6 +28,19 @@ const staggerContainer = {
 };
 
 export default function InsightsPage() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = () => {
+    if (email.trim() !== "") {
+      setSubscribed(true);
+      setEmail("");
+      playSound('success');
+    } else {
+      playSound('error');
+    }
+  };
+
   const articles = [
     {
       date: "Feb 20, 2026",
@@ -138,6 +152,7 @@ export default function InsightsPage() {
             {articles.map((article, index) => (
               <motion.article
                 key={index}
+                onClick={() => playSound('click')}
                 className="group p-8 rounded-2xl bg-[#fbfbfd] dark:bg-[#0a0a0a] border border-[#d2d2d7]/20 dark:border-[#2a2a2a]/50 hover:border-[#0071e3]/50 transition-all duration-300 cursor-pointer"
                 variants={fadeInUp}
                 whileHover={{ y: -4 }}
@@ -212,20 +227,33 @@ export default function InsightsPage() {
             thoughtful technology.
           </motion.p>
 
-          <motion.div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-5 py-3 rounded-full bg-white dark:bg-[#1a1a1a] border border-[#d2d2d7] dark:border-[#2a2a2a] focus:outline-none focus:border-[#0071e3] transition-colors"
-              style={{ fontSize: "1rem" }}
-            />
-            <button
-              className="px-6 py-3 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] active:scale-[0.98] whitespace-nowrap"
-              style={{ fontSize: "1rem", fontWeight: 500 }}
+          {subscribed ? (
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="text-[#0071e3] font-semibold py-4"
             >
-              Subscribe
-            </button>
-          </motion.div>
+              🎉 Thank you for subscribing!
+            </motion.div>
+          ) : (
+            <motion.div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="flex-1 px-5 py-3 rounded-full bg-white dark:bg-[#1a1a1a] border border-[#d2d2d7] dark:border-[#2a2a2a] focus:outline-none focus:border-[#0071e3] transition-colors"
+                style={{ fontSize: "1rem" }}
+              />
+              <button
+                onClick={handleSubscribe}
+                className="px-6 py-3 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] active:scale-[0.98] whitespace-nowrap cursor-pointer"
+                style={{ fontSize: "1rem", fontWeight: 500 }}
+              >
+                Subscribe
+              </button>
+            </motion.div>
+          )}
 
           <motion.p
             className="mt-4 text-[#86868b]"
@@ -255,6 +283,7 @@ export default function InsightsPage() {
                 <a
                   key={link.name}
                   href={link.href}
+                  onClick={() => playSound('click')}
                   className="text-[#86868b] hover:text-[#1a1a1a] dark:hover:text-white transition-colors"
                   style={{ fontSize: "0.875rem" }}
                 >

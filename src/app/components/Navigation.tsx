@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router";
+import { playSound } from "./SoundToggle";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -46,6 +47,7 @@ export function Navigation() {
           <div className="flex items-center justify-between">
             <Link
               to="/"
+              onClick={() => playSound('click')}
               className="text-[#1a1a1a] dark:text-white transition-colors hover:text-[#0071e3] dark:hover:text-[#3b82f6]"
               style={{ fontSize: "1.125rem", fontWeight: 600 }}
             >
@@ -58,6 +60,7 @@ export function Navigation() {
                 <Link
                   key={link.name}
                   to={link.href}
+                  onClick={() => playSound('click')}
                   className="text-[#86868b] dark:text-[#a1a1a6] hover:text-[#1a1a1a] dark:hover:text-white transition-colors"
                   style={{ fontSize: "0.9375rem", fontWeight: 500 }}
                 >
@@ -68,8 +71,11 @@ export function Navigation() {
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-[#1a1a1a] dark:text-white"
+              onClick={() => {
+                setIsMobileMenuOpen(!isMobileMenuOpen);
+                playSound('switch');
+              }}
+              className="md:hidden p-2 text-[#1a1a1a] dark:text-white cursor-pointer"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -99,6 +105,7 @@ export function Navigation() {
                   <motion.a
                     key={link.name}
                     href={link.href}
+                    onClick={() => playSound('click')}
                     className="text-[#1a1a1a] dark:text-white hover:text-[#0071e3] dark:hover:text-[#3b82f6] transition-colors"
                     style={{ fontSize: "1.5rem", fontWeight: 600 }}
                     initial={{ opacity: 0, y: 20 }}
