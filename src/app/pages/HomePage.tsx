@@ -20,7 +20,6 @@ import { playSound } from "../components/SoundToggle";
 import { NeuralBackground } from "../components/NeuralBackground";
 import { Magnetic } from "../components/Magnetic";
 import { ProjectEstimator } from "../components/ProjectEstimator";
-import { JvmSandboxWidget } from "../components/JvmSandboxWidget";
 
 import { Variants } from "motion/react";
 
@@ -320,9 +319,6 @@ export default function HomePage() {
           </motion.div>
         </motion.div>
       </section>
-
-      {/* JVM Interactive Demo Sandbox */}
-      <JvmSandboxWidget />
 
       {/* Stats Section */}
       <motion.section

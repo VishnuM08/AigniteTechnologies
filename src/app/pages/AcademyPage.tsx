@@ -694,7 +694,26 @@ export default function AcademyPage() {
               </div>
             </div>
 
-            <div className="w-full h-[85vh] rounded-2xl border border-border overflow-hidden bg-card shadow-2xl relative mb-12 backdrop-blur-sm fullscreen-container">
+            <div className="w-full h-[85vh] rounded-2xl border border-border overflow-hidden bg-card shadow-2xl relative mb-12 backdrop-blur-sm fullscreen-container group">
+              {/* Floating Fullscreen Button */}
+              <button
+                onClick={() => {
+                  const container = iframeRef.current?.parentElement;
+                  if (container) {
+                    if (!document.fullscreenElement) {
+                      container.requestFullscreen().catch(() => {});
+                    } else {
+                      document.exitFullscreen().catch(() => {});
+                    }
+                  }
+                  playSound('click');
+                }}
+                className="absolute top-4 right-4 z-20 flex items-center justify-center p-3 rounded-full bg-white/90 dark:bg-neutral-900/90 border border-neutral-200/50 dark:border-white/10 text-neutral-700 dark:text-neutral-300 hover:text-indigo-500 dark:hover:text-indigo-400 hover:scale-105 active:scale-95 transition-all shadow-md cursor-pointer opacity-70 hover:opacity-100"
+                title="Toggle Fullscreen"
+              >
+                <Maximize2 className="w-4 h-4" />
+              </button>
+
               <iframe
                 ref={iframeRef}
                 src="/Java_Mastery_Course_Co.html"

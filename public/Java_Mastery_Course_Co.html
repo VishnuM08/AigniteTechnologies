@@ -2317,7 +2317,40 @@ function showSlide(i){
 
 function nextSlide(){if(currentMod!==null&&currentSlideIdx<slidesByMod[currentMod].length-1)showSlide(currentSlideIdx+1)}
 function prevSlide(){if(currentMod!==null&&currentSlideIdx>0)showSlide(currentSlideIdx-1)}
-function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});else document.exitFullscreen()}
+function toggleFullscreen(){
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'toggleFullscreen' }, '*');
+    } else {
+      if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});
+      else document.exitFullscreen();
+    }
+  } catch (e) {
+    if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});
+    else document.exitFullscreen();
+  }
+}
+
+// Touch swipe gestures support for mobile/touch screens
+let touchStartX = 0;
+let touchEndX = 0;
+document.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+document.addEventListener('touchend', e => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+  if (currentMod === null) return;
+  const swipeThreshold = 50;
+  if (touchStartX - touchEndX > swipeThreshold) {
+    nextSlide();
+  } else if (touchEndX - touchStartX > swipeThreshold) {
+    prevSlide();
+  }
+}
 
 document.addEventListener('keydown',e=>{
   if(currentMod===null)return;
