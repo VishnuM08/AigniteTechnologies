@@ -19,6 +19,8 @@ import { teamData } from "../data/team";
 import { playSound } from "../components/SoundToggle";
 import { NeuralBackground } from "../components/NeuralBackground";
 import { Magnetic } from "../components/Magnetic";
+import { ProjectEstimator } from "../components/ProjectEstimator";
+import { JvmSandboxWidget } from "../components/JvmSandboxWidget";
 
 import { Variants } from "motion/react";
 
@@ -318,6 +320,9 @@ export default function HomePage() {
           </motion.div>
         </motion.div>
       </section>
+
+      {/* JVM Interactive Demo Sandbox */}
+      <JvmSandboxWidget />
 
       {/* Stats Section */}
       <motion.section
@@ -1042,15 +1047,15 @@ export default function HomePage() {
       {/* Contact Section */}
       <motion.section
         id="contact"
-        className="px-6 py-20 md:py-28"
+        className="px-6 py-20 md:py-28 bg-[#f5f5f7]/40 dark:bg-[#1c1c1f]/40"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeInUp}
       >
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.h2
-            className="mb-8 text-[#1a1a1a] dark:text-white"
+            className="mb-6 text-[#1a1a1a] dark:text-white"
             style={{
               fontSize: "clamp(2rem, 5vw, 3rem)",
               fontWeight: 600,
@@ -1058,11 +1063,11 @@ export default function HomePage() {
               lineHeight: 1.2,
             }}
           >
-            Get in touch
+            Estimate Your Project Scope
           </motion.h2>
 
           <motion.p
-            className="mb-6 text-[#86868b]"
+            className="mb-8 text-[#86868b] max-w-2xl mx-auto"
             style={{
               fontSize: "1.0625rem",
               lineHeight: 1.5,
@@ -1072,36 +1077,47 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            For business inquiries, support, or collaboration opportunities:
+            Select platforms, add core features, and configure your delivery timeline.
+            Submit your config below to receive a detailed technical proposal from our engineering team.
           </motion.p>
 
-          <motion.a
-            href="mailto:admin@theaignite.app"
-            className="inline-flex items-center gap-3 px-8 py-4 mb-12 text-[#0071e3] bg-[#f5f5f7] dark:bg-[#2a2a2a] rounded-2xl hover:bg-[#e8e8ed] dark:hover:bg-[#3a3a3a] transition-all"
-            style={{
-              fontSize: "1.25rem",
-              fontWeight: 500,
-            }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            whileHover={{ scale: 1.05 }}
-          >
-            <ExternalLink size={20} />
-            admin@theaignite.app
-          </motion.a>
+          <ProjectEstimator />
 
-          <motion.p
-            className="text-[#86868b]"
-            style={{ fontSize: "0.9375rem" }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-          >
-            We typically respond within 24-48 hours.
-          </motion.p>
+          <div className="mt-16 text-center">
+            <motion.p
+              className="mb-6 text-[#86868b] text-sm uppercase tracking-wider font-semibold"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              Or drop us a direct email:
+            </motion.p>
+
+            <motion.a
+              href="mailto:admin@theaignite.app"
+              className="inline-flex items-center gap-3 px-8 py-4 mb-8 text-[#0071e3] bg-[#f5f5f7] dark:bg-[#2a2a2a] rounded-2xl hover:bg-[#e8e8ed] dark:hover:bg-[#3a3a3a] transition-all cursor-pointer border border-[#d2d2d7]/30 dark:border-[#2a2a2a]"
+              style={{
+                fontSize: "1.25rem",
+                fontWeight: 500,
+              }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <ExternalLink size={20} />
+              admin@theaignite.app
+            </motion.a>
+
+            <motion.p
+              className="text-[#86868b]"
+              style={{ fontSize: "0.9375rem" }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              We typically respond within 24 hours.
+            </motion.p>
+          </div>
         </div>
       </motion.section>
       {/* Join Us Section */}

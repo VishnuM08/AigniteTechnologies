@@ -26,7 +26,7 @@ export function Navigation() {
     { name: "Home", href: "/" },
     { name: "Products", href: "/#products" },
     { name: "Insights", href: "/insights" },
-    { name: "Academy", href: "/academy" },
+    { name: "Academy", href: "/academy", badge: "NEW" },
     { name: "About", href: "/#who-we-are" },
     { name: "Contact", href: "/#contact" },
   ];
@@ -61,10 +61,15 @@ export function Navigation() {
                   key={link.name}
                   to={link.href}
                   onClick={() => playSound('click')}
-                  className="text-[#86868b] dark:text-[#a1a1a6] hover:text-[#1a1a1a] dark:hover:text-white transition-colors"
+                  className="text-[#86868b] dark:text-[#a1a1a6] hover:text-[#1a1a1a] dark:hover:text-white transition-colors flex items-center gap-2"
                   style={{ fontSize: "0.9375rem", fontWeight: 500 }}
                 >
-                  {link.name}
+                  <span>{link.name}</span>
+                  {link.badge && (
+                    <span className="px-1.5 py-0.5 rounded text-[8px] font-bold text-white bg-indigo-500 tracking-wider uppercase leading-none animate-pulse">
+                      {link.badge}
+                    </span>
+                  )}
                 </Link>
               ))}
             </div>
@@ -94,7 +99,7 @@ export function Navigation() {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="absolute inset-0 bg-white dark:bg-[#1a1a1a]"
+              className="absolute inset-0 bg-white/95 dark:bg-[#1a1a1a]/95 backdrop-blur-2xl"
               initial={{ y: "-100%" }}
               animate={{ y: 0 }}
               exit={{ y: "-100%" }}
@@ -102,18 +107,29 @@ export function Navigation() {
             >
               <div className="flex flex-col items-center justify-center h-full gap-8">
                 {navLinks.map((link, index) => (
-                  <motion.a
+                  <motion.div
                     key={link.name}
-                    href={link.href}
-                    onClick={() => playSound('click')}
-                    className="text-[#1a1a1a] dark:text-white hover:text-[#0071e3] dark:hover:text-[#3b82f6] transition-colors"
-                    style={{ fontSize: "1.5rem", fontWeight: 600 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                   >
-                    {link.name}
-                  </motion.a>
+                    <Link
+                      to={link.href}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        playSound('click');
+                      }}
+                      className="text-[#1a1a1a] dark:text-white hover:text-[#0071e3] dark:hover:text-[#3b82f6] transition-colors flex items-center gap-2"
+                      style={{ fontSize: "1.5rem", fontWeight: 600 }}
+                    >
+                      <span>{link.name}</span>
+                      {link.badge && (
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold text-white bg-indigo-500 tracking-wider uppercase leading-none animate-pulse">
+                          {link.badge}
+                        </span>
+                      )}
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>

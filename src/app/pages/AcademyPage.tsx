@@ -36,6 +36,8 @@ export default function AcademyPage() {
     topicIndex: number;
   } | null>(null);
 
+  const [workspaceTab, setWorkspaceTab] = useState<'info' | 'code'>('info');
+
   // Local Storage Progress Tracking
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
 
@@ -279,9 +281,9 @@ export default function AcademyPage() {
         
         {/* Tab Switcher */}
         <div className="flex justify-center mb-16">
-          <div className="relative flex items-center gap-1.5 p-1.5 bg-neutral-100/70 dark:bg-neutral-900/60 rounded-2xl border border-neutral-200/50 dark:border-neutral-800/40 backdrop-blur-md shadow-inner">
+          <div className="relative flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 bg-neutral-100/70 dark:bg-neutral-900/60 rounded-2xl border border-neutral-200/50 dark:border-neutral-800/40 backdrop-blur-md shadow-inner max-w-full overflow-x-auto">
             {(['course', 'java', 'dsa'] as const).map((tab) => {
-              const label = tab === 'course' ? 'Interactive Mastery Course' : tab === 'java' ? 'Java Core Curriculum' : 'Data Structures & Algorithms';
+              const label = tab === 'course' ? 'Java Mastery' : tab === 'java' ? 'Core Java' : 'DSA & Algos';
               const isActive = activeTab === tab;
               const hoverColor = tab === 'course' ? 'hover:text-indigo-500' : tab === 'java' ? 'hover:text-amber-500' : 'hover:text-green-500';
               return (
@@ -291,7 +293,7 @@ export default function AcademyPage() {
                     setActiveTab(tab);
                     playSound('switch', isSoundMuted);
                   }}
-                  className={`relative px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 z-10 cursor-pointer ${
+                  className={`relative px-3 sm:px-5 py-2 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 z-10 cursor-pointer ${
                     isActive 
                       ? 'text-white' 
                       : `text-muted-foreground ${hoverColor}`
@@ -308,11 +310,16 @@ export default function AcademyPage() {
                       transition={{ type: 'spring', stiffness: 350, damping: 28 }}
                     />
                   )}
-                  <span className="flex items-center gap-2">
-                    {tab === 'course' && <BookOpen className="w-3.5 h-3.5" />}
-                    {tab === 'java' && <Sparkles className="w-3.5 h-3.5" />}
-                    {tab === 'dsa' && <Terminal className="w-3.5 h-3.5" />}
-                    {label}
+                  <span className="flex items-center gap-1.5 sm:gap-2">
+                    {tab === 'course' && <BookOpen className="w-3 h-3 sm:w-3.5 sm:h-3.5" />}
+                    {tab === 'java' && <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" />}
+                    {tab === 'dsa' && <Terminal className="w-3 h-3 sm:w-3.5 sm:h-3.5" />}
+                    <span>{label}</span>
+                    {tab === 'course' && (
+                      <span className="px-1.5 py-0.5 rounded text-[8px] font-black text-white bg-[#d4183d] tracking-wider uppercase leading-none animate-pulse">
+                        NEW
+                      </span>
+                    )}
                   </span>
                 </button>
               );
@@ -511,6 +518,7 @@ export default function AcademyPage() {
                           <button
                             onClick={() => {
                               setActiveWorkspace({ type: 'java', categoryIndex: vi, topicIndex: ti });
+                              setWorkspaceTab('info');
                               playSound('click', isSoundMuted);
                             }}
                             className="w-full py-2.5 rounded-xl text-xs font-black tracking-wide border border-neutral-200/60 dark:border-neutral-800/50 bg-neutral-50/50 dark:bg-neutral-900/50 hover:bg-amber-500 dark:hover:bg-amber-500 hover:text-white hover:border-amber-500 dark:hover:border-amber-500 transition-all duration-300 text-center cursor-pointer shadow-sm"
@@ -621,6 +629,7 @@ export default function AcademyPage() {
                           <button
                             onClick={() => {
                               setActiveWorkspace({ type: 'dsa', categoryIndex: ci, topicIndex: ti });
+                              setWorkspaceTab('info');
                               playSound('click', isSoundMuted);
                             }}
                             className="w-full py-2.5 rounded-xl text-xs font-black tracking-wide border border-neutral-200/60 dark:border-neutral-800/50 bg-neutral-50/50 dark:bg-neutral-900/50 hover:bg-green-500 dark:hover:bg-green-500 hover:text-white hover:border-green-500 dark:hover:border-green-500 transition-all duration-300 text-center cursor-pointer shadow-sm"
@@ -807,10 +816,44 @@ export default function AcademyPage() {
                   </div>
                 </div>
 
+                {/* Mobile Workspace Tabs Toggle */}
+                <div className="flex lg:hidden justify-center border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-950/30 p-2.5">
+                  <div className="flex gap-1 bg-neutral-100 dark:bg-neutral-800 p-1 rounded-xl w-full max-w-sm">
+                    <button
+                      onClick={() => {
+                        setWorkspaceTab('info');
+                        playSound('click', isSoundMuted);
+                      }}
+                      className={`flex-1 py-2 rounded-lg text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
+                        workspaceTab === 'info'
+                          ? 'bg-white dark:bg-neutral-700 text-foreground shadow-sm'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      📖 Description
+                    </button>
+                    <button
+                      onClick={() => {
+                        setWorkspaceTab('code');
+                        playSound('click', isSoundMuted);
+                      }}
+                      className={`flex-1 py-2 rounded-lg text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
+                        workspaceTab === 'code'
+                          ? 'bg-white dark:bg-neutral-700 text-foreground shadow-sm'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      💻 Workspace
+                    </button>
+                  </div>
+                </div>
+
                 {/* Workspace Split Layout */}
                 <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden bg-neutral-50/20 dark:bg-neutral-950/10">
                   {/* Left Column: Theory/Details */}
-                  <div className="lg:col-span-5 p-6 md:p-8 overflow-y-auto border-r border-neutral-200 dark:border-neutral-800 flex flex-col gap-6 scrollbar-thin">
+                  <div className={`lg:col-span-5 p-6 md:p-8 overflow-y-auto border-r border-neutral-200 dark:border-neutral-800 flex flex-col gap-6 scrollbar-thin ${
+                    workspaceTab === 'info' ? 'flex' : 'hidden lg:flex'
+                  }`}>
                     <div>
                       <h4 className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-2">Overview</h4>
                       <div
@@ -893,7 +936,9 @@ export default function AcademyPage() {
                   </div>
 
                   {/* Right Column: Code panel & compiler */}
-                  <div className="lg:col-span-7 overflow-y-auto flex flex-col h-full bg-neutral-50/50 dark:bg-black/20">
+                  <div className={`lg:col-span-7 overflow-y-auto flex flex-col h-full bg-neutral-50/50 dark:bg-black/20 ${
+                    workspaceTab === 'code' ? 'flex' : 'hidden lg:flex'
+                  }`}>
                     <CodePanel 
                       rawCode={topic.code} 
                       topicName={topic.name} 
