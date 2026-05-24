@@ -33,6 +33,6 @@ export const teamData: TeamMember[] = [
       "Her insights ensure that as we scale our engineering efforts, we remain deeply committed to building human-centered, impactful digital products without compromise.",
     linkedin: "https://www.linkedin.com/in/lavanya2002/",
     gradient: "from-[#34c759] to-[#28a745]",
-    active: false,
+    active: true,
   },
 ];
