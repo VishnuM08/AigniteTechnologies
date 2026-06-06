@@ -655,8 +655,8 @@ export default function HomePage() {
                   <div className="relative w-full overflow-hidden">
                     <HorizontalMarquee
                       images={[
-                        "/assets/Notebook/editor_mockup.png",
-                        "/assets/Notebook/organization_mockup.png",
+                        "/assets/Notebook/dashboard.png",
+                        "/assets/Notebook/editor.png",
                       ]}
                       speed={35}
                     />

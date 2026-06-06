@@ -204,8 +204,8 @@ export default function NotebookPage() {
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <img
-                  src="/assets/Notebook/editor_mockup.png"
-                  alt="Notebook Editor Interface"
+                  src="/assets/Notebook/dashboard.png"
+                  alt="Notebook Dashboard Interface"
                   className="w-full h-auto object-cover"
                 />
               </motion.div>
@@ -219,8 +219,8 @@ export default function NotebookPage() {
                 whileHover={{ y: -10, scale: 1.05 }}
               >
                 <img
-                  src="/assets/Notebook/organization_mockup.png"
-                  alt="Notebook Organization Interface"
+                  src="/assets/Notebook/editor.png"
+                  alt="Notebook Editor Interface"
                   className="w-full h-auto object-cover"
                 />
               </motion.div>
