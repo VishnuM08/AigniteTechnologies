@@ -628,7 +628,7 @@ export default function HomePage() {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <a
-                      href="https://notebook.theaignite.app"
+                      href="https://sanctum.theaignite.app/"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => playSound('click')}
