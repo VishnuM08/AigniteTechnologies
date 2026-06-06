@@ -193,16 +193,37 @@ export default function NotebookPage() {
 
             <motion.div 
               className="relative p-4 md:p-8"
+              style={{ perspective: 1000 }}
               variants={fadeInUp}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#f59e0b]/20 to-orange-500/20 blur-[60px] rounded-full animate-pulse pointer-events-none" />
-              <div className="relative rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] border border-white/20 bg-[#1a1a1a] aspect-square flex items-center justify-center">
-                 {/* Placeholder for Notebook App screenshot */}
-                 <div className="text-center p-10">
-                     <BookOpen size={100} className="text-white/20 mx-auto mb-6" />
-                     <h3 className="text-white/50 font-semibold text-2xl tracking-widest uppercase">Notebook Interface</h3>
-                 </div>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-[#f59e0b]/30 to-orange-500/30 blur-[80px] rounded-full animate-pulse pointer-events-none" />
+              
+              <motion.div 
+                className="relative rounded-[2rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)] border border-white/20 z-10"
+                whileHover={{ rotateY: -2, rotateX: 2, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <img
+                  src="/assets/Notebook/editor_mockup.png"
+                  alt="Notebook Editor Interface"
+                  className="w-full h-auto object-cover"
+                />
+              </motion.div>
+              
+              {/* Floating secondary image */}
+              <motion.div 
+                className="absolute -bottom-16 -left-12 w-2/3 rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] border border-white/20 z-20"
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                whileHover={{ y: -10, scale: 1.05 }}
+              >
+                <img
+                  src="/assets/Notebook/organization_mockup.png"
+                  alt="Notebook Organization Interface"
+                  className="w-full h-auto object-cover"
+                />
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>

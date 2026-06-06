@@ -649,28 +649,22 @@ export default function HomePage() {
                     </Link>
                   </div>
                 </div>
-                <div className="relative h-64 md:h-auto overflow-hidden bg-gradient-to-br from-[#f59e0b]/10 to-[#f59e0b]/5 dark:from-[#f59e0b]/20 dark:to-[#f59e0b]/10 flex flex-col items-center justify-center group overflow-hidden">
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#f59e0b]/10 to-[#fbbf24]/5 dark:from-[#f59e0b]/20 dark:to-[#fbbf24]/10">
-                    <motion.div
-                      initial={{ scale: 0.9, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 1 }}
-                      className="flex flex-col items-center gap-6"
-                    >
-                      <div className="p-10 rounded-full bg-white/10 backdrop-blur-3xl border border-white/20 shadow-2xl">
-                        <BookOpen
-                          size={64}
-                          className="text-[#f59e0b]"
-                          strokeWidth={1.5}
-                        />
-                      </div>
-                      <div className="px-6 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
-                        <span className="text-[#1a1a1a] dark:text-white font-semibold tracking-wider text-sm">
-                          EARLY ACCESS
-                        </span>
-                      </div>
-                    </motion.div>
+                <div className="relative h-[450px] md:h-full overflow-hidden flex items-center group bg-[#0a0a0a]">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#1a1a1a_0%,_#000000_100%)] opacity-80" />
+
+                  <div className="relative w-full overflow-hidden">
+                    <HorizontalMarquee
+                      images={[
+                        "/assets/Notebook/editor_mockup.png",
+                        "/assets/Notebook/organization_mockup.png",
+                      ]}
+                      speed={35}
+                    />
                   </div>
+
+                  {/* Left and Right Fades for Infinite Look */}
+                  <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+                  <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
                 </div>
               </motion.div>
             </motion.div>
