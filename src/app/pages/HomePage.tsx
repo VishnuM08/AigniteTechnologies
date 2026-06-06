@@ -638,6 +638,15 @@ export default function HomePage() {
                       Open App
                       <ExternalLink size={16} />
                     </a>
+                    <Link
+                      to="/products/notebook"
+                      onClick={() => playSound('click')}
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#1a1a1a] dark:bg-white text-white dark:text-[#1a1a1a] rounded-full transition-all hover:bg-[#2a2a2a] dark:hover:bg-[#f5f5f7] hover:shadow-lg active:scale-[0.98] cursor-pointer"
+                      style={{ fontSize: "1rem", fontWeight: 500 }}
+                    >
+                      Learn more
+                      <ArrowRight size={16} />
+                    </Link>
                   </div>
                 </div>
                 <div className="relative h-64 md:h-auto overflow-hidden bg-gradient-to-br from-[#f59e0b]/10 to-[#f59e0b]/5 dark:from-[#f59e0b]/20 dark:to-[#f59e0b]/10 flex flex-col items-center justify-center group overflow-hidden">

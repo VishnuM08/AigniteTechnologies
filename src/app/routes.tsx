@@ -3,6 +3,7 @@ import { RootLayout } from "./components/RootLayout";
 import HomePage from "./pages/HomePage";
 import PeerovaPage from "./pages/PeerovaPage";
 import KakeiboPage from "./pages/KakeiboPage";
+import NotebookPage from "./pages/NotebookPage";
 import InsightsPage from "./pages/InsightsPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import AignitePrivacyPolicyPage from "./pages/AignitePrivacyPolicyPage";
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "/products/kakeibo",
         element: <KakeiboPage />,
+      },
+      {
+        path: "/products/notebook",
+        element: <NotebookPage />,
       },
       {
         path: "/insights",
