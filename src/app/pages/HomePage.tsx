@@ -12,6 +12,7 @@ import {
   Layers,
   Linkedin,
   CheckCircle2,
+  BookOpen,
 } from "lucide-react";
 import { SEO } from "../components/SEO";
 import { Link } from "react-router";
@@ -564,7 +565,108 @@ export default function HomePage() {
               </motion.div>
             </motion.div>
 
-            {/* Product 2: Peerova */}
+            {/* Product 2: Notebook */}
+            <motion.div
+              className="group bg-white dark:bg-[#1a1a1a] rounded-3xl overflow-hidden shadow-sm border border-[#d2d2d7]/30 dark:border-[#2a2a2a] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-2xl transition-all duration-500 will-change-transform"
+              variants={scaleIn}
+              whileHover={{ scale: 1.01, y: -8 }}
+              style={{ perspective: 1000 }}
+            >
+              <motion.div
+                className="grid md:grid-cols-2 gap-8 h-full"
+                whileHover={{ rotateX: 1, rotateY: -1 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              >
+                <div className="p-10 md:p-16 flex flex-col justify-center">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 rounded-full bg-[#fef3c7] dark:bg-[#78350f] w-fit">
+                    <div className="w-2 h-2 rounded-full bg-[#f59e0b] animate-pulse" />
+                    <span
+                      className="text-[#92400e] dark:text-[#fde68a]"
+                      style={{ fontSize: "0.75rem", fontWeight: 500 }}
+                    >
+                      BETA
+                    </span>
+                  </div>
+                  <h3
+                    className="mb-3 text-[#1a1a1a] dark:text-white"
+                    style={{
+                      fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
+                      fontWeight: 600,
+                      letterSpacing: "-0.01em",
+                    }}
+                  >
+                    Notebook
+                  </h3>
+                  <p
+                    className="mb-5 text-[#1a1a1a] dark:text-white"
+                    style={{
+                      fontSize: "clamp(1.125rem, 2.5vw, 1.5rem)",
+                      fontWeight: 500,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    Your digital thoughts, organized.
+                  </p>
+                  <p
+                    className="mb-4 text-[#86868b]"
+                    style={{
+                      fontSize: "1.0625rem",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    A powerful, distraction-free writing environment. Capture ideas, organize your knowledge, and boost your productivity with seamless syncing across devices.
+                  </p>
+                  <p
+                    className="mb-8 text-[#f59e0b] dark:text-[#fbbf24]"
+                    style={{
+                      fontSize: "0.9375rem",
+                      lineHeight: 1.5,
+                      fontWeight: 500,
+                    }}
+                  >
+                    Currently in beta stage.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <a
+                      href="https://notebook.theaignite.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => playSound('click')}
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#0071e3] text-white rounded-full transition-all hover:bg-[#0077ed] hover:shadow-lg active:scale-[0.98] cursor-pointer"
+                      style={{ fontSize: "1rem", fontWeight: 500 }}
+                    >
+                      Open App
+                      <ExternalLink size={16} />
+                    </a>
+                  </div>
+                </div>
+                <div className="relative h-64 md:h-auto overflow-hidden bg-gradient-to-br from-[#f59e0b]/10 to-[#f59e0b]/5 dark:from-[#f59e0b]/20 dark:to-[#f59e0b]/10 flex flex-col items-center justify-center group overflow-hidden">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#f59e0b]/10 to-[#fbbf24]/5 dark:from-[#f59e0b]/20 dark:to-[#fbbf24]/10">
+                    <motion.div
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 1 }}
+                      className="flex flex-col items-center gap-6"
+                    >
+                      <div className="p-10 rounded-full bg-white/10 backdrop-blur-3xl border border-white/20 shadow-2xl">
+                        <BookOpen
+                          size={64}
+                          className="text-[#f59e0b]"
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                      <div className="px-6 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
+                        <span className="text-[#1a1a1a] dark:text-white font-semibold tracking-wider text-sm">
+                          EARLY ACCESS
+                        </span>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Product 3: Peerova */}
             <motion.div
               className="group bg-white dark:bg-[#1a1a1a] rounded-3xl overflow-hidden shadow-sm border border-[#d2d2d7]/30 dark:border-[#2a2a2a] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-2xl transition-all duration-500 will-change-transform"
               variants={scaleIn}
