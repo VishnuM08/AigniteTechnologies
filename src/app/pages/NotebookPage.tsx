@@ -192,17 +192,22 @@ export default function NotebookPage() {
             </motion.div>
 
             <motion.div 
-              className="relative p-4 md:p-8"
-              style={{ perspective: 1000 }}
+              className="relative p-4 md:p-0 flex items-center mt-12 lg:mt-0"
               variants={fadeInUp}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#f59e0b]/30 to-orange-500/30 blur-[80px] rounded-full animate-pulse pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#f59e0b]/20 to-amber-400/10 blur-[80px] rounded-full animate-pulse pointer-events-none" />
               
+              {/* Primary Dashboard Image */}
               <motion.div 
-                className="relative rounded-[2rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)] border border-white/20 z-10"
-                whileHover={{ rotateY: -2, rotateX: 2, scale: 1.02 }}
+                className="relative rounded-2xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border border-black/5 dark:border-white/10 z-10 w-full ml-auto"
+                whileHover={{ y: -5, scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
+                <div className="bg-white dark:bg-[#2a2a2a] h-8 flex items-center px-4 gap-2 border-b border-black/5 dark:border-white/5">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                  <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                </div>
                 <img
                   src="/assets/Notebook/dashboard.png"
                   alt="Notebook Dashboard Interface"
@@ -210,14 +215,19 @@ export default function NotebookPage() {
                 />
               </motion.div>
               
-              {/* Floating secondary image */}
+              {/* Floating Editor Image */}
               <motion.div 
-                className="absolute -bottom-16 -left-12 w-2/3 rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] border border-white/20 z-20"
+                className="absolute -bottom-16 -left-8 md:-left-16 w-[85%] rounded-2xl overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)] border border-black/5 dark:border-white/10 z-20"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
-                whileHover={{ y: -10, scale: 1.05 }}
+                whileHover={{ y: -10, scale: 1.03 }}
               >
+                <div className="bg-white dark:bg-[#2a2a2a] h-6 flex items-center px-3 gap-1.5 border-b border-black/5 dark:border-white/5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
+                </div>
                 <img
                   src="/assets/Notebook/editor.png"
                   alt="Notebook Editor Interface"

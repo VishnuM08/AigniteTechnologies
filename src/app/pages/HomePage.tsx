@@ -649,22 +649,24 @@ export default function HomePage() {
                     </Link>
                   </div>
                 </div>
-                <div className="relative h-[450px] md:h-full overflow-hidden flex items-center group bg-[#0a0a0a]">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#1a1a1a_0%,_#000000_100%)] opacity-80" />
+                <div className="relative h-80 md:h-auto overflow-hidden bg-gradient-to-br from-[#fbfbfd] to-[#f5f5f7] dark:from-[#1a1a1a] dark:to-[#111111] flex items-center justify-center p-8 group">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#f59e0b_0%,_transparent_70%)] opacity-5 dark:opacity-10" />
 
-                  <div className="relative w-full overflow-hidden">
-                    <HorizontalMarquee
-                      images={[
-                        "/assets/Notebook/dashboard.png",
-                        "/assets/Notebook/editor.png",
-                      ]}
-                      speed={35}
+                  <motion.div 
+                    className="absolute md:right-[-15%] md:top-[15%] w-[120%] md:w-[130%] rounded-2xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border border-black/5 dark:border-white/10 z-10 transition-transform duration-700 group-hover:scale-[1.02] group-hover:-translate-x-4"
+                  >
+                    {/* Mac OS style top bar */}
+                    <div className="bg-white dark:bg-[#2a2a2a] h-6 md:h-8 flex items-center px-3 md:px-4 gap-1.5 md:gap-2 border-b border-black/5 dark:border-white/5">
+                      <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#ff5f56]"></div>
+                      <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#ffbd2e]"></div>
+                      <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#27c93f]"></div>
+                    </div>
+                    <img
+                      src="/assets/Notebook/dashboard.png"
+                      alt="Notebook App Dashboard"
+                      className="w-full h-auto object-cover"
                     />
-                  </div>
-
-                  {/* Left and Right Fades for Infinite Look */}
-                  <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-                  <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+                  </motion.div>
                 </div>
               </motion.div>
             </motion.div>
