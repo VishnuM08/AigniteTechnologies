@@ -1,0 +1,5 @@
+# app-ads.txt — AIgnite Technologies
+# https://theaignite.app
+# Apps: Pengoku (Android)
+
+google.com, pub-6320489113058324, DIRECT, f08c47fec0942fa0
