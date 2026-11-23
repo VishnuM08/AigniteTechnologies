@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pengoku Privacy Policy | AIgnite Technologies</title>
+  <meta name="description" content="Official Privacy Policy for Pengoku Android game, operated by AIgnite Technologies. Learn how your data, leaderboards, and privacy rights are handled." />
+  <link rel="canonical" href="https://theaignite.app/pengoku/privacy" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --card-bg: #f5f5f7;
+      --card-alt: #fbfbfd;
+      --text: #1a1a1a;
+      --text-muted: #86868b;
+      --text-body: #424245;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --border: #d2d2d7;
+      --border-subtle: rgba(210, 210, 215, 0.4);
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    html.light {
+      --bg: #ffffff !important;
+      --card-bg: #f5f5f7 !important;
+      --card-alt: #fbfbfd !important;
+      --text: #1a1a1a !important;
+      --text-muted: #86868b !important;
+      --text-body: #424245 !important;
+      --border: #d2d2d7 !important;
+      --border-subtle: rgba(210, 210, 215, 0.4) !important;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not(.light) {
+        --bg: #111111;
+        --card-bg: #1a1a1a;
+        --card-alt: #161616;
+        --text: #ffffff;
+        --text-muted: #86868b;
+        --text-body: #a1a1a6;
+        --accent: #0071e3;
+        --accent-hover: #0077ed;
+        --border: #2a2a2a;
+        --border-subtle: rgba(42, 42, 42, 0.6);
+      }
+    }
+    html.dark {
+      --bg: #111111;
+      --card-bg: #1a1a1a;
+      --card-alt: #161616;
+      --text: #ffffff;
+      --text-muted: #86868b;
+      --text-body: #a1a1a6;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --border: #2a2a2a;
+      --border-subtle: rgba(42, 42, 42, 0.6);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text-body);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    header.site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 100;
+    }
+    html.dark header.site-header {
+      background: rgba(26, 26, 26, 0.85);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not(.light) header.site-header {
+        background: rgba(26, 26, 26, 0.85);
+      }
+    }
+    .brand-link {
+      color: var(--text);
+      font-weight: 600;
+      font-size: 1.125rem;
+      text-decoration: none;
+    }
+    .brand-link:hover {
+      color: var(--accent);
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--text);
+    }
+    .hero-section {
+      padding: 120px 24px 48px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: var(--text);
+    }
+    .badge-legal {
+      color: var(--accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+    h1 {
+      color: var(--text);
+      font-size: clamp(1.85rem, 6.5vw, 3.25rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      word-wrap: break-word;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.35rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+    .dates-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .date-pill {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .main-content {
+      padding: 48px 24px 80px;
+    }
+    .summary-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+    .summary-box h2 {
+      color: var(--text);
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .summary-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .summary-list li {
+      position: relative;
+      padding-left: 24px;
+      font-size: 0.95rem;
+    }
+    .summary-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: 700;
+    }
+    .toc-box {
+      background: var(--card-alt);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 48px;
+    }
+    .toc-title {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 1.125rem;
+      margin-bottom: 12px;
+    }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+      list-style: none;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    @media (min-width: 600px) {
+      .toc-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .toc-grid a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      display: block;
+      padding: 3px 0;
+      transition: color 0.2s;
+    }
+    .toc-grid a:hover {
+      color: var(--accent);
+    }
+    .toc-num {
+      color: var(--accent);
+      font-weight: 600;
+      margin-right: 4px;
+      font-size: 0.8rem;
+    }
+    .policy-section {
+      margin-bottom: 48px;
+      scroll-margin-top: 96px;
+    }
+    h2.section-heading {
+      color: var(--text);
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      letter-spacing: -0.01em;
+    }
+    h2.section-heading span.num {
+      color: var(--accent);
+      margin-right: 8px;
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+    p {
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+    ul.policy-bullets {
+      list-style-type: disc;
+      padding-left: 24px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    ul.policy-bullets li {
+      line-height: 1.6;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    a:hover {
+      color: var(--accent-hover);
+    }
+    .table-container {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+    th {
+      background: var(--card-bg);
+      color: var(--text);
+      font-weight: 600;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .card-info {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    footer.site-footer {
+      border-top: 1px solid var(--border-subtle);
+      background: var(--card-alt);
+      padding: 36px 24px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    .footer-content {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      text-align: center;
+    }
+    @media (min-width: 600px) {
+      .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="brand-link">Aignite</a>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/#products">Products</a>
+      <a href="/privacy">Privacy</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="container">
+        <a href="/" class="back-link">← Back to home</a>
+        <div class="badge-legal">Legal &amp; Privacy</div>
+        <h1>Pengoku Privacy Policy</h1>
+        <div class="subtitle">AIgnite Technologies</div>
+        <div class="dates-container">
+          <div class="date-pill">Effective date: 23 November 2026</div>
+          <div class="date-pill">Last updated: 23 November 2026</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="main-content">
+      <div class="container">
+        <!-- Summary Box -->
+        <div class="summary-box">
+          <h2>Privacy at a Glance</h2>
+          <ul class="summary-list">
+            <li><strong>Progress stays on your device:</strong> Puzzles, coins, cosmetics, and settings are saved locally and never sent to our servers.</li>
+            <li><strong>Optional Play Games sign-in:</strong> Used exclusively for public leaderboards and cheat-free score ranking.</li>
+            <li><strong>Transparent advertising:</strong> Ads provided by Google AdMob with GDPR/UMP consent management and easy opt-out controls.</li>
+            <li><strong>We never sell your data:</strong> We do not sell, rent, or trade your personal information to third parties. Ever.</li>
+          </ul>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc-box">
+          <div class="toc-title">Table of Contents</div>
+          <ol class="toc-grid">
+            <li><a href="#introduction"><span class="toc-num">1.</span> Introduction</a></li>
+            <li><a href="#information-stored-on-device"><span class="toc-num">2.</span> On-Device Storage</a></li>
+            <li><a href="#play-games-and-leaderboards"><span class="toc-num">3.</span> Play Games &amp; Leaderboards</a></li>
+            <li><a href="#advertising"><span class="toc-num">4.</span> Advertising</a></li>
+            <li><a href="#analytics"><span class="toc-num">5.</span> Analytics</a></li>
+            <li><a href="#in-app-purchases"><span class="toc-num">6.</span> In-App Purchases</a></li>
+            <li><a href="#server-logs-and-security"><span class="toc-num">7.</span> Server Logs &amp; Security</a></li>
+            <li><a href="#how-we-use-information"><span class="toc-num">8.</span> How We Use Information</a></li>
+            <li><a href="#legal-bases"><span class="toc-num">9.</span> Legal Bases (EEA / UK)</a></li>
+            <li><a href="#sharing-and-disclosure"><span class="toc-num">10.</span> Sharing &amp; Disclosure</a></li>
+            <li><a href="#delete-data"><span class="toc-num">11.</span> Data Retention &amp; Deletion</a></li>
+            <li><a href="#data-security"><span class="toc-num">12.</span> Data Security</a></li>
+            <li><a href="#international-transfers"><span class="toc-num">13.</span> International Transfers</a></li>
+            <li><a href="#childrens-privacy"><span class="toc-num">14.</span> Children's Privacy</a></li>
+            <li><a href="#your-rights"><span class="toc-num">15.</span> Your Privacy Rights</a></li>
+            <li><a href="#changes-to-policy"><span class="toc-num">16.</span> Changes to This Policy</a></li>
+            <li><a href="#contact-us"><span class="toc-num">17.</span> Contact Us</a></li>
+          </ol>
+        </div>
+
+        <!-- Section 1 -->
+        <article class="policy-section" id="introduction">
+          <h2 class="section-heading"><span class="num">1.</span> Introduction</h2>
+          <p>
+            AIgnite Technologies ("we," "us," or "our") operates the mobile game Pengoku ("the App") and its associated online services, available at <a href="https://theaignite.app" target="_blank" rel="noopener noreferrer">https://theaignite.app</a>.
+          </p>
+          <p>
+            This Privacy Policy explains how we collect, use, store, and disclose information when you download, install, and play Pengoku on Android devices.
+          </p>
+          <p>
+            By downloading, accessing, or playing Pengoku, you acknowledge that you have read and understood this Privacy Policy. If you do not agree with any part of this policy, please do not use the application or its online services.
+          </p>
+        </article>
+
+        <!-- Section 2 -->
+        <article class="policy-section" id="information-stored-on-device">
+          <h2 class="section-heading"><span class="num">2.</span> Information Stored Locally on Your Device</h2>
+          <p>
+            Pengoku is designed with local-first privacy. The core gameplay operates offline without requiring an account or network connection. The following data is stored exclusively on your device using Android Jetpack DataStore and Room local database:
+          </p>
+          <ul class="policy-bullets">
+            <li><strong>Level Progress &amp; Stars:</strong> Unlocked campaign chapters, completed levels, best completion times, and star ratings.</li>
+            <li><strong>In-Progress Board Snapshots:</strong> Temporary board state and timer for the level you are currently solving, allowing you to resume seamlessly.</li>
+            <li><strong>Player Preferences:</strong> Audio volume, haptic feedback toggles, theme settings (Day, Night, or System), and display modes (2D / 3D).</li>
+            <li><strong>In-Game Currency &amp; Collectibles:</strong> Fish currency balance, rescued sanctuary animals, and unlocked cosmetic skins.</li>
+          </ul>
+          <p>
+            None of this on-device gameplay data is transmitted to or stored on our servers unless you explicitly sign in to Google Play Games Services for online leaderboards. Uninstalling the game or clearing app storage in Android Settings permanently deletes all local data from your device.
+          </p>
+        </article>
+
+        <!-- Section 3 -->
+        <article class="policy-section" id="play-games-and-leaderboards">
+          <h2 class="section-heading"><span class="num">3.</span> Google Play Games Services and Online Leaderboards</h2>
+          <p>
+            Signing in to Google Play Games Services is completely optional. If you choose to sign in to compete on global, weekly, or daily leaderboards:
+          </p>
+          <ul class="policy-bullets">
+            <li><strong>Profile Information:</strong> We receive your Google Play Games pseudonymised player ID and public display name via the Google Play Games v2 SDK. We do not receive your email address, phone number, or real identity.</li>
+            <li><strong>Gameplay Verification Data:</strong> When you complete a puzzle run while signed in, the app submits your completion time (in milliseconds), hearts remaining, final score, and the chronological sequence of moves (row, column, action type, timestamp). This move log is processed solely by our backend anti-cheat engine to verify score integrity and prevent automated tampering.</li>
+            <li><strong>Server Location:</strong> Leaderboard scores, player display names, and move validation logs are securely stored on servers operated by Amazon Web Services (AWS) in the Mumbai (ap-south-1) region, India.</li>
+            <li><strong>Public Visibility:</strong> Your Play Games public display name and puzzle scores are publicly visible to other players on global, daily, and weekly leaderboards.</li>
+          </ul>
+        </article>
+
+        <!-- Section 4 -->
+        <article class="policy-section" id="advertising">
+          <h2 class="section-heading"><span class="num">4.</span> Advertising</h2>
+          <p>
+            Pengoku displays in-game advertisements provided by Google AdMob to support the development and maintenance of the game:
+          </p>
+          <ul class="policy-bullets">
+            <li><strong>Data Processed:</strong> Google AdMob and its advertising technology partners may collect and process device identifiers (such as the Google Advertising ID), IP address, coarse location, and app interaction data to serve, personalise, and measure the effectiveness of advertisements.</li>
+            <li><strong>European Privacy Regulations (EEA, UK &amp; Switzerland):</strong> Prior to displaying ads to users in the European Economic Area, the United Kingdom, and Switzerland, consent is obtained via Google's User Messaging Platform (UMP) consent SDK. Users can grant, customize, or revoke their consent preferences at any time within the in-game Settings menu.</li>
+            <li><strong>Opt-Out &amp; Reset:</strong> You can reset or delete your Android Advertising ID at any time through your device settings: <em>Settings &gt; Google &gt; Ads &gt; Reset advertising ID / Delete advertising ID</em>.</li>
+            <li><strong>Remove Ads:</strong> Players who purchase the in-game "Remove Ads" item have banner and interstitial ads permanently deactivated.</li>
+          </ul>
+          <p>
+            For more information on how Google uses data from partner apps, please review Google's Partner Privacy Policy: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">How Google uses information from sites or apps that use our services</a>.
+          </p>
+        </article>
+
+        <!-- Section 5 -->
+        <article class="policy-section" id="analytics">
+          <h2 class="section-heading"><span class="num">5.</span> Analytics</h2>
+          <p>
+            We use Google Analytics for Firebase to understand gameplay patterns, diagnose stability issues, and improve puzzle balance:
+          </p>
+          <ul class="policy-bullets">
+            <li><strong>Events Collected:</strong> Gameplay telemetry such as levels started, levels completed, puzzle abandon rates, screen views, and session duration.</li>
+            <li><strong>Device Metrics:</strong> Device model, operating system version, app version, approximate geographic region (country level), and Firebase installation ID.</li>
+            <li><strong>No Personal Profiling:</strong> Analytics telemetry is aggregated and pseudonymous. We do not link Firebase analytics with your real identity or external accounts.</li>
+          </ul>
+          <p>
+            Learn more about Firebase data protection in the <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer">Firebase Privacy and Security Documentation</a>.
+          </p>
+        </article>
+
+        <!-- Section 6 -->
+        <article class="policy-section" id="in-app-purchases">
+          <h2 class="section-heading"><span class="num">6.</span> In-App Purchases</h2>
+          <p>
+            Pengoku offers optional in-app purchases (such as cosmetic items, fish packs, or ad-removal) fulfilled through the Google Play In-App Billing library.
+          </p>
+          <p>
+            <strong>Payment Security:</strong> All financial transactions and payment processing are handled exclusively by Google Play. AIgnite Technologies never receives, collects, or stores your credit card numbers, bank details, or billing addresses.
+          </p>
+          <p>
+            We receive only an encrypted digital receipt and purchase token from Google Play confirming that a transaction succeeded, enabling us to entitle the purchased items to your game.
+          </p>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data Category</th>
+                  <th>Purpose</th>
+                  <th>Shared With</th>
+                  <th>Stored Where</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Play Games ID &amp; Display Name</strong></td>
+                  <td>Optional online leaderboard ranking and player identification</td>
+                  <td>Google LLC &amp; Public Players</td>
+                  <td>AWS Mumbai (India)</td>
+                </tr>
+                <tr>
+                  <td><strong>Puzzle Scores &amp; Move Logs</strong></td>
+                  <td>Score verification, anti-cheat validation, and leaderboard ranking</td>
+                  <td>AWS Infrastructure (Private)</td>
+                  <td>AWS Mumbai (India)</td>
+                </tr>
+                <tr>
+                  <td><strong>Advertising ID &amp; Diagnostics</strong></td>
+                  <td>Serving, frequency capping, and measurement of AdMob ads</td>
+                  <td>Google LLC (AdMob)</td>
+                  <td>Google Global Data Centers</td>
+                </tr>
+                <tr>
+                  <td><strong>Usage Events &amp; Device Model</strong></td>
+                  <td>Aggregated crash diagnostics, telemetry, and game tuning</td>
+                  <td>Google LLC (Firebase)</td>
+                  <td>Google Global Data Centers</td>
+                </tr>
+                <tr>
+                  <td><strong>Purchase Tokens &amp; Status</strong></td>
+                  <td>Validating item ownership and unlocking purchased features</td>
+                  <td>Google Play Billing</td>
+                  <td>Google Servers / On-Device</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- Section 7 -->
+        <article class="policy-section" id="server-logs-and-security">
+          <h2 class="section-heading"><span class="num">7.</span> Server Logs and System Security</h2>
+          <p>
+            When your application connects to our backend API endpoints (such as submitting leaderboard scores or checking server status), our servers temporarily process standard web request metadata:
+          </p>
+          <ul class="policy-bullets">
+            <li>Internet Protocol (IP) address.</li>
+            <li>Date, time, and duration of the connection.</li>
+            <li>HTTP request payload, response status code, and app version header.</li>
+          </ul>
+          <p>
+            These server logs are retained strictly for security monitoring, detecting Distributed Denial of Service (DDoS) attempts, preventing automated score spoofing, and debugging network connectivity. Logs are routinely rotated and purged.
+          </p>
+        </article>
+
+        <!-- Section 8 -->
+        <article class="policy-section" id="how-we-use-information">
+          <h2 class="section-heading"><span class="num">8.</span> How We Use Information</h2>
+          <p>We use the collected information strictly for the following purposes:</p>
+          <ul class="policy-bullets">
+            <li>To provide, operate, and maintain Pengoku and its puzzle mechanics.</li>
+            <li>To verify puzzle move sequences and calculate fair, cheat-free global and daily leaderboards.</li>
+            <li>To deliver in-game rewards, hints, and revives earned through rewarded advertising.</li>
+            <li>To diagnose performance bottlenecks, optimize battery and rendering performance, and fix crashes.</li>
+            <li>To process and restore purchased virtual goods.</li>
+            <li>To detect, investigate, and prevent fraudulent activity and policy violations.</li>
+            <li>To comply with statutory legal and regulatory obligations.</li>
+          </ul>
+        </article>
+
+        <!-- Section 9 -->
+        <article class="policy-section" id="legal-bases">
+          <h2 class="section-heading"><span class="num">9.</span> Legal Bases for Processing (EEA / UK Users)</h2>
+          <p>
+            If you are located in the European Economic Area (EEA) or the United Kingdom, our legal grounds for processing personal data under the General Data Protection Regulation (GDPR) and UK GDPR are:
+          </p>
+          <ul class="policy-bullets">
+            <li><strong>Performance of a Contract:</strong> Providing online leaderboard participation, validating scores, and fulfilling purchased digital items upon your request.</li>
+            <li><strong>Legitimate Interests:</strong> Securing our infrastructure, enforcing anti-cheat rules, analyzing game health, and preventing fraudulent abuse.</li>
+            <li><strong>Consent:</strong> Serving personalized advertisements and accessing mobile advertising identifiers where required by law, as collected through the UMP consent dialog.</li>
+            <li><strong>Legal Compliance:</strong> Retaining records where mandatory under applicable financial, tax, or legal disclosure requirements.</li>
+          </ul>
+        </article>
+
+        <!-- Section 10 -->
+        <article class="policy-section" id="sharing-and-disclosure">
+          <h2 class="section-heading"><span class="num">10.</span> Data Sharing and Disclosure</h2>
+          <p>
+            AIgnite Technologies does not sell, rent, monetize, or trade your personal information to third parties. We share data only in the following specific circumstances:
+          </p>
+          <ul class="policy-bullets">
+            <li><strong>Cloud and Infrastructure Providers:</strong> Amazon Web Services (AWS) hosts our backend validation services and leaderboard databases under strict confidentiality and data protection agreements.</li>
+            <li><strong>Google Platforms:</strong> Google LLC provides Google Play Services, AdMob advertising, and Firebase analytics under their respective enterprise security standards.</li>
+            <li><strong>Public Leaderboards:</strong> Your Play Games public display name and puzzle scores are visible to other players of Pengoku.</li>
+            <li><strong>Legal Requirements:</strong> We may disclose information if required to do so by applicable law, court order, or governmental authority, or to protect the safety, rights, and property of AIgnite Technologies, our players, or the public.</li>
+          </ul>
+        </article>
+
+        <!-- Section 11 -->
+        <article class="policy-section" id="delete-data">
+          <h2 class="section-heading"><span class="num">11.</span> Data Retention and Deletion</h2>
+          <p>
+            We retain your data only for as long as necessary to provide the game's features and satisfy the purposes outlined in this policy:
+          </p>
+          <ul class="policy-bullets">
+            <li><strong>Leaderboard Cycles:</strong> Daily and weekly rankings automatically expire and rotate according to the leaderboard schedule. Historical top rankings and verified global campaign scores remain stored while your player account is active.</li>
+            <li><strong>On-Device Data:</strong> All local campaign progress, stars, settings, and coins are deleted immediately when you uninstall Pengoku or clear the application storage in Android Settings.</li>
+            <li><strong>Online Data Deletion in App:</strong> You can purge your online leaderboard records directly inside the game by opening <em>Settings &gt; Delete my online data</em>.</li>
+            <li><strong>Deletion by Email Request:</strong> You can also request complete deletion of your online player profile, scores, and move logs by sending an email to <a href="mailto:admin@theaignite.app">admin@theaignite.app</a> with the subject line:</li>
+          </ul>
+          <div class="card-info">
+            <p style="font-family: monospace; font-weight: 600; color: var(--text); margin-bottom: 6px;">
+              Subject: Delete my Pengoku data
+            </p>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin: 0;">
+              Please include your Google Play Games public display name in the message body so we can verify and locate your records.
+            </p>
+          </div>
+          <p>
+            Upon receipt of a verified deletion request, we will permanently remove your player record, scores, and associated logs from our production databases within 30 calendar days.
+          </p>
+        </article>
+
+        <!-- Section 12 -->
+        <article class="policy-section" id="data-security">
+          <h2 class="section-heading"><span class="num">12.</span> Data Security</h2>
+          <p>
+            We take administrative, technical, and physical measures to safeguard your information against unauthorized access, loss, or alteration:
+          </p>
+          <ul class="policy-bullets">
+            <li>All network communications between the Pengoku mobile client and our servers are encrypted in transit using industry-standard Transport Layer Security (HTTPS / TLS 1.3).</li>
+            <li>Production databases are isolated in private subnets with restricted firewall access and tokenized authentication.</li>
+            <li>Internal access to score logs and administrative utilities is restricted strictly to authorized engineering personnel.</li>
+          </ul>
+          <p>
+            While we apply stringent security practices, no method of electronic transmission or cloud storage is 100% secure, and we cannot guarantee absolute security.
+          </p>
+        </article>
+
+        <!-- Section 13 -->
+        <article class="policy-section" id="international-transfers">
+          <h2 class="section-heading"><span class="num">13.</span> International Data Transfers</h2>
+          <p>
+            AIgnite Technologies is headquartered in India. Our primary leaderboard and anti-cheat infrastructure is hosted on Amazon Web Services in Mumbai, India. If you access Pengoku from outside India (including the EEA, UK, United States, or other jurisdictions), your information will be transferred to, stored, and processed in India and in data centers operated globally by Google.
+          </p>
+          <p>
+            Where cross-border data transfers occur from the EEA or UK, we ensure adequate protections are in place through standard contractual clauses, reliance on adequacy decisions, or enterprise vendor compliance frameworks.
+          </p>
+        </article>
+
+        <!-- Section 14 -->
+        <article class="policy-section" id="childrens-privacy">
+          <h2 class="section-heading"><span class="num">14.</span> Children's Privacy</h2>
+          <p>
+            Pengoku is a general audience logic puzzle game and is not directed to children under 13 years of age (or under 16 in the European Union).
+          </p>
+          <p>
+            We do not knowingly collect, solicit, or maintain personally identifiable information from children under 13. If you are a parent or legal guardian and discover that your child has provided personal information or participated in online leaderboards without your consent, please contact us immediately at <a href="mailto:admin@theaignite.app">admin@theaignite.app</a>.
+          </p>
+          <p>
+            Upon notification, we will promptly verify and delete such information from our servers.
+          </p>
+        </article>
+
+        <!-- Section 15 -->
+        <article class="policy-section" id="your-rights">
+          <h2 class="section-heading"><span class="num">15.</span> Your Privacy Rights</h2>
+          <p>
+            Depending on your geographic location and applicable local data protection legislation (including India's Digital Personal Data Protection Act 2023, the EU/UK GDPR, California Consumer Privacy Act / CPRA, and similar privacy regulations), you have specific statutory rights:
+          </p>
+          <ul class="policy-bullets">
+            <li><strong>Right to Access:</strong> Request a confirmation and copy of the personal information we maintain about you.</li>
+            <li><strong>Right to Rectification:</strong> Request correction of inaccurate or incomplete records.</li>
+            <li><strong>Right to Erasure:</strong> Request the deletion of your online player profile and leaderboard scores (see section 11).</li>
+            <li><strong>Right to Restrict or Object:</strong> Object to or request restriction of certain processing activities.</li>
+            <li><strong>Right to Withdraw Consent:</strong> Revoke consent for personalized advertising at any time via in-game Settings.</li>
+            <li><strong>Right to Lodge a Complaint:</strong> Lodge a complaint with your jurisdiction's competent data protection supervisory authority.</li>
+          </ul>
+          <p>
+            To exercise any of these statutory rights, please email us at <a href="mailto:admin@theaignite.app">admin@theaignite.app</a>. We will verify your request and respond within 30 calendar days at no cost to you.
+          </p>
+        </article>
+
+        <!-- Section 16 -->
+        <article class="policy-section" id="changes-to-policy">
+          <h2 class="section-heading"><span class="num">16.</span> Changes to This Privacy Policy</h2>
+          <p>
+            We may periodically update this Privacy Policy to reflect modifications to Pengoku's gameplay, our privacy practices, or legal and regulatory standards.
+          </p>
+          <p>
+            Any revisions will be posted on this page with an updated "Last updated" date at the top. For material changes affecting your rights, we will provide prominent notice inside the mobile application or through in-game notifications prior to the change taking effect.
+          </p>
+          <p>
+            We encourage you to review this Privacy Policy periodically to stay informed about how we safeguard your information.
+          </p>
+        </article>
+
+        <!-- Section 17 -->
+        <article class="policy-section" id="contact-us">
+          <h2 class="section-heading"><span class="num">17.</span> Contact Us</h2>
+          <p>
+            If you have questions, comments, or data privacy requests concerning Pengoku or this Privacy Policy, please reach out to our team:
+          </p>
+          <div class="card-info">
+            <p style="margin-bottom: 8px;"><strong>Entity:</strong> AIgnite Technologies</p>
+            <p style="margin-bottom: 8px;"><strong>Website:</strong> <a href="https://theaignite.app" target="_blank" rel="noopener noreferrer">https://theaignite.app</a></p>
+            <p style="margin-bottom: 8px;"><strong>Email:</strong> <a href="mailto:admin@theaignite.app">admin@theaignite.app</a></p>
+            <p style="margin-bottom: 0;"><strong>Location:</strong> Tamil Nadu, India</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>© 2026 AIgnite Technologies. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/privacy">Aignite Privacy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="mailto:admin@theaignite.app">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sync theme with site localStorage preference or ?theme query param
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var urlTheme = params.get('theme');
+      var saved = urlTheme || localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else if (saved === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      }
+    } catch (e) {}
+  </script>
+</body>
+</html>

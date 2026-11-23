@@ -139,13 +139,24 @@ export default function AignitePrivacyPolicyPage() {
       title: "6. Product-Specific Policies",
       content: (
         <>
-          <p>
-            Certain applications built by Aignite Technologies, such as Kakeibo
-            or Peerova, may have their own specific privacy policies detailing
-            the unique data they handle (e.g., financial data or communication
-            logs). Where a product-specific policy exists, it will supersede
-            this general policy for that specific app.
+          <p className="mb-4">
+            Certain applications built by Aignite Technologies, such as Kakeibo,
+            Peerova, or Pengoku, have their own specific privacy policies detailing
+            the unique data they handle. Where a product-specific policy exists, it will supersede
+            this general policy for that specific app:
           </p>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>
+              <Link to="/privacy/kakeibo" className="text-[#0071e3] hover:underline">
+                Kakeibo Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link to="/pengoku/privacy" className="text-[#0071e3] hover:underline">
+                Pengoku Privacy Policy
+              </Link>
+            </li>
+          </ul>
         </>
       ),
     },
