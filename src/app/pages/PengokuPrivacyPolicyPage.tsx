@@ -672,9 +672,10 @@ export default function PengokuPrivacyPolicyPage() {
       <footer className="px-6 py-12 border-t border-[#d2d2d7]/50 dark:border-[#2a2a2a] bg-[#fbfbfd] dark:bg-[#111111]">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-[#86868b]">
           <p>© {new Date().getFullYear()} AIgnite Technologies. All rights reserved.</p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-6">
+            <Link to="/pengoku/terms" className="hover:text-[#0071e3] transition-colors">Pengoku Terms</Link>
             <Link to="/privacy" className="hover:text-[#0071e3] transition-colors">Aignite Privacy</Link>
-            <Link to="/terms" className="hover:text-[#0071e3] transition-colors">Terms of Service</Link>
+            <Link to="/terms" className="hover:text-[#0071e3] transition-colors">Site Terms</Link>
             <a href="mailto:admin@theaignite.app" className="hover:text-[#0071e3] transition-colors">Contact</a>
           </div>
         </div>

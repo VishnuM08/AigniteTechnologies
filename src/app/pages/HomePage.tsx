@@ -1402,6 +1402,14 @@ export default function HomePage() {
               </li>
               <li>
                 <Link
+                  to="/pengoku/terms"
+                  className="text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-colors text-sm"
+                >
+                  Pengoku Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/terms"
                   className="text-[#86868b] hover:text-[#0071e3] dark:hover:text-white transition-colors text-sm"
                 >

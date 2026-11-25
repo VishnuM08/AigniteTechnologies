@@ -8,6 +8,7 @@ import InsightsPage from "./pages/InsightsPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import AignitePrivacyPolicyPage from "./pages/AignitePrivacyPolicyPage";
 import PengokuPrivacyPolicyPage from "./pages/PengokuPrivacyPolicyPage";
+import PengokuTermsPage from "./pages/PengokuTermsPage";
 import TermsOfServicePage from "./pages/TermsOfServicePage";
 import DeleteAccountPage from "./pages/DeleteAccountPage";
 import AcademyPage from "./pages/AcademyPage";
@@ -61,6 +62,14 @@ export const router = createBrowserRouter([
       {
         path: "/pengoku/privacy/",
         element: <PengokuPrivacyPolicyPage />,
+      },
+      {
+        path: "/pengoku/terms",
+        element: <PengokuTermsPage />,
+      },
+      {
+        path: "/pengoku/terms/",
+        element: <PengokuTermsPage />,
       },
       {
         path: "/terms",
