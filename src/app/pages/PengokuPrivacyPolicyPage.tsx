@@ -108,33 +108,36 @@ export default function PengokuPrivacyPolicyPage() {
       content: (
         <>
           <p className="mb-4">
-            Pengoku displays in-game advertisements provided by Google AdMob to support the development and maintenance of the game:
+            Pengoku shows ads through Google AdMob (rewarded and interstitial ads). Players who buy "Remove Ads" don't see interstitial ads.
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-4">
             <li>
-              <strong>Data Processed:</strong> Google AdMob and its advertising technology partners may collect and process device identifiers (such as the Google Advertising ID), IP address, coarse location, and app interaction data to serve, personalise, and measure the effectiveness of advertisements.
+              <strong>Data Collection and Use:</strong> AdMob may collect and use the device's advertising ID, IP address and app interaction data to show and measure ads, and personalised ads where the user has consented.
             </li>
             <li>
-              <strong>European Privacy Regulations (EEA, UK & Switzerland):</strong> Prior to displaying ads to users in the European Economic Area, the United Kingdom, and Switzerland, consent is obtained via Google's User Messaging Platform (UMP) consent SDK. Users can grant, customize, or revoke their consent preferences at any time within the in-game Settings menu.
+              <strong>Consent (EEA &amp; UK):</strong> Users in the EEA/UK are asked for consent through Google's consent message; users can change their choice in the app's Settings &rarr; Privacy options, and can reset or opt out of ad personalisation in Android Settings &rarr; Google &rarr; Ads.
             </li>
             <li>
-              <strong>Opt-Out & Reset:</strong> You can reset or delete your Android Advertising ID at any time through your device settings: <em>Settings &gt; Google &gt; Ads &gt; Reset advertising ID / Delete advertising ID</em>.
-            </li>
-            <li>
-              <strong>Remove Ads:</strong> Players who purchase the in-game "Remove Ads" item have banner and interstitial ads permanently deactivated.
+              <strong>Third-Party Advertising:</strong> Google AdMob is operated by Google LLC. For more details on how Google uses information from sites or apps that use their services, see:{" "}
+              <a
+                href="https://policies.google.com/technologies/partner-sites"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#0071e3] hover:underline inline-flex items-center gap-1"
+              >
+                How Google uses information from sites or apps that use our services <ExternalLink size={14} />
+              </a>{" "}
+              and the{" "}
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#0071e3] hover:underline inline-flex items-center gap-1"
+              >
+                Google Privacy Policy <ExternalLink size={14} />
+              </a>.
             </li>
           </ul>
-          <p>
-            For more information on how Google uses data from partner apps, please review Google's Partner Privacy Policy:{" "}
-            <a
-              href="https://policies.google.com/technologies/partner-sites"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#0071e3] hover:underline inline-flex items-center gap-1"
-            >
-              How Google uses information from sites or apps that use our services <ExternalLink size={14} />
-            </a>.
-          </p>
         </>
       ),
     },
@@ -219,7 +222,11 @@ export default function PengokuPrivacyPolicyPage() {
                   <tr>
                     <td className="py-3 px-4 font-medium text-[#1a1a1a] dark:text-white">Advertising ID & Diagnostics</td>
                     <td className="py-3 px-4">Serving, frequency capping, and measurement of AdMob ads</td>
-                    <td className="py-3 px-4">Google LLC (AdMob)</td>
+                    <td className="py-3 px-4">
+                      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#0071e3] hover:underline inline-flex items-center gap-1">
+                        Google LLC (AdMob) <ExternalLink size={12} />
+                      </a>
+                    </td>
                     <td className="py-3 px-4">Google Global Data Centers</td>
                   </tr>
                   <tr>
@@ -311,18 +318,48 @@ export default function PengokuPrivacyPolicyPage() {
     {
       id: "sharing-and-disclosure",
       number: "10",
-      title: "Data Sharing and Disclosure",
+      title: "Data Sharing and Third-Party Services",
       content: (
         <>
           <p className="mb-4">
-            AIgnite Technologies does not sell, rent, monetize, or trade your personal information to third parties. We share data only in the following specific circumstances:
+            AIgnite Technologies does not sell, rent, monetize, or trade your personal information to third parties. We share data only with trusted third-party service providers and under specific circumstances:
           </p>
           <ul className="list-disc pl-5 space-y-2 mb-4">
             <li>
-              <strong>Cloud and Infrastructure Providers:</strong> Amazon Web Services (AWS) hosts our backend validation services and leaderboard databases under strict confidentiality and data protection agreements.
+              <strong>Google AdMob (Google LLC):</strong> Third-party advertising service delivering rewarded and interstitial ads. Governed by the{" "}
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#0071e3] hover:underline inline-flex items-center gap-1"
+              >
+                Google Privacy Policy <ExternalLink size={14} />
+              </a>.
             </li>
             <li>
-              <strong>Google Platforms:</strong> Google LLC provides Google Play Services, AdMob advertising, and Firebase analytics under their respective enterprise security standards.
+              <strong>Google Play Platforms (Google LLC):</strong> Provides optional player authentication, cloud leaderboards, and in-app purchase billing under the{" "}
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#0071e3] hover:underline inline-flex items-center gap-1"
+              >
+                Google Privacy Policy <ExternalLink size={14} />
+              </a>.
+            </li>
+            <li>
+              <strong>Google Analytics for Firebase (Google LLC):</strong> Provides aggregated, pseudonymous game telemetry and crash diagnostics under the{" "}
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#0071e3] hover:underline inline-flex items-center gap-1"
+              >
+                Google Privacy Policy <ExternalLink size={14} />
+              </a>.
+            </li>
+            <li>
+              <strong>Cloud and Infrastructure Providers:</strong> Amazon Web Services (AWS) hosts our backend validation services and leaderboard databases under strict confidentiality and data protection agreements.
             </li>
             <li>
               <strong>Public Leaderboards:</strong> Your Play Games public display name and puzzle scores are visible to other players of Pengoku.
@@ -574,7 +611,7 @@ export default function PengokuPrivacyPolicyPage() {
               <div className="flex items-center gap-2 bg-[#f5f5f7] dark:bg-[#1a1a1a] px-4 py-2 rounded-full border border-[#d2d2d7]/50 dark:border-[#2a2a2a]">
                 <Clock size={16} />
                 <span style={{ fontSize: "0.875rem", fontWeight: 500 }}>
-                  Last updated: 23 November 2026
+                  Last updated: 27 November 2026
                 </span>
               </div>
             </motion.div>
